@@ -145,3 +145,28 @@ window.addEventListener("load",()=>{
     document.body.classList.add("loaded");
 
 });
+
+const video = document.getElementById("heroVideo");
+
+const videos = [
+    "camion.mp4",
+    "camion2.mp4"
+];
+
+let videoActual = 0;
+
+video.addEventListener("ended", function(){
+
+    videoActual++;
+
+    if(videoActual >= videos.length){
+
+        videoActual = 0;
+
+    }
+
+    video.src = videos[videoActual];
+
+    video.play();
+
+});
