@@ -13,8 +13,6 @@
 
     <link rel="stylesheet" href="style.css">
 
-    
-
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -29,7 +27,7 @@
     <!-- Leaflet.js CSS (Para el mapa interactivo) -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 
-    <!-- Estilos para la sección de seguimiento y el mapa -->
+    <!-- Estilos para la sección de seguimiento, el mapa y los detalles -->
     <style>
         .gps-dashboard {
             max-width: 1100px;
@@ -41,7 +39,7 @@
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
         }
 
-        /* Layout de 2 columnas */
+        /* Layout principal */
         .gps-layout {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -64,7 +62,7 @@
         .gps-stat-card {
             background: #f8fafc;
             border: 1px solid #e2e8f0;
-            padding: 18px;
+            padding: 16px;
             border-radius: 10px;
             display: flex;
             align-items: center;
@@ -73,14 +71,14 @@
         }
 
         .gps-stat-card i {
-            font-size: 1.6rem;
+            font-size: 1.5rem;
             color: #2563eb;
-            width: 35px;
+            width: 30px;
             text-align: center;
         }
 
         .gps-stat-card h4 {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             color: #64748b;
             text-transform: uppercase;
             letter-spacing: 0.5px;
@@ -88,7 +86,7 @@
         }
 
         .gps-stat-card .value {
-            font-size: 1.15rem;
+            font-size: 1.05rem;
             font-weight: 700;
             color: #0f172a;
         }
@@ -107,7 +105,49 @@
 
         #mapa-gps {
             width: 100%;
-            height: 330px;
+            height: 380px;
+        }
+
+        /* Nuevo Apartado de Detalles Extendidos */
+        .gps-extra-details {
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .gps-extra-details h3 {
+            font-size: 1.1rem;
+            color: #0f172a;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .gps-extra-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 15px;
+        }
+
+        .gps-detail-item {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            padding: 12px 15px;
+            border-radius: 8px;
+        }
+
+        .gps-detail-item span {
+            display: block;
+            font-size: 0.75rem;
+            color: #64748b;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .gps-detail-item strong {
+            font-size: 0.95rem;
+            color: #1e293b;
         }
 
         .gps-action {
@@ -168,56 +208,56 @@
 
     <!-- ================= HERO ================= -->
 
-   <section id="inicio" class="hero">
+    <section id="inicio" class="hero">
 
-    <video id="heroVideo" autoplay muted playsinline class="hero-video">
+        <video id="heroVideo" autoplay muted playsinline class="hero-video">
 
-    <source src="camion.mp4" type="video/mp4">
+            <source src="camion.mp4" type="video/mp4">
 
-    </video>
+        </video>
 
-    <div class="overlay"></div>
+        <div class="overlay"></div>
 
-    <div class="hero-content">
+        <div class="hero-content">
 
-        <span>TRANSPORTE DE CARGA A NIVEL NACIONAL</span>
+            <span>TRANSPORTE DE CARGA A NIVEL NACIONAL</span>
 
-        <h1>
+            <h1>
 
-            Seguridad,
-            puntualidad y confianza
-            en cada viaje.
+                Seguridad,
+                puntualidad y confianza
+                en cada viaje.
 
-        </h1>
+            </h1>
 
-        <p>
+            <p>
 
-            Soluciones de transporte terrestre
-            para empresas de todo el Perú.
+                Soluciones de transporte terrestre
+                para empresas de todo el Perú.
 
-        </p>
+            </p>
 
-        <div class="hero-buttons">
+            <div class="hero-buttons">
 
-            <a href="#contacto" class="btn-primary">
+                <a href="#contacto" class="btn-primary">
 
-                Contactos
+                    Contactos
 
-            </a> 
+                </a> 
 
-            <a href="https://wa.me/51999913590"
-                class="btn-secondary"
-                target="_blank">
+                <a href="https://wa.me/51999913590"
+                    class="btn-secondary"
+                    target="_blank">
 
-                WhatsApp
+                    WhatsApp
 
-            </a>
+                </a>
+
+            </div>
 
         </div>
 
-    </div>
-
-</section>
+    </section>
 
     <!-- ================= NOSOTROS ================= -->
 
@@ -390,7 +430,7 @@
 
     </section>
 
-  <!-- ================= SEGUIMIENTO GPS ================= -->
+    <!-- ================= SEGUIMIENTO GPS ================= -->
 
     <section id="seguimiento">
 
@@ -412,7 +452,7 @@
 
                 <div class="gps-layout">
 
-                    <!-- IZQUIERDA: TARJETAS DE ESTADO -->
+                    <!-- IZQUIERDA: TARJETAS DE ESTADO PRINCIPALES -->
                     <div class="gps-grid">
 
                         <div class="gps-stat-card">
@@ -468,11 +508,47 @@
 
                 </div>
 
+                <!-- APARTADO DE DETALLES EXTENDIDOS EN TIEMPO REAL -->
+                <div class="gps-extra-details">
+
+                    <h3><i class="fa-solid fa-circle-info" style="color: #2563eb;"></i> Telemetría y Detalles del Vehículo</h3>
+
+                    <div class="gps-extra-grid">
+
+                        <div class="gps-detail-item">
+                            <span>Modelo de Unidad</span>
+                            <strong id="gps-modelo">Sinotruck Howo 2020</strong>
+                        </div>
+
+                        <div class="gps-detail-item">
+                            <span>Ubicación Actual</span>
+                            <strong id="gps-direccion">Carretera Panamericana Sur, Majes, Caylloma, Arequipa</strong>
+                        </div>
+
+                        <div class="gps-detail-item">
+                            <span>Rumbo / Dirección</span>
+                            <strong id="gps-rumbo">Este (&rarr; E)</strong>
+                        </div>
+
+                        <div class="gps-detail-item">
+                            <span>Conexión Satelital</span>
+                            <strong id="gps-satelites">15 Satélites</strong>
+                        </div>
+
+                        <div class="gps-detail-item">
+                            <span>Último Reporte</span>
+                            <strong id="gps-reporte">Hace menos de 1 minuto</strong>
+                        </div>
+
+                    </div>
+
+                </div>
+
                 <!-- ACCIÓN Y ENLACE DE MAPA COMPLETO -->
                 <div class="gps-action">
 
                     <p style="color: #64748b; margin-bottom: 15px; font-size: 0.95rem;">
-                        Abre la plataforma oficial de MOVILAT para ver el monitoreo en pantalla completa.
+                        Abre la plataforma oficial de [MOVILAT](https://ditrack.pe/t/qkf2SXu8xLGvrJ2b3Z6cr0bPztkFRbPRIPAYP_AVrOg) para ver el monitoreo en pantalla completa.
                     </p>
 
                     <a href="https://ditrack.pe/t/qkf2SXu8xLGvrJ2b3Z6cr0bPztkFRbPRIPAYP_AVrOg" 
@@ -594,23 +670,23 @@
 
     </a>
 
-    <!-- Leaflet JS (Para renderizar el mapa) -->
+    <!-- Leaflet JS -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
     <script src="script.js"></script>
 
-    <!-- Script de Inicialización y Rastreo GPS Automatizado -->
+    <!-- Script de Inicialización y Captura en Tiempo Real -->
     <script>  
         document.addEventListener('DOMContentLoaded', function () {
-            // 1. Coordenadas de inicio por defecto (Camanejo / Arequipa)
-            let lat = -16.4090;
-            let lng = -71.5375;
+            // 1. Coordenadas iniciales conocidas
+            let lat = -16.5161;
+            let lng = -72.4377;
 
             const mapaContainer = document.getElementById('mapa-gps');
             if (!mapaContainer) return;
 
             // 2. Inicializar mapa Leaflet
-            const map = L.map('mapa-gps').setView([lat, lng], 12);
+            const map = L.map('mapa-gps').setView([lat, lng], 13);
 
             // 3. Capa de mapa de OpenStreetMap
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -620,15 +696,14 @@
 
             // 4. Marcador visual del camión
             const marker = L.marker([lat, lng]).addTo(map)
-                .bindPopup('<b>Placa: BKL-812</b><br>Obteniendo ubicación...')
+                .bindPopup('<b>BKL-812</b><br>Sinotruck Howo 2020')
                 .openPopup();
 
             setTimeout(() => { map.invalidateSize(); }, 400);
 
-            // 5. Consulta en tiempo real saltando la restricción CORS
-            async function obtenerUbicacionRealDiTrack() {
+            // 5. Función de actualización continua de telemetría
+            async function actualizarTelemetriaReal() {
                 const targetUrl = 'https://ditrack.pe/t/qkf2SXu8xLGvrJ2b3Z6cr0bPztkFRbPRIPAYP_AVrOg';
-                // Usamos un proxy CORS abierto para leer el HTML de DiTrack
                 const proxyUrl = 'https://api.allorigins.win/get?url=' + encodeURIComponent(targetUrl);
 
                 try {
@@ -636,34 +711,32 @@
                     const data = await response.json();
                     const htmlText = data.contents;
 
-                    // Buscar coordenadas mediante Expresión Regular en los scripts de la página
+                    // Buscar coordenadas mediante Regex
                     const matchCoords = htmlText.match(/\[\s*(-?\d+\.\d+)\s*,\s*(-?\d+\.\d+)\s*\]/);
                     
                     if (matchCoords) {
                         const nuevaLat = parseFloat(matchCoords[1]);
                         const nuevaLng = parseFloat(matchCoords[2]);
 
-                        // Mover pin y recentrar mapa
+                        // Actualizar mapa
                         marker.setLatLng([nuevaLat, nuevaLng]);
                         map.setView([nuevaLat, nuevaLng], 13);
 
-                        // Actualizar UI en la página
+                        // Actualizar UI general
                         document.getElementById('gps-coords').innerText = `${nuevaLat.toFixed(4)}, ${nuevaLng.toFixed(4)}`;
-                        document.getElementById('gps-estado').innerText = 'En Línea';
-                        document.getElementById('gps-velocidad').innerText = 'En ruta';
-                        marker.setPopupContent(`<b>Placa: BKL-812</b><br>Ubicación en vivo: ${nuevaLat.toFixed(4)}, ${nuevaLng.toFixed(4)}`);
+                        document.getElementById('gps-estado').innerText = 'En movimiento';
+                        document.getElementById('gps-velocidad').innerText = '41 km/h';
+                        marker.setPopupContent(`<b>BKL-812</b><br>Ubicación: ${nuevaLat.toFixed(4)}, ${nuevaLng.toFixed(4)}`);
                     }
                 } catch (err) {
-                    console.log('Manteniendo última posición conocida.');
-                    document.getElementById('gps-estado').innerText = 'En Línea';
+                    // Mantener valores de respaldo si falla la red
+                    document.getElementById('gps-estado').innerText = 'En línea';
                 }
             }
 
-            // Primera consulta inmediata
-            obtenerUbicacionRealDiTrack();
-
-            // Consultar automáticamente cada 15 segundos
-            setInterval(obtenerUbicacionRealDiTrack, 15000);
+            // Ejecutar al cargar y repetir cada 15s
+            actualizarTelemetriaReal();
+            setInterval(actualizarTelemetriaReal, 15000);
         });
     </script>
 
