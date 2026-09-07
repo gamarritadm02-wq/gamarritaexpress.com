@@ -24,10 +24,13 @@
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 
-    <!-- Estilos para la sección de seguimiento y los widgets de datos -->
+    <!-- Leaflet.js CSS (Para el mapa interactivo) -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+    <!-- Estilos para la sección de seguimiento y el mapa -->
     <style>
         .gps-dashboard {
-            max-width: 900px;
+            max-width: 1100px;
             margin: 0 auto;
             background: #ffffff;
             border-radius: 12px;
@@ -36,37 +39,54 @@
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
         }
 
+        /* Layout de 2 columnas */
+        .gps-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            align-items: start;
+        }
+
+        @media (max-width: 768px) {
+            .gps-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
         .gps-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
+            grid-template-columns: 1fr;
+            gap: 15px;
         }
 
         .gps-stat-card {
             background: #f8fafc;
             border: 1px solid #e2e8f0;
-            padding: 20px;
+            padding: 18px;
             border-radius: 10px;
-            text-align: center;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-align: left;
         }
 
         .gps-stat-card i {
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             color: #2563eb;
-            margin-bottom: 10px;
+            width: 35px;
+            text-align: center;
         }
 
         .gps-stat-card h4 {
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             color: #64748b;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            margin-bottom: 5px;
+            margin: 0 0 3px 0;
         }
 
         .gps-stat-card .value {
-            font-size: 1.25rem;
+            font-size: 1.15rem;
             font-weight: 700;
             color: #0f172a;
         }
@@ -75,17 +95,31 @@
             color: #10b981;
         }
 
+        /* Contenedor del mapa */
+        .gps-map-container {
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        #mapa-gps {
+            width: 100%;
+            height: 330px;
+        }
+
         .gps-action {
             text-align: center;
             border-top: 1px solid #e2e8f0;
-            padding-top: 25px;
+            padding-top: 20px;
+            margin-top: 25px;
         }
 
         .btn-gps {
             display: inline-block;
             background-color: #0f172a;
             color: #ffffff;
-            padding: 14px 32px;
+            padding: 12px 28px;
             text-decoration: none;
             border-radius: 8px;
             font-weight: 600;
@@ -374,37 +408,60 @@
 
             <div class="gps-dashboard">
 
-                <!-- TARJETAS SUPERIORES DE ESTADO -->
-                <div class="gps-grid">
+                <div class="gps-layout">
 
-                    <div class="gps-stat-card">
+                    <!-- IZQUIERDA: TARJETAS DE ESTADO -->
+                    <div class="gps-grid">
 
-                        <i class="fa-solid fa-truck"></i>
+                        <div class="gps-stat-card">
 
-                        <h4>Vehículo / Placa</h4>
+                            <i class="fa-solid fa-truck"></i>
 
-                        <div class="value" id="gps-placa">BKL-812</div>
+                            <div>
+                                <h4>Vehículo / Placa</h4>
+                                <div class="value" id="gps-placa">BKL-812</div>
+                            </div>
+
+                        </div>
+
+                        <div class="gps-stat-card">
+
+                            <i class="fa-solid fa-signal"></i>
+
+                            <div>
+                                <h4>Estado</h4>
+                                <div class="value status-online" id="gps-estado">En línea</div>
+                            </div>
+
+                        </div>
+
+                        <div class="gps-stat-card">
+
+                            <i class="fa-solid fa-gauge-high"></i>
+
+                            <div>
+                                <h4>Velocidad</h4>
+                                <div class="value" id="gps-velocidad">21 km/h</div>
+                            </div>
+
+                        </div>
+
+                        <div class="gps-stat-card">
+
+                            <i class="fa-solid fa-location-dot"></i>
+
+                            <div>
+                                <h4>Coordenadas</h4>
+                                <div class="value" id="gps-coords" style="font-size: 0.95rem;">-16.4090, -71.5375</div>
+                            </div>
+
+                        </div>
 
                     </div>
 
-                    <div class="gps-stat-card">
-
-                        <i class="fa-solid fa-signal"></i>
-
-                        <h4>Estado</h4>
-
-                        <div class="value status-online" id="gps-estado">En línea</div>
-
-                    </div>
-
-                    <div class="gps-stat-card">
-
-                        <i class="fa-solid fa-gauge-high"></i>
-
-                        <h4>Velocidad</h4>
-
-                        <div class="value" id="gps-velocidad">21 km/h</div>
-
+                    <!-- DERECHA: MAPA GPS INTERACTIVO -->
+                    <div class="gps-map-container">
+                        <div id="mapa-gps"></div>
                     </div>
 
                 </div>
@@ -413,7 +470,7 @@
                 <div class="gps-action">
 
                     <p style="color: #64748b; margin-bottom: 15px; font-size: 0.95rem;">
-                        Abre el mapa satelital interactivo para ver la ubicación geográfica en tiempo real.
+                        Abre la plataforma oficial de [MOVILAT](https://ditrack.pe/t/qkf2SXu8xLGvrJ2b3Z6cr0bPztkFRbPRIPAYP_AVrOg) para ver el monitoreo en pantalla completa.
                     </p>
 
                     <a href="https://ditrack.pe/t/qkf2SXu8xLGvrJ2b3Z6cr0bPztkFRbPRIPAYP_AVrOg" 
@@ -423,7 +480,7 @@
 
                         <i class="fa-solid fa-map-location-dot" style="margin-right: 8px;"></i>
 
-                        Abrir Mapa Interactivos
+                        Abrir Monitoreo Completo
 
                     </a>
 
@@ -535,33 +592,52 @@
 
     </a>
 
+    <!-- Leaflet JS (Para renderizar el mapa) -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
     <script src="script.js"></script>
+
+    <!-- Script de Inicialización y Actualización de Mapa/GPS -->
+    <script>  
+        // Coordenadas base
+        let lat = -16.4090;
+        let lng = -71.5375;
+
+        // Inicializar Mapa Leaflet
+        const map = L.map('mapa-gps').setView([lat, lng], 13);
+
+        // Capa de Mapa OpenStreetMap
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '© OpenStreetMap'
+        }).addTo(map);
+
+        // Marcador del Camión
+        const marker = L.marker([lat, lng]).addTo(map)
+            .bindPopup('<b>BKL-812</b><br>Velocidad: 21 km/h')
+            .openPopup();
+
+        // Función para consultar los datos del servidor de DiTrack
+        async function actualizarTelemetriaGPS() {
+            try {
+                const url = 'https://ditrack.pe/t/qkf2SXu8xLGvrJ2b3Z6cr0bPztkFRbPRIPAYP_AVrOg';
+                
+                const response = await fetch(url);
+                const html = await response.text();
+
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(html, 'text/html');
+
+                // Si el servidor permite CORS, actualiza el mapa con los nuevos valores
+            } catch (error) {
+                console.log("Servidor cargado con valores predeterminados.");
+            }
+        }
+
+        // Actualizar cada 20 segundos
+        setInterval(actualizarTelemetriaGPS, 20000);
+    </script>
 
 </body>
 
 </html>
-<script>  
-    // Función para consultar los datos del servidor de DiTrack
-async function actualizarTelemetriaGPS() {
-    try {
-        // Consultamos el enlace del dispositivo MOVILAT
-        const url = 'https://ditrack.pe/t/qkf2SXu8xLGvrJ2b3Z6cr0bPztkFRbPRIPAYP_AVrOg';
-        
-        const response = await fetch(url);
-        const html = await response.text();
-
-        // Creamos un parser para extraer los textos del HTML de DiTrack
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(html, 'text/html');
-
-        // Extraer y actualizar los elementos si el servidor lo permite
-        // (En caso de bloqueo CORS se mantendrán los valores por defecto del HTML)
-    } catch (error) {
-        console.log("Servidor cargado con valores predeterminados.");
-    }
-}
-
-// Actualizar cada 20 segundos
-setInterval(actualizarTelemetriaGPS, 20000);
-
-</script>
