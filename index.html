@@ -593,46 +593,56 @@
         <i class="fa-brands fa-whatsapp"></i>
 
     </a>
-
-   <!-- Leaflet JS (Para renderizar el mapa) -->
+<!-- Leaflet JS (Para renderizar el mapa) -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
+    <!-- Archivo JS secundario -->
     <script src="script.js"></script>
 
-    <!-- Script de Inicialización y Actualización de Mapa/GPS -->
+    <!-- Script de Inicialización del Mapa GPS -->
     <script>  
-        // 1. Coordenadas base
-        let lat = -16.4090;
-        let lng = -71.5375;
+        document.addEventListener('DOMContentLoaded', function () {
+            // 1. Coordenadas base (Arequipa)
+            let lat = -16.4090;
+            let lng = -71.5375;
 
-        // 2. Inicializar Mapa Leaflet sobre el div #mapa-gps
-        const map = L.map('mapa-gps').setView([lat, lng], 13);
+            // 2. Comprobar que existe el contenedor antes de crear el mapa
+            const mapaContainer = document.getElementById('mapa-gps');
+            if (!mapaContainer) return;
 
-        // 3. Capa de mapa OpenStreetMap
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 19,
-            attribution: '© OpenStreetMap'
-        }).addTo(map);
+            // 3. Inicializar Mapa Leaflet
+            const map = L.map('mapa-gps').setView([lat, lng], 13);
 
-        // 4. Marcador del vehículo
-        const marker = L.marker([lat, lng]).addTo(map)
-            .bindPopup('<b>BKL-812</b><br>Velocidad: 21 km/h')
-            .openPopup();
+            // 4. Capa gráfica de OpenStreetMap
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 19,
+                attribution: '© OpenStreetMap'
+            }).addTo(map);
 
-        // 5. Forzar el recalculo de tamaño para evitar cuadros vacíos o grises
-        setTimeout(() => { 
-            map.invalidateSize(); 
-        }, 300);
+            // 5. Marcador del vehículo
+            const marker = L.marker([lat, lng]).addTo(map)
+                .bindPopup('<b>BKL-812</b><br>Velocidad: 21 km/h')
+                .openPopup();
 
-        // 6. Función para mover el mapa y cambiar los valores del cuadro dinámicamente
-        function actualizarUbicacionEnMapa(nuevaLat, nuevaLng, velocidad) {
-            marker.setLatLng([nuevaLat, nuevaLng]);
-            map.setView([nuevaLat, nuevaLng], 14);
-            
-            marker.setPopupContent(`<b>BKL-812</b><br>Velocidad: ${velocidad} km/h`);
-            document.getElementById('gps-coords').innerText = `${nuevaLat.toFixed(4)}, ${nuevaLng.toFixed(4)}`;
-            document.getElementById('gps-velocidad').innerText = `${velocidad} km/h`;
-        }
+            // 6. Recalcular tamaño para evitar cuadros grises o transparentes
+            setTimeout(function () { 
+                map.invalidateSize(); 
+            }, 400);
+
+            // 7. Función global para actualizar coordenadas dinámicamente
+            window.actualizarUbicacionEnMapa = function (nuevaLat, nuevaLng, velocidad) {
+                marker.setLatLng([nuevaLat, nuevaLng]);
+                map.setView([nuevaLat, nuevaLng], 14);
+                
+                marker.setPopupContent(`<b>BKL-812</b><br>Velocidad: ${velocidad} km/h`);
+                
+                const elemCoords = document.getElementById('gps-coords');
+                const elemVel = document.getElementById('gps-velocidad');
+
+                if (elemCoords) elemCoords.innerText = `${nuevaLat.toFixed(4)}, ${nuevaLng.toFixed(4)}`;
+                if (elemVel) elemVel.innerText = `${velocidad} km/h`;
+            };
+        });
     </script>
 
 </body>
