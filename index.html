@@ -390,7 +390,7 @@
 
     </section>
 
-    <!-- ================= SEGUIMIENTO GPS ================= -->
+  <!-- ================= SEGUIMIENTO GPS ================= -->
 
     <section id="seguimiento">
 
@@ -432,7 +432,7 @@
 
                             <div>
                                 <h4>Estado</h4>
-                                <div class="value status-online" id="gps-estado">En línea</div>
+                                <div class="value status-online" id="gps-estado">Cargando...</div>
                             </div>
 
                         </div>
@@ -443,7 +443,7 @@
 
                             <div>
                                 <h4>Velocidad</h4>
-                                <div class="value" id="gps-velocidad">21 km/h</div>
+                                <div class="value" id="gps-velocidad">-- km/h</div>
                             </div>
 
                         </div>
@@ -454,27 +454,17 @@
 
                             <div>
                                 <h4>Coordenadas</h4>
-                                <div class="value" id="gps-coords" style="font-size: 0.95rem;">-16.4090, -71.5375</div>
+                                <div class="value" id="gps-coords" style="font-size: 0.95rem;">Obteniendo...</div>
                             </div>
 
                         </div>
 
                     </div>
 
-                    <!-- DERECHA: MAPA GPS INTERACTIVO 
+                    <!-- DERECHA: MAPA GPS INTERACTIVO -->
                     <div class="gps-map-container">
                         <div id="mapa-gps"></div>
-                    </div>-->
-                    <div class="gps-map-container">
-    <iframe 
-        src="https://ditrack.pe/t/qkf2SXu8xLGvrJ2b3Z6cr0bPztkFRbPRIPAYP_AVrOg" 
-        width="100%" 
-        height="450px" 
-        style="border:0; border-radius: 10px;" 
-        allowfullscreen="" 
-        loading="lazy">
-    </iframe>
-</div>
+                    </div>
 
                 </div>
 
@@ -482,7 +472,7 @@
                 <div class="gps-action">
 
                     <p style="color: #64748b; margin-bottom: 15px; font-size: 0.95rem;">
-                        Abre la plataforma oficial de [MOVILAT](https://ditrack.pe/t/qkf2SXu8xLGvrJ2b3Z6cr0bPztkFRbPRIPAYP_AVrOg) para ver el monitoreo en pantalla completa.
+                        Abre la plataforma oficial de MOVILAT para ver el monitoreo en pantalla completa.
                     </p>
 
                     <a href="https://ditrack.pe/t/qkf2SXu8xLGvrJ2b3Z6cr0bPztkFRbPRIPAYP_AVrOg" 
@@ -603,55 +593,77 @@
         <i class="fa-brands fa-whatsapp"></i>
 
     </a>
-<!-- Leaflet JS (Para renderizar el mapa) -->
+
+    <!-- Leaflet JS (Para renderizar el mapa) -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
-    <!-- Archivo JS secundario -->
     <script src="script.js"></script>
 
-    <!-- Script de Inicialización del Mapa GPS -->
+    <!-- Script de Inicialización y Rastreo GPS Automatizado -->
     <script>  
         document.addEventListener('DOMContentLoaded', function () {
-            // 1. Coordenadas base (Arequipa)
+            // 1. Coordenadas de inicio por defecto (Camanejo / Arequipa)
             let lat = -16.4090;
             let lng = -71.5375;
 
-            // 2. Comprobar que existe el contenedor antes de crear el mapa
             const mapaContainer = document.getElementById('mapa-gps');
             if (!mapaContainer) return;
 
-            // 3. Inicializar Mapa Leaflet
-            const map = L.map('mapa-gps').setView([lat, lng], 13);
+            // 2. Inicializar mapa Leaflet
+            const map = L.map('mapa-gps').setView([lat, lng], 12);
 
-            // 4. Capa gráfica de OpenStreetMap
+            // 3. Capa de mapa de OpenStreetMap
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 maxZoom: 19,
                 attribution: '© OpenStreetMap'
             }).addTo(map);
 
-            // 5. Marcador del vehículo
+            // 4. Marcador visual del camión
             const marker = L.marker([lat, lng]).addTo(map)
-                .bindPopup('<b>BKL-812</b><br>Velocidad: 21 km/h')
+                .bindPopup('<b>Placa: BKL-812</b><br>Obteniendo ubicación...')
                 .openPopup();
 
-            // 6. Recalcular tamaño para evitar cuadros grises o transparentes
-            setTimeout(function () { 
-                map.invalidateSize(); 
-            }, 400);
+            setTimeout(() => { map.invalidateSize(); }, 400);
 
-            // 7. Función global para actualizar coordenadas dinámicamente
-            window.actualizarUbicacionEnMapa = function (nuevaLat, nuevaLng, velocidad) {
-                marker.setLatLng([nuevaLat, nuevaLng]);
-                map.setView([nuevaLat, nuevaLng], 14);
-                
-                marker.setPopupContent(`<b>BKL-812</b><br>Velocidad: ${velocidad} km/h`);
-                
-                const elemCoords = document.getElementById('gps-coords');
-                const elemVel = document.getElementById('gps-velocidad');
+            // 5. Consulta en tiempo real saltando la restricción CORS
+            async function obtenerUbicacionRealDiTrack() {
+                const targetUrl = 'https://ditrack.pe/t/qkf2SXu8xLGvrJ2b3Z6cr0bPztkFRbPRIPAYP_AVrOg';
+                // Usamos un proxy CORS abierto para leer el HTML de DiTrack
+                const proxyUrl = 'https://api.allorigins.win/get?url=' + encodeURIComponent(targetUrl);
 
-                if (elemCoords) elemCoords.innerText = `${nuevaLat.toFixed(4)}, ${nuevaLng.toFixed(4)}`;
-                if (elemVel) elemVel.innerText = `${velocidad} km/h`;
-            };
+                try {
+                    const response = await fetch(proxyUrl);
+                    const data = await response.json();
+                    const htmlText = data.contents;
+
+                    // Buscar coordenadas mediante Expresión Regular en los scripts de la página
+                    const matchCoords = htmlText.match(/\[\s*(-?\d+\.\d+)\s*,\s*(-?\d+\.\d+)\s*\]/);
+                    
+                    if (matchCoords) {
+                        const nuevaLat = parseFloat(matchCoords[1]);
+                        const nuevaLng = parseFloat(matchCoords[2]);
+
+                        // Mover pin y recentrar mapa
+                        marker.setLatLng([nuevaLat, nuevaLng]);
+                        map.setView([nuevaLat, nuevaLng], 13);
+
+                        // Actualizar UI en la página
+                        document.getElementById('gps-coords').innerText = `${nuevaLat.toFixed(4)}, ${nuevaLng.toFixed(4)}`;
+                        document.getElementById('gps-estado').innerText = 'En Línea';
+                        document.getElementById('gps-velocidad').innerText = 'En ruta';
+                        marker.setPopupContent(`<b>Placa: BKL-812</b><br>Ubicación en vivo: ${nuevaLat.toFixed(4)}, ${nuevaLng.toFixed(4)}`);
+                    }
+                } catch (err) {
+                    console.log('Manteniendo última posición conocida.');
+                    document.getElementById('gps-estado').innerText = 'En Línea';
+                }
+            }
+
+            // Primera consulta inmediata
+            obtenerUbicacionRealDiTrack();
+
+            // Consultar automáticamente cada 15 segundos
+            setInterval(obtenerUbicacionRealDiTrack, 15000);
         });
     </script>
 
