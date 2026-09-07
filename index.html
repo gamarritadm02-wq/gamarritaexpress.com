@@ -24,6 +24,23 @@
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 
+    <!-- Estilos rápidos para el contenedor del iframe -->
+    <style>
+        .map-container {
+            width: 100%;
+            max-width: 1100px;
+            margin: 0 auto;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        .map-container iframe {
+            width: 100%;
+            height: 600px;
+            border: none;
+        }
+    </style>
+
 </head>
 
 <body>
@@ -46,15 +63,12 @@
                     <li><a href="#inicio">Inicio</a></li>
                     <li><a href="#nosotros">Nosotros</a></li>
                     <li><a href="#servicios">Servicios</a></li>
+                    <li><a href="#seguimiento">Seguimiento GPS</a></li>
                     <li><a href="#contacto">Contacto</a></li>
 
                 </ul>
 
             </nav>
-<!--
-            <a href="#contacto" class="btn-header">
-                Cotizar
-            </a>  -->
 
         </div>
 
@@ -99,7 +113,7 @@
 
             </a> 
 
-            <a href="https://wa.me/51999999999"
+            <a href="https://wa.me/51999913590"
                 class="btn-secondary">
 
                 WhatsApp
@@ -277,6 +291,36 @@
 
                 </article>
 
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- ================= SEGUIMIENTO GPS ================= -->
+
+    <section id="seguimiento">
+
+        <div class="container">
+
+            <div class="section-title">
+
+                <span>MONITOREO EN TIEMPO REAL</span>
+
+                <h2>
+
+                    Rastreo de Flota GPS
+
+                </h2>
+
+            </div>
+
+            <div class="map-container">
+                <iframe 
+                    src="https://ditrack.pe/t/qkf2SXu8xLGvrJ2b3Z6cr0bPztkFRbPRIPAYP_AVrOg" 
+                    title="Seguimiento en Vivo MOVILAT - BKL-812"
+                    allowfullscreen>
+                </iframe>
             </div>
 
         </div>
