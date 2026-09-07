@@ -594,83 +594,45 @@
 
     </a>
 
-    <!-- Leaflet JS (Para renderizar el mapa) -->
+   <!-- Leaflet JS (Para renderizar el mapa) -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
     <script src="script.js"></script>
 
     <!-- Script de Inicialización y Actualización de Mapa/GPS -->
     <script>  
-        // Coordenadas base
+        // 1. Coordenadas base
         let lat = -16.4090;
         let lng = -71.5375;
 
-        // Inicializar Mapa Leaflet
+        // 2. Inicializar Mapa Leaflet sobre el div #mapa-gps
         const map = L.map('mapa-gps').setView([lat, lng], 13);
 
-        // Capa de Mapa OpenStreetMap
+        // 3. Capa de mapa OpenStreetMap
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 19,
             attribution: '© OpenStreetMap'
         }).addTo(map);
 
-        // Marcador del Camión
+        // 4. Marcador del vehículo
         const marker = L.marker([lat, lng]).addTo(map)
             .bindPopup('<b>BKL-812</b><br>Velocidad: 21 km/h')
             .openPopup();
 
-        // Función para consultar los datos del servidor de DiTrack
-        async function actualizarTelemetriaGPS() {
-            try {
-                const url = 'https://ditrack.pe/t/qkf2SXu8xLGvrJ2b3Z6cr0bPztkFRbPRIPAYP_AVrOg';
-                
-                const response = await fetch(url);
-                const html = await response.text();
+        // 5. Forzar el recalculo de tamaño para evitar cuadros vacíos o grises
+        setTimeout(() => { 
+            map.invalidateSize(); 
+        }, 300);
 
-                const parser = new DOMParser();
-                const doc = parser.parseFromString(html, 'text/html');
-
-                // Si el servidor permite CORS, actualiza el mapa con los nuevos valores
-            } catch (error) {
-                console.log("Servidor cargado con valores predeterminados.");
-            }
+        // 6. Función para mover el mapa y cambiar los valores del cuadro dinámicamente
+        function actualizarUbicacionEnMapa(nuevaLat, nuevaLng, velocidad) {
+            marker.setLatLng([nuevaLat, nuevaLng]);
+            map.setView([nuevaLat, nuevaLng], 14);
+            
+            marker.setPopupContent(`<b>BKL-812</b><br>Velocidad: ${velocidad} km/h`);
+            document.getElementById('gps-coords').innerText = `${nuevaLat.toFixed(4)}, ${nuevaLng.toFixed(4)}`;
+            document.getElementById('gps-velocidad').innerText = `${velocidad} km/h`;
         }
-
-        // Actualizar cada 20 segundos
-        setInterval(actualizarTelemetriaGPS, 20000);
-
-        // 1. Coordenadas iniciales (Arequipa)
-let lat = -16.4090;
-let lng = -71.5375;
-
-// 2. Inicializar mapa en el DIV #mapa-gps
-const map = L.map('mapa-gps').setView([lat, lng], 13);
-
-// 3. Cargar la capa gráfica del mapa
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: 19,
-    attribution: '© OpenStreetMap'
-}).addTo(map);
-
-// 4. Dibujar el marcador
-const marker = L.marker([lat, lng]).addTo(map)
-    .bindPopup('<b>BKL-812</b><br>Velocidad: 21 km/h')
-    .openPopup();
-
-// 5. Ajustar renderizado si la pantalla cambia de tamaño
-setTimeout(() => { map.invalidateSize(); }, 500);
-
-// Función para mover el mapa y actualizar la tarjeta cuando se reciben coordenadas reales
-function actualizarUbicacionEnMapa(nuevaLat, nuevaLng, velocidad) {
-    // Mover el marcador y centrar el mapa
-    marker.setLatLng([nuevaLat, nuevaLng]);
-    map.setView([nuevaLat, nuevaLng], 14);
-    
-    // Actualizar el texto emergente y la tarjeta en el HTML
-    marker.setPopupContent(`<b>BKL-812</b><br>Velocidad: ${velocidad} km/h`);
-    document.getElementById('gps-coords').innerText = `${nuevaLat.toFixed(4)}, ${nuevaLng.toFixed(4)}`;
-    document.getElementById('gps-velocidad').innerText = `${velocidad} km/h`;
-}
     </script>
 
 </body>
