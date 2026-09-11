@@ -976,176 +976,356 @@
 
     <script src="script.js"></script>
 
+<!-- ================================================= -->
+<!-- MONITOREO GPS -->
+<!-- ================================================= -->
 
-    <!-- ================================================= -->
-    <!-- MONITOREO GPS -->
-    <!-- ================================================= -->
+<script>
 
-    <script>
+    /* ============================================= */
+    /* VARIABLES DEL MAPA */
+    /* ============================================= */
 
-        async function actualizarDatosGPS() {
+    let gpsMap = null;
+    let gpsMarker = null;
 
-            try {
 
-                const respuesta = await fetch(
-                    "https://odd-wind-b62d.gamarritadm02.workers.dev/?t=" + Date.now()
+    /* ============================================= */
+    /* INICIALIZAR MAPA */
+    /* ============================================= */
+
+    function inicializarMapaGPS(latitud, longitud) {
+
+        /* Si el mapa ya existe, no lo volvemos a crear */
+        if (gpsMap) {
+            return;
+        }
+
+
+        /* Crear mapa */
+        gpsMap = L.map("gpsMap").setView(
+            [latitud, longitud],
+            15
+        );
+
+
+        /* Mapa base */
+        L.tileLayer(
+            "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+            {
+                maxZoom: 19,
+                attribution:
+                    '&copy; OpenStreetMap contributors'
+            }
+        ).addTo(gpsMap);
+
+
+        /* Crear marcador */
+        gpsMarker = L.marker(
+            [latitud, longitud]
+        ).addTo(gpsMap);
+
+
+        /* Información del vehículo */
+        gpsMarker.bindPopup(
+            `
+            <strong>GAMARRITA EXPRESS</strong><br>
+            Vehículo: BKL-812
+            `
+        );
+
+    }
+
+
+    /* ============================================= */
+    /* ACTUALIZAR MARCADOR */
+    /* ============================================= */
+
+    function actualizarMapaGPS(latitud, longitud) {
+
+        /* Si todavía no existe el mapa */
+        if (!gpsMap) {
+
+            inicializarMapaGPS(
+                latitud,
+                longitud
+            );
+
+            return;
+        }
+
+
+        /* Actualizar posición del marcador */
+        if (gpsMarker) {
+
+            gpsMarker.setLatLng(
+                [latitud, longitud]
+            );
+
+        }
+
+
+        /* Centrar mapa en la nueva posición */
+        gpsMap.panTo(
+            [latitud, longitud],
+            {
+                animate: true,
+                duration: 1
+            }
+        );
+
+    }
+
+
+    /* ============================================= */
+    /* ACTUALIZAR DATOS GPS */
+    /* ============================================= */
+
+    async function actualizarDatosGPS() {
+
+        try {
+
+            const respuesta = await fetch(
+                "https://odd-wind-b62d.gamarritadm02.workers.dev/?t=" +
+                Date.now()
+            );
+
+
+            if (!respuesta.ok) {
+
+                throw new Error(
+                    "No se pudo conectar con el servidor GPS"
                 );
 
-                if (!respuesta.ok) {
-
-                    throw new Error(
-                        "No se pudo conectar con el servidor GPS"
-                    );
-
-                }
-
-                const datos = await respuesta.json();
-
-                console.log(
-                    "Datos GPS recibidos:",
-                    datos
-                );
+            }
 
 
-                /* ============================================= */
-                /* VEHÍCULO */
-                /* ============================================= */
-
-                document.getElementById(
-                    "gpsPlaca"
-                ).textContent =
-                    datos.vehiculo || "No disponible";
+            const datos =
+                await respuesta.json();
 
 
-                /* ============================================= */
-                /* VELOCIDAD */
-                /* ============================================= */
-
-                document.getElementById(
-                    "gpsVelocidad"
-                ).textContent =
-                    datos.velocidad || "No disponible";
+            console.log(
+                "Datos GPS recibidos:",
+                datos
+            );
 
 
-                /* ============================================= */
-                /* ESTADO */
-                /* ============================================= */
+            /* ========================================= */
+            /* VEHÍCULO */
+            /* ========================================= */
 
-                document.getElementById(
-                    "gpsEstadoTexto"
-                ).textContent =
-                    datos.estado || "No disponible";
-
-
-                /* ============================================= */
-                /* ÚLTIMA ACTUALIZACIÓN */
-                /* ============================================= */
-
-                document.getElementById(
-                    "gpsHora"
-                ).textContent =
-                    datos.ultimaActualizacion || "No disponible";
+            document.getElementById(
+                "gpsPlaca"
+            ).textContent =
+                datos.vehiculo ||
+                "No disponible";
 
 
-                /* ============================================= */
-                /* PUNTO DE ESTADO */
-                /* ============================================= */
+            /* ========================================= */
+            /* VELOCIDAD */
+            /* ========================================= */
 
-                const punto =
-                    document.getElementById(
-                        "gpsStatusDot"
-                    );
-
-
-                if (
-                    datos.estado &&
-                    datos.estado.toLowerCase() === "online"
-                ) {
-
-                    punto.style.background =
-                        "#22c55e";
-
-                }
-
-                else {
-
-                    punto.style.background =
-                        "#94a3b8";
-
-                }
+            document.getElementById(
+                "gpsVelocidad"
+            ).textContent =
+                datos.velocidad ||
+                "No disponible";
 
 
-                /* ============================================= */
-                /* DATOS QUE TODAVÍA NO OBTENEMOS DE DITRACK */
-                /* ============================================= */
+            /* ========================================= */
+            /* ESTADO */
+            /* ========================================= */
+
+            document.getElementById(
+                "gpsEstadoTexto"
+            ).textContent =
+                datos.estado ||
+                "No disponible";
+
+
+            /* ========================================= */
+            /* ÚLTIMA ACTUALIZACIÓN */
+            /* ========================================= */
+
+            document.getElementById(
+                "gpsHora"
+            ).textContent =
+                datos.ultimaActualizacion ||
+                "No disponible";
+
+
+            /* ========================================= */
+            /* LATITUD */
+            /* ========================================= */
+
+            if (
+                datos.latitud !== null &&
+                datos.latitud !== undefined
+            ) {
 
                 document.getElementById(
-                    "gpsRumbo"
+                    "gpsLatitud"
                 ).textContent =
-                    "No disponible";
+                    Number(datos.latitud).toFixed(6);
 
-
-                document.getElementById(
-                    "gpsEvento"
-                ).textContent =
-                    "No disponible";
-
+            } else {
 
                 document.getElementById(
                     "gpsLatitud"
                 ).textContent =
                     "No disponible";
 
+            }
+
+
+            /* ========================================= */
+            /* LONGITUD */
+            /* ========================================= */
+
+            if (
+                datos.longitud !== null &&
+                datos.longitud !== undefined
+            ) {
+
+                document.getElementById(
+                    "gpsLongitud"
+                ).textContent =
+                    Number(datos.longitud).toFixed(6);
+
+            } else {
 
                 document.getElementById(
                     "gpsLongitud"
                 ).textContent =
                     "No disponible";
 
+            }
+
+
+            /* ========================================= */
+            /* RUMBO */
+            /* ========================================= */
+
+            if (
+                datos.rumbo !== null &&
+                datos.rumbo !== undefined
+            ) {
+
+                document.getElementById(
+                    "gpsRumbo"
+                ).textContent =
+                    datos.rumbo + "°";
+
+            } else {
+
+                document.getElementById(
+                    "gpsRumbo"
+                ).textContent =
+                    "No disponible";
 
             }
 
-            catch (error) {
 
-                console.error(
-                    "Error GPS:",
-                    error
+            /* ========================================= */
+            /* EVENTO */
+            /* ========================================= */
+
+            document.getElementById(
+                "gpsEvento"
+            ).textContent =
+                datos.evento ||
+                "Sin evento";
+
+
+            /* ========================================= */
+            /* ESTADO VISUAL */
+            /* ========================================= */
+
+            const punto =
+                document.getElementById(
+                    "gpsStatusDot"
                 );
 
 
-                document.getElementById(
-                    "gpsEstadoTexto"
-                ).textContent =
-                    "Sin conexión";
+            if (
+                datos.estado &&
+                datos.estado.toLowerCase() === "online"
+            ) {
+
+                punto.style.background =
+                    "#22c55e";
+
+            } else {
+
+                punto.style.background =
+                    "#94a3b8";
+
+            }
 
 
-                document.getElementById(
-                    "gpsStatusDot"
-                ).style.background =
-                    "#ef4444";
+            /* ========================================= */
+            /* ACTUALIZAR MAPA */
+            /* ========================================= */
+
+            if (
+                datos.latitud !== null &&
+                datos.latitud !== undefined &&
+                datos.longitud !== null &&
+                datos.longitud !== undefined
+            ) {
+
+                actualizarMapaGPS(
+                    Number(datos.latitud),
+                    Number(datos.longitud)
+                );
 
             }
 
         }
 
+        catch (error) {
 
-        /* ============================================= */
-        /* PRIMERA CONSULTA */
-        /* ============================================= */
+            console.error(
+                "Error GPS:",
+                error
+            );
 
-        actualizarDatosGPS();
+
+            /* Estado */
+            document.getElementById(
+                "gpsEstadoTexto"
+            ).textContent =
+                "Sin conexión";
 
 
-        /* ============================================= */
-        /* ACTUALIZACIÓN CADA 20 SEGUNDOS */
-        /* ============================================= */
+            /* Punto rojo */
+            document.getElementById(
+                "gpsStatusDot"
+            ).style.background =
+                "#ef4444";
 
-        setInterval(
-            actualizarDatosGPS,
-            20000
-        );
+        }
 
-    </script>
+    }
+
+
+    /* ============================================= */
+    /* PRIMERA CONSULTA */
+    /* ============================================= */
+
+    actualizarDatosGPS();
+
+
+    /* ============================================= */
+    /* ACTUALIZACIÓN CADA 20 SEGUNDOS */
+    /* ============================================= */
+
+    setInterval(
+        actualizarDatosGPS,
+        20000
+    );
+
+</script>
 
 
 </body>
