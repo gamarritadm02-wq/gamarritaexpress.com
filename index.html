@@ -27,6 +27,38 @@
     <!-- Estilos del monitoreo -->
     <style>
 
+        /* ================= MONITOREO DITRACK ================= */
+
+.gps-dashboard {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.ditrack-container {
+    width: 100%;
+    height: 750px;
+    overflow: hidden;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    background: #ffffff;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+.ditrack-frame {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+@media (max-width: 768px) {
+
+    .ditrack-container {
+        height: 650px;
+    }
+
+}
         .gps-dashboard {
             max-width: 1200px;
             margin: 0 auto;
@@ -357,86 +389,41 @@
     </section>
 
 
-    <!-- ================= SEGUIMIENTO GPS ================= -->
+ <!-- ================= SEGUIMIENTO GPS ================= -->
 
-    <section id="seguimiento">
+<section id="seguimiento">
 
-        <div class="container">
+    <div class="container">
 
-            <div class="section-title">
+        <div class="section-title">
 
-                <span>MONITOREO EN TIEMPO REAL</span>
+            <span>MONITOREO EN TIEMPO REAL</span>
 
-                <h2>
+            <h2>
+                Rastreo de Flota
+            </h2>
 
-                    Rastreo de Flota
+        </div>
 
-                </h2>
+        <div class="gps-dashboard">
 
-            </div>
+            <div class="ditrack-container">
 
-
-            <div class="gps-dashboard">
-
-
-                <!-- ================= DITRACK ================= -->
-
-                <div class="ditrack-container">
-
-                    <iframe
-
-                        class="ditrack-frame"
-
-                        src="https://ditrack.pe/t/qkf2SXu8xLGvrJ2b3Z6cr0bPztkFRbPRIPAYP_AVrOg"
-
-                        title="Monitoreo GPS GAMARRITA EXPRESS"
-
-                        allowfullscreen>
-
-                    </iframe>
-
-                </div>
-
-
-                <!-- ================= BOTÓN EXTERNO ================= -->
-
-                <div class="gps-action">
-
-                    <p>
-
-                        Visualiza el monitoreo GPS en tiempo real
-                        directamente desde la plataforma Ditrack.
-
-                    </p>
-
-
-                    <a
-
-                        href="https://ditrack.pe/t/qkf2SXu8xLGvrJ2b3Z6cr0bPztkFRbPRIPAYP_AVrOg"
-
-                        target="_blank"
-
-                        rel="noopener noreferrer"
-
-                        class="btn-gps">
-
-                        <i
-                            class="fa-solid fa-map-location-dot"
-                            style="margin-right: 8px;">
-                        </i>
-
-                        Abrir Monitoreo en Pantalla Completa
-
-                    </a>
-
-                </div>
+                <iframe
+                    src="https://ditrack.pe/t/qkf2SXu8xLGvrJ2b3Z6cr0bPztkFRbPRIPAYP_AVrOg"
+                    class="ditrack-frame"
+                    title="Monitoreo GPS GAMARRITA EXPRESS"
+                    allow="fullscreen"
+                    allowfullscreen>
+                </iframe>
 
             </div>
 
         </div>
 
-    </section>
+    </div>
 
+</section>
 
     <!-- ================= CONTACTO ================= -->
 
