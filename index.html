@@ -1188,7 +1188,6 @@
 
     </a>
 
-
     <!-- ================================================= -->
     <!-- SCRIPT PRINCIPAL -->
     <!-- ================================================= -->
@@ -1201,7 +1200,6 @@
     <!-- ================================================= -->
 
     <script>
-
 
         /* ================================================= */
         /* VARIABLES */
@@ -1217,7 +1215,6 @@
         /* ================================================= */
 
         function iniciarMapaGPS() {
-
 
             gpsMap = L.map("gpsMap").setView(
 
@@ -1241,7 +1238,6 @@
 
             ).addTo(gpsMap);
 
-
         }
 
 
@@ -1250,30 +1246,6 @@
         /* ================================================= */
 
         function actualizarGPS(datos) {
-
-
-            /*
-                FORMATO ESPERADO:
-
-                {
-                    plate: "BKL812",
-
-                    geo: [
-                        -11.410890,
-                        -76.960400
-                    ],
-
-                    direction: 38,
-
-                    event: "ER",
-
-                    speed: 50,
-
-                    time_device:
-                        "2026-09-11 10:47:00"
-                }
-            */
-
 
             if (!datos) {
 
@@ -1424,52 +1396,41 @@
 
             if (evento === "ER") {
 
-
                 estadoTexto.textContent =
                     "En ruta";
 
-
                 estadoPunto.style.background =
                     "#22c55e";
-
 
             }
 
 
             else if (evento === "PA") {
 
-
                 estadoTexto.textContent =
                     "Detenido";
 
-
                 estadoPunto.style.background =
                     "#f59e0b";
-
 
             }
 
 
             else if (evento === "BP") {
 
-
                 estadoTexto.textContent =
                     "Botón de pánico";
 
-
                 estadoPunto.style.background =
                     "#ef4444";
-
 
             }
 
 
             else {
 
-
                 estadoTexto.textContent =
                     "Conectado";
-
 
                 estadoPunto.style.background =
                     "#3b82f6";
@@ -1495,7 +1456,6 @@
 
             if (!gpsMarker) {
 
-
                 gpsMarker = L.marker(
                     posicion
                 )
@@ -1511,12 +1471,10 @@
 
                 );
 
-
             }
 
 
             else {
-
 
                 gpsMarker.setLatLng(
                     posicion
@@ -1558,9 +1516,7 @@
 
         function convertirEvento(evento) {
 
-
             switch (evento) {
-
 
                 case "ER":
 
@@ -1596,62 +1552,11 @@
 
             function () {
 
-
                 iniciarMapaGPS();
-
 
             }
 
         );
-
-
-        /* ================================================= */
-        /*
-            PRUEBA DEL MONITOREO 2
-
-            ESTA PARTE SOLO SIRVE PARA COMPROBAR
-            QUE EL MAPA Y EL PANEL FUNCIONAN.
-
-            POSTERIORMENTE SE REEMPLAZARÁ POR
-            LA CONEXIÓN REAL A LA API DE DITRACK.
-        */
-        /* ================================================= */
-
-
-        setTimeout(
-
-            function () {
-
-
-                actualizarGPS({
-
-                    plate: "BKL-812",
-
-                    geo: [
-
-                        -11.410890,
-                        -76.960400
-
-                    ],
-
-                    direction: 38,
-
-                    event: "ER",
-
-                    speed: 50,
-
-                    time_device:
-                        "2026-09-11 10:47:00"
-
-                });
-
-
-            },
-
-            1000
-
-        );
-
 
     </script>
 
