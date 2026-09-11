@@ -6,11 +6,11 @@ const header = document.getElementById("header");
 
 window.addEventListener("scroll", () => {
 
-    if(window.scrollY > 60){
+    if (window.scrollY > 60) {
 
         header.classList.add("scrolled");
 
-    }else{
+    } else {
 
         header.classList.remove("scrolled");
 
@@ -25,15 +25,15 @@ window.addEventListener("scroll", () => {
 
 const sections = document.querySelectorAll("section");
 
-const reveal = () =>{
+const reveal = () => {
 
     const trigger = window.innerHeight * 0.85;
 
-    sections.forEach(section=>{
+    sections.forEach(section => {
 
         const top = section.getBoundingClientRect().top;
 
-        if(top < trigger){
+        if (top < trigger) {
 
             section.classList.add("show");
 
@@ -41,7 +41,7 @@ const reveal = () =>{
 
     });
 
-}
+};
 
 window.addEventListener("scroll", reveal);
 
@@ -52,19 +52,23 @@ reveal();
    BOTONES SUAVES
 ==========================*/
 
-document.querySelectorAll('a[href^="#"]').forEach(anchor=>{
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
-    anchor.addEventListener("click",function(e){
+    anchor.addEventListener("click", function (e) {
 
         e.preventDefault();
 
-        const destino=document.querySelector(this.getAttribute("href"));
+        const destino = document.querySelector(
+            this.getAttribute("href")
+        );
 
-        destino.scrollIntoView({
+        if (destino) {
 
-            behavior:"smooth"
+            destino.scrollIntoView({
+                behavior: "smooth"
+            });
 
-        });
+        }
 
     });
 
@@ -75,11 +79,16 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor=>{
      EFECTO HERO
 ==========================*/
 
-window.addEventListener("scroll",()=>{
+window.addEventListener("scroll", () => {
 
-    const hero=document.querySelector(".hero");
+    const hero = document.querySelector(".hero");
 
-    hero.style.backgroundPositionY=(window.scrollY*0.35)+"px";
+    if (hero) {
+
+        hero.style.backgroundPositionY =
+            (window.scrollY * 0.35) + "px";
+
+    }
 
 });
 
@@ -88,21 +97,21 @@ window.addEventListener("scroll",()=>{
     BOTON WHATSAPP
 ==========================*/
 
-const whatsapp=document.querySelector(".whatsapp");
+const whatsapp = document.querySelector(".whatsapp");
 
-window.addEventListener("scroll",()=>{
+window.addEventListener("scroll", () => {
 
-    if(window.scrollY>500){
+    if (!whatsapp) return;
 
-        whatsapp.style.opacity="1";
+    if (window.scrollY > 500) {
 
-        whatsapp.style.transform="scale(1)";
+        whatsapp.style.opacity = "1";
+        whatsapp.style.transform = "scale(1)";
 
-    }else{
+    } else {
 
-        whatsapp.style.opacity="0";
-
-        whatsapp.style.transform="scale(.8)";
+        whatsapp.style.opacity = "0";
+        whatsapp.style.transform = "scale(.8)";
 
     }
 
@@ -113,23 +122,23 @@ window.addEventListener("scroll",()=>{
      EFECTO TARJETAS
 ==========================*/
 
-const cards=document.querySelectorAll(".service");
+const cards = document.querySelectorAll(".service");
 
-cards.forEach(card=>{
+cards.forEach(card => {
 
-    card.addEventListener("mousemove",(e)=>{
+    card.addEventListener("mousemove", (e) => {
 
-        const x=e.offsetX;
-        const y=e.offsetY;
+        const x = e.offsetX;
+        const y = e.offsetY;
 
-        card.style.background=
-        `radial-gradient(circle at ${x}px ${y}px,#ffffff,#f5f7fb)`;
+        card.style.background =
+            `radial-gradient(circle at ${x}px ${y}px, #ffffff, #f5f7fb)`;
 
     });
 
-    card.addEventListener("mouseleave",()=>{
+    card.addEventListener("mouseleave", () => {
 
-        card.style.background="#fff";
+        card.style.background = "#fff";
 
     });
 
@@ -140,11 +149,16 @@ cards.forEach(card=>{
     CARGA PAGINA
 ==========================*/
 
-window.addEventListener("load",()=>{
+window.addEventListener("load", () => {
 
     document.body.classList.add("loaded");
 
 });
+
+
+/*=========================
+      VIDEO HERO
+==========================*/
 
 const video = document.getElementById("heroVideo");
 
@@ -155,64 +169,22 @@ const videos = [
 
 let videoActual = 0;
 
-video.addEventListener("ended", function(){
+if (video) {
 
-    videoActual++;
+    video.addEventListener("ended", function () {
 
-    if(videoActual >= videos.length){
+        videoActual++;
 
-        videoActual = 0;
+        if (videoActual >= videos.length) {
 
-    }
+            videoActual = 0;
 
-    video.src = videos[videoActual];
-
-    video.play();
-
-});
-
-// ==========================================
-// MONITOREO GPS BKL-812 - DITRACK
-// ==========================================
-
-async function obtenerGPS() {
-    try {
-        const respuesta = await fetch(
-            "https://odd-wind-b62d.gamarritadm02.workers.dev/?t=" + Date.now()
-        );
-
-        if (!respuesta.ok) {
-            throw new Error("Error al consultar el servidor GPS");
         }
 
-        const datos = await respuesta.json();
+        video.src = videos[videoActual];
 
-        // Vehículo
-        document.getElementById("gpsPlaca").textContent =
-            datos.vehiculo || "No disponible";
+        video.play();
 
-        // Estado
-        document.getElementById("gpsEstadoTexto").textContent =
-            datos.estado || "No disponible";
+    });
 
-        // Velocidad
-        document.getElementById("gpsVelocidad").textContent =
-            datos.velocidad || "No disponible";
-
-        // Última actualización
-        document.getElementById("gpsHora").textContent =
-            datos.ultimaActualizacion || "No disponible";
-
-    } catch (error) {
-        console.error("Error GPS:", error);
-
-        document.getElementById("gpsEstadoTexto").textContent =
-            "Sin conexión";
-    }
 }
-
-// Primera consulta al cargar la página
-obtenerGPS();
-
-// Actualizar cada 20 segundos
-setInterval(obtenerGPS, 20000);
