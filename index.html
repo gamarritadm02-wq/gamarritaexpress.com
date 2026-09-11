@@ -24,105 +24,345 @@
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 
-    <!-- Estilos del monitoreo -->
+    <!-- Leaflet -->
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    >
+
+    <script
+        src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
+    </script>
+
+
+    <!-- ================================================= -->
+    <!-- ESTILOS DEL MONITOREO -->
+    <!-- ================================================= -->
+
     <style>
 
         /* ================= MONITOREO DITRACK ================= */
 
-.gps-dashboard {
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.ditrack-container {
-    width: 100%;
-    height: 750px;
-    overflow: hidden;
-    border-radius: 12px;
-    border: 1px solid #e2e8f0;
-    background: #ffffff;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
-}
-
-.ditrack-frame {
-    display: block;
-    width: 100%;
-    height: 100%;
-    border: 0;
-}
-
-@media (max-width: 768px) {
-
-    .ditrack-container {
-        height: 650px;
-    }
-
-}
         .gps-dashboard {
+
+            width: 100%;
             max-width: 1200px;
-            margin: 0 auto;
+            margin: 0 auto 40px auto;
             background: #ffffff;
             border-radius: 12px;
             padding: 30px;
             border: 1px solid #e2e8f0;
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+
         }
 
-        /* Contenedor del monitoreo Ditrack */
+
         .ditrack-container {
+
             width: 100%;
+            height: 700px;
+            overflow: hidden;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+            background: #f8fafc;
+
+        }
+
+
+        .ditrack-frame {
+
+            display: block;
+            width: 100%;
+            height: 100%;
+            border: none;
+
+        }
+
+
+        /* ================================================= */
+        /* MONITOREO 2 */
+        /* ================================================= */
+
+        .gps-sutran {
+
+            margin-top: 40px;
+
+        }
+
+
+        .gps-header {
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+
+        }
+
+
+        .gps-label {
+
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #2563eb;
+            letter-spacing: 1px;
+
+        }
+
+
+        .gps-header h3 {
+
+            margin-top: 5px;
+            margin-bottom: 0;
+            font-size: 1.5rem;
+            color: #0f172a;
+
+        }
+
+
+        /* ESTADO */
+
+        .gps-status {
+
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 14px;
+            border-radius: 20px;
+            background: #f1f5f9;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #334155;
+
+        }
+
+
+        .status-dot {
+
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #94a3b8;
+
+        }
+
+
+        /* INFORMACIÓN */
+
+        .gps-info-grid {
+
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-bottom: 25px;
+
+        }
+
+
+        .gps-card {
+
+            padding: 20px;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            background: #f8fafc;
+
+        }
+
+
+        .gps-card i {
+
+            display: block;
+            font-size: 20px;
+            color: #2563eb;
+            margin-bottom: 12px;
+
+        }
+
+
+        .gps-card span {
+
+            display: block;
+            color: #64748b;
+            font-size: 0.85rem;
+            margin-bottom: 5px;
+
+        }
+
+
+        .gps-card strong {
+
+            font-size: 1.25rem;
+            color: #0f172a;
+
+        }
+
+
+        /* MAPA */
+
+        .gps-map-container {
+
+            width: 100%;
+            height: 500px;
             border-radius: 12px;
             overflow: hidden;
             border: 1px solid #e2e8f0;
             background: #f8fafc;
+
         }
 
-        .ditrack-frame {
-            display: block;
+
+        #gpsMap {
+
             width: 100%;
-            height: 700px;
-            border: none;
+            height: 100%;
+
         }
 
-        /* Mensaje inferior */
-        .gps-action {
-            text-align: center;
-            border-top: 1px solid #e2e8f0;
-            padding-top: 25px;
-            margin-top: 25px;
-        }
 
-        .gps-action p {
+        .gps-map-message {
+
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             color: #64748b;
-            margin-bottom: 15px;
-            font-size: 0.95rem;
+            background: #f8fafc;
+
         }
 
-        .btn-gps {
-            display: inline-block;
-            background-color: #0f172a;
-            color: #ffffff;
-            padding: 12px 28px;
-            text-decoration: none;
-            border-radius: 8px;
-            font-weight: 600;
-            transition: background 0.3s ease;
+
+        .gps-map-message i {
+
+            font-size: 40px;
+            margin-bottom: 10px;
+
         }
 
-        .btn-gps:hover {
-            background-color: #2563eb;
+
+        .gps-map-message p {
+
+            margin: 0;
+
         }
 
-        /* Ajuste para celulares */
+
+        /* DETALLES */
+
+        .gps-details {
+
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+
+        }
+
+
+        .gps-details div {
+
+            padding: 15px;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            background: #ffffff;
+
+        }
+
+
+        .gps-details span {
+
+            display: block;
+            color: #64748b;
+            font-size: 0.8rem;
+            margin-bottom: 5px;
+
+        }
+
+
+        .gps-details strong {
+
+            color: #0f172a;
+
+        }
+
+
+        /* PIE */
+
+        .gps-footer {
+
+            margin-top: 20px;
+            text-align: center;
+            color: #64748b;
+            font-size: 0.85rem;
+
+        }
+
+
+        .gps-footer i {
+
+            margin-right: 5px;
+
+        }
+
+
+        /* ================================================= */
+        /* RESPONSIVE */
+        /* ================================================= */
+
         @media (max-width: 768px) {
 
             .gps-dashboard {
+
                 padding: 15px;
+
             }
 
-            .ditrack-frame {
+
+            .ditrack-container {
+
                 height: 650px;
+
+            }
+
+
+            .gps-header {
+
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+
+            }
+
+
+            .gps-info-grid {
+
+                grid-template-columns: repeat(2, 1fr);
+
+            }
+
+
+            .gps-details {
+
+                grid-template-columns: 1fr;
+
+            }
+
+
+            .gps-map-container {
+
+                height: 400px;
+
+            }
+
+        }
+
+
+        @media (max-width: 480px) {
+
+            .gps-info-grid {
+
+                grid-template-columns: 1fr;
+
             }
 
         }
@@ -131,28 +371,59 @@
 
 </head>
 
+
 <body>
 
-    <!-- ================= HEADER ================= -->
+
+    <!-- ================================================= -->
+    <!-- HEADER -->
+    <!-- ================================================= -->
 
     <header id="header">
 
         <div class="container">
 
             <a href="#" class="logo">
+
                 GAMARRITA
                 <span>EXPRESS</span>
+
             </a>
+
 
             <nav>
 
                 <ul>
 
-                    <li><a href="#inicio">Inicio</a></li>
-                    <li><a href="#nosotros">Nosotros</a></li>
-                    <li><a href="#servicios">Servicios</a></li>
-                    <li><a href="#seguimiento">Seguimiento GPS</a></li>
-                    <li><a href="#contacto">Contacto</a></li>
+                    <li>
+                        <a href="#inicio">
+                            Inicio
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#nosotros">
+                            Nosotros
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#servicios">
+                            Servicios
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#seguimiento">
+                            Seguimiento GPS
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#contacto">
+                            Contacto
+                        </a>
+                    </li>
 
                 </ul>
 
@@ -163,21 +434,33 @@
     </header>
 
 
-    <!-- ================= HERO ================= -->
+    <!-- ================================================= -->
+    <!-- HERO -->
+    <!-- ================================================= -->
 
     <section id="inicio" class="hero">
 
-        <video id="heroVideo" autoplay muted playsinline class="hero-video">
+        <video
+            id="heroVideo"
+            autoplay
+            muted
+            playsinline
+            class="hero-video">
 
             <source src="camion.mp4" type="video/mp4">
 
         </video>
 
+
         <div class="overlay"></div>
+
 
         <div class="hero-content">
 
-            <span>TRANSPORTE DE CARGA A NIVEL NACIONAL</span>
+            <span>
+                TRANSPORTE DE CARGA A NIVEL NACIONAL
+            </span>
+
 
             <h1>
 
@@ -187,6 +470,7 @@
 
             </h1>
 
+
             <p>
 
                 Soluciones de transporte terrestre
@@ -194,15 +478,20 @@
 
             </p>
 
+
             <div class="hero-buttons">
 
-                <a href="#contacto" class="btn-primary">
+                <a
+                    href="#contacto"
+                    class="btn-primary">
 
                     Contactos
 
                 </a>
 
-                <a href="https://wa.me/51999913590"
+
+                <a
+                    href="https://wa.me/51999913590"
                     class="btn-secondary"
                     target="_blank"
                     rel="noopener noreferrer">
@@ -218,7 +507,9 @@
     </section>
 
 
-    <!-- ================= NOSOTROS ================= -->
+    <!-- ================================================= -->
+    <!-- NOSOTROS -->
+    <!-- ================================================= -->
 
     <section id="nosotros">
 
@@ -226,7 +517,10 @@
 
             <div class="section-title">
 
-                <span>QUIÉNES SOMOS</span>
+                <span>
+                    QUIÉNES SOMOS
+                </span>
+
 
                 <h2>
 
@@ -236,6 +530,7 @@
                 </h2>
 
             </div>
+
 
             <div class="about-grid">
 
@@ -250,6 +545,7 @@
 
                     </p>
 
+
                     <p>
 
                         Nuestro equipo trabaja bajo una cultura
@@ -262,11 +558,14 @@
 
                 </div>
 
+
                 <div class="about-card">
 
                     <div>
 
-                        <h3>100%</h3>
+                        <h3>
+                            100%
+                        </h3>
 
                         <span>
                             Compromiso con nuestros clientes
@@ -274,9 +573,12 @@
 
                     </div>
 
+
                     <div>
 
-                        <h3>24/7</h3>
+                        <h3>
+                            24/7
+                        </h3>
 
                         <span>
                             Atención permanente
@@ -284,9 +586,12 @@
 
                     </div>
 
+
                     <div>
 
-                        <h3>SST</h3>
+                        <h3>
+                            SST
+                        </h3>
 
                         <span>
                             Seguridad como prioridad
@@ -303,7 +608,9 @@
     </section>
 
 
-    <!-- ================= SERVICIOS ================= -->
+    <!-- ================================================= -->
+    <!-- SERVICIOS -->
+    <!-- ================================================= -->
 
     <section id="servicios">
 
@@ -311,7 +618,10 @@
 
             <div class="section-title">
 
-                <span>NUESTROS SERVICIOS</span>
+                <span>
+                    NUESTROS SERVICIOS
+                </span>
+
 
                 <h2>
 
@@ -321,7 +631,9 @@
 
             </div>
 
+
             <div class="services">
+
 
                 <article class="service">
 
@@ -382,6 +694,7 @@
 
                 </article>
 
+
             </div>
 
         </div>
@@ -389,51 +702,323 @@
     </section>
 
 
- <!-- ================= SEGUIMIENTO GPS ================= -->
+    <!-- ================================================= -->
+    <!-- SEGUIMIENTO GPS -->
+    <!-- ================================================= -->
 
-<section id="seguimiento">
+    <section id="seguimiento">
 
-    <div class="container">
+        <div class="container">
 
-        <div class="section-title">
 
-            <span>MONITOREO EN TIEMPO REAL</span>
+            <div class="section-title">
 
-            <h2>
-                Rastreo de Flota
-            </h2>
+                <span>
+                    MONITOREO EN TIEMPO REAL
+                </span>
 
-        </div>
 
-        <div class="gps-dashboard">
+                <h2>
 
-            <div class="ditrack-container">
+                    Rastreo de Flota
 
-                <iframe
-                    src="https://ditrack.pe/t/qkf2SXu8xLGvrJ2b3Z6cr0bPztkFRbPRIPAYP_AVrOg"
-                    class="ditrack-frame"
-                    title="Monitoreo GPS GAMARRITA EXPRESS"
-                    allow="fullscreen"
-                    allowfullscreen>
-                </iframe>
+                </h2>
+
+            </div>
+
+
+            <!-- ================================================= -->
+            <!-- MONITOREO 1 - DITRACK -->
+            <!-- ================================================= -->
+
+            <div class="gps-dashboard">
+
+                <div class="gps-header">
+
+                    <div>
+
+                        <span class="gps-label">
+                            MONITOREO 1
+                        </span>
+
+                        <h3>
+                            Plataforma Ditrack
+                        </h3>
+
+                    </div>
+
+                </div>
+
+
+                <div class="ditrack-container">
+
+                    <iframe
+
+                        src="https://ditrack.pe/t/qkf2SXu8xLGvrJ2b3Z6cr0bPztkFRbPRIPAYP_AVrOg"
+
+                        class="ditrack-frame"
+
+                        title="Monitoreo GPS GAMARRITA EXPRESS"
+
+                        allow="fullscreen"
+
+                        allowfullscreen>
+
+                    </iframe>
+
+                </div>
+
+            </div>
+
+
+            <!-- ================================================= -->
+            <!-- MONITOREO 2 - DATOS GPS -->
+            <!-- ================================================= -->
+
+            <div class="gps-dashboard gps-sutran">
+
+
+                <div class="gps-header">
+
+
+                    <div>
+
+                        <span class="gps-label">
+                            MONITOREO 2
+                        </span>
+
+
+                        <h3>
+
+                            Datos GPS del vehículo
+
+                        </h3>
+
+                    </div>
+
+
+                    <div
+                        id="gpsEstado"
+                        class="gps-status">
+
+                        <span class="status-dot"></span>
+
+                        <span id="gpsEstadoTexto">
+
+                            Esperando datos
+
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ================================================= -->
+                <!-- TARJETAS -->
+                <!-- ================================================= -->
+
+                <div class="gps-info-grid">
+
+
+                    <!-- PLACA -->
+
+                    <div class="gps-card">
+
+                        <i class="fa-solid fa-truck"></i>
+
+                        <span>
+                            Vehículo
+                        </span>
+
+                        <strong id="gpsPlaca">
+
+                            BKL-812
+
+                        </strong>
+
+                    </div>
+
+
+                    <!-- VELOCIDAD -->
+
+                    <div class="gps-card">
+
+                        <i class="fa-solid fa-gauge-high"></i>
+
+                        <span>
+                            Velocidad
+                        </span>
+
+                        <strong>
+
+                            <span id="gpsVelocidad">
+                                0
+                            </span>
+
+                            km/h
+
+                        </strong>
+
+                    </div>
+
+
+                    <!-- RUMBO -->
+
+                    <div class="gps-card">
+
+                        <i class="fa-solid fa-compass"></i>
+
+                        <span>
+                            Rumbo
+                        </span>
+
+                        <strong id="gpsRumbo">
+
+                            0°
+
+                        </strong>
+
+                    </div>
+
+
+                    <!-- EVENTO -->
+
+                    <div class="gps-card">
+
+                        <i class="fa-solid fa-circle-info"></i>
+
+                        <span>
+                            Evento
+                        </span>
+
+                        <strong id="gpsEvento">
+
+                            Sin datos
+
+                        </strong>
+
+                    </div>
+
+
+                </div>
+
+
+                <!-- ================================================= -->
+                <!-- MAPA -->
+                <!-- ================================================= -->
+
+                <div class="gps-map-container">
+
+                    <div id="gpsMap">
+
+                        <div class="gps-map-message">
+
+                            <i class="fa-solid fa-location-dot"></i>
+
+                            <p>
+
+                                Esperando posición GPS...
+
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ================================================= -->
+                <!-- COORDENADAS -->
+                <!-- ================================================= -->
+
+                <div class="gps-details">
+
+
+                    <div>
+
+                        <span>
+                            Latitud
+                        </span>
+
+                        <strong id="gpsLatitud">
+
+                            —
+
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>
+                            Longitud
+                        </span>
+
+                        <strong id="gpsLongitud">
+
+                            —
+
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>
+                            Última actualización
+                        </span>
+
+                        <strong id="gpsHora">
+
+                            —
+
+                        </strong>
+
+                    </div>
+
+
+                </div>
+
+
+                <!-- ================================================= -->
+                <!-- PIE -->
+                <!-- ================================================= -->
+
+                <div class="gps-footer">
+
+                    <i class="fa-solid fa-satellite-dish"></i>
+
+                    Datos de posicionamiento GPS
+
+                </div>
+
 
             </div>
 
         </div>
 
-    </div>
+    </section>
 
-</section>
 
-    <!-- ================= CONTACTO ================= -->
+    <!-- ================================================= -->
+    <!-- CONTACTO -->
+    <!-- ================================================= -->
 
     <section id="contacto">
 
         <div class="container">
 
+
             <div class="section-title">
 
-                <span>CONTACTO</span>
+                <span>
+                    CONTACTO
+                </span>
+
 
                 <h2>
 
@@ -446,11 +1031,14 @@
 
             <div class="contact-grid">
 
+
                 <div>
 
                     <i class="fa-solid fa-phone"></i>
 
-                    <h3>Teléfono</h3>
+                    <h3>
+                        Teléfono
+                    </h3>
 
                     <p>
 
@@ -465,7 +1053,9 @@
 
                     <i class="fa-brands fa-whatsapp"></i>
 
-                    <h3>WhatsApp</h3>
+                    <h3>
+                        WhatsApp
+                    </h3>
 
                     <p>
 
@@ -480,7 +1070,9 @@
 
                     <i class="fa-solid fa-envelope"></i>
 
-                    <h3>Correo</h3>
+                    <h3>
+                        Correo
+                    </h3>
 
                     <p>
 
@@ -490,6 +1082,7 @@
 
                 </div>
 
+
             </div>
 
         </div>
@@ -497,7 +1090,9 @@
     </section>
 
 
-    <!-- ================= FOOTER ================= -->
+    <!-- ================================================= -->
+    <!-- FOOTER -->
+    <!-- ================================================= -->
 
     <footer>
 
@@ -509,12 +1104,14 @@
 
             </h3>
 
+
             <p>
 
                 Transporte de carga con seguridad,
                 puntualidad y confianza.
 
             </p>
+
 
             <small>
 
@@ -528,7 +1125,9 @@
     </footer>
 
 
-    <!-- ================= BOTÓN WHATSAPP ================= -->
+    <!-- ================================================= -->
+    <!-- BOTÓN WHATSAPP -->
+    <!-- ================================================= -->
 
     <a
 
@@ -545,9 +1144,512 @@
     </a>
 
 
-    <!-- ================= JAVASCRIPT ================= -->
+    <!-- ================================================= -->
+    <!-- JAVASCRIPT -->
+    <!-- ================================================= -->
 
     <script src="script.js"></script>
+
+
+    <script>
+
+        /* ================================================= */
+        /* MONITOREO 2 - MAPA GPS */
+        /* ================================================= */
+
+
+        let gpsMap = null;
+
+        let gpsMarker = null;
+
+
+        /*
+            INICIALIZAR MAPA
+        */
+
+        function iniciarMapaGPS() {
+
+
+            gpsMap = L.map("gpsMap").setView(
+
+                [-12.0464, -77.0428],
+
+                6
+
+            );
+
+
+            L.tileLayer(
+
+                "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+
+                {
+
+                    attribution:
+                        "&copy; OpenStreetMap contributors"
+
+                }
+
+            ).addTo(gpsMap);
+
+
+        }
+
+
+        /*
+            ACTUALIZAR GPS
+        */
+
+        function actualizarGPS(datos) {
+
+
+            /*
+                FORMATO ESPERADO:
+
+                {
+                    plate: "BKL812",
+
+                    geo: [
+                        latitud,
+                        longitud
+                    ],
+
+                    direction: 38,
+
+                    event: "ER",
+
+                    speed: 50,
+
+                    time_device:
+                        "2026-09-11 10:47:00"
+                }
+
+            */
+
+
+            const placa =
+
+                datos.plate || "BKL-812";
+
+
+            const velocidad =
+
+                datos.speed ?? 0;
+
+
+            const rumbo =
+
+                datos.direction ?? 0;
+
+
+            const evento =
+
+                datos.event || "Sin datos";
+
+
+            /*
+                VERIFICAR COORDENADAS
+            */
+
+            if (
+
+                !datos.geo ||
+
+                !Array.isArray(datos.geo) ||
+
+                datos.geo.length < 2
+
+            ) {
+
+                return;
+
+            }
+
+
+            const lat =
+
+                Number(datos.geo[0]);
+
+
+            const lon =
+
+                Number(datos.geo[1]);
+
+
+            /*
+                VALIDAR COORDENADAS
+            */
+
+            if (
+
+                !Number.isFinite(lat) ||
+
+                !Number.isFinite(lon)
+
+            ) {
+
+                return;
+
+            }
+
+
+            /*
+                ACTUALIZAR PLACA
+            */
+
+            document.getElementById(
+
+                "gpsPlaca"
+
+            ).textContent = placa;
+
+
+            /*
+                ACTUALIZAR VELOCIDAD
+            */
+
+            document.getElementById(
+
+                "gpsVelocidad"
+
+            ).textContent = velocidad;
+
+
+            /*
+                ACTUALIZAR RUMBO
+            */
+
+            document.getElementById(
+
+                "gpsRumbo"
+
+            ).textContent =
+
+                rumbo + "°";
+
+
+            /*
+                ACTUALIZAR EVENTO
+            */
+
+            document.getElementById(
+
+                "gpsEvento"
+
+            ).textContent =
+
+                convertirEvento(evento);
+
+
+            /*
+                LATITUD
+            */
+
+            document.getElementById(
+
+                "gpsLatitud"
+
+            ).textContent =
+
+                lat.toFixed(6);
+
+
+            /*
+                LONGITUD
+            */
+
+            document.getElementById(
+
+                "gpsLongitud"
+
+            ).textContent =
+
+                lon.toFixed(6);
+
+
+            /*
+                HORA
+            */
+
+            document.getElementById(
+
+                "gpsHora"
+
+            ).textContent =
+
+                datos.time_device || "—";
+
+
+            /*
+                ESTADO
+            */
+
+            const estadoTexto =
+
+                document.getElementById(
+
+                    "gpsEstadoTexto"
+
+                );
+
+
+            const estadoPunto =
+
+                document.querySelector(
+
+                    ".status-dot"
+
+                );
+
+
+            if (evento === "ER") {
+
+
+                estadoTexto.textContent =
+
+                    "En ruta";
+
+
+                estadoPunto.style.background =
+
+                    "#22c55e";
+
+
+            }
+
+
+            else if (evento === "PA") {
+
+
+                estadoTexto.textContent =
+
+                    "Detenido";
+
+
+                estadoPunto.style.background =
+
+                    "#f59e0b";
+
+
+            }
+
+
+            else if (evento === "BP") {
+
+
+                estadoTexto.textContent =
+
+                    "Botón de pánico";
+
+
+                estadoPunto.style.background =
+
+                    "#ef4444";
+
+
+            }
+
+
+            else {
+
+
+                estadoTexto.textContent =
+
+                    "Conectado";
+
+
+                estadoPunto.style.background =
+
+                    "#3b82f6";
+
+            }
+
+
+            /*
+                POSICIÓN
+            */
+
+            const posicion = [
+
+                lat,
+
+                lon
+
+            ];
+
+
+            /*
+                CREAR MARCADOR
+            */
+
+            if (!gpsMarker) {
+
+
+                gpsMarker =
+
+                    L.marker(posicion)
+
+                    .addTo(gpsMap)
+
+                    .bindPopup(
+
+                        "<strong>" +
+
+                        placa +
+
+                        "</strong><br>" +
+
+                        velocidad +
+
+                        " km/h"
+
+                    );
+
+
+            }
+
+
+            /*
+                ACTUALIZAR MARCADOR
+            */
+
+            else {
+
+
+                gpsMarker.setLatLng(
+
+                    posicion
+
+                );
+
+
+                gpsMarker.setPopupContent(
+
+                    "<strong>" +
+
+                    placa +
+
+                    "</strong><br>" +
+
+                    velocidad +
+
+                    " km/h"
+
+                );
+
+            }
+
+
+            /*
+                CENTRAR MAPA
+            */
+
+            gpsMap.setView(
+
+                posicion,
+
+                15
+
+            );
+
+
+        }
+
+
+        /*
+            CONVERTIR EVENTO
+        */
+
+        function convertirEvento(evento) {
+
+
+            switch (evento) {
+
+
+                case "ER":
+
+                    return "En ruta";
+
+
+                case "PA":
+
+                    return "Parada";
+
+
+                case "BP":
+
+                    return "Botón de pánico";
+
+
+                default:
+
+                    return evento || "Sin datos";
+
+            }
+
+        }
+
+
+        /*
+            INICIAR MAPA CUANDO CARGUE LA PÁGINA
+        */
+
+        document.addEventListener(
+
+            "DOMContentLoaded",
+
+            function () {
+
+
+                iniciarMapaGPS();
+
+
+            }
+
+        );
+
+
+        /*
+            =================================================
+            CONEXIÓN REAL CON DITRACK
+            =================================================
+
+            AQUÍ irá posteriormente el endpoint real
+            de la API de integración de Ditrack.
+
+            NO colocar todavía la API de SUTRAN aquí.
+
+        */
+
+
+        /*
+        EJEMPLO DE CÓMO SE RECIBIRÍA UNA TRAMA:
+
+        actualizarGPS({
+
+            plate: "BKL812",
+
+            geo: [
+                -11.410890,
+                -76.960400
+            ],
+
+            direction: 38,
+
+            event: "ER",
+
+            speed: 50,
+
+            time_device:
+                "2026-09-11 10:47:00"
+
+        });
+
+        */
+
+
+    </script>
+
 
 </body>
 
