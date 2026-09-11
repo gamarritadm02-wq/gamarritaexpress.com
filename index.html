@@ -83,6 +83,7 @@
             font-size: 1.5rem;
         }
 
+
         /* ================================================= */
         /* MONITOREO 1 */
         /* ================================================= */
@@ -102,6 +103,7 @@
             height: 100%;
             border: none;
         }
+
 
         /* ================================================= */
         /* ESTADO */
@@ -125,6 +127,7 @@
             border-radius: 50%;
             background: #94a3b8;
         }
+
 
         /* ================================================= */
         /* TARJETAS */
@@ -163,8 +166,9 @@
             color: #0f172a;
         }
 
+
         /* ================================================= */
-        /* MAPA */
+        /* MAPA MONITOREO 2 */
         /* ================================================= */
 
         .gps-map-container {
@@ -181,24 +185,6 @@
             height: 100%;
         }
 
-        .gps-map-message {
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            color: #64748b;
-            background: #f8fafc;
-        }
-
-        .gps-map-message i {
-            font-size: 40px;
-            margin-bottom: 10px;
-        }
-
-        .gps-map-message p {
-            margin: 0;
-        }
 
         /* ================================================= */
         /* DETALLES */
@@ -229,6 +215,7 @@
             color: #0f172a;
         }
 
+
         /* ================================================= */
         /* PIE */
         /* ================================================= */
@@ -244,6 +231,7 @@
             margin-right: 5px;
         }
 
+
         /* ================================================= */
         /* SEPARADOR */
         /* ================================================= */
@@ -256,9 +244,169 @@
             margin: 10px 0 40px 0;
         }
 
+
+        /* ================================================= */
+        /* MONITOREO 3 - MAPA GENERAL */
+        /* ================================================= */
+
+        .fleet-layout {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) 320px;
+            gap: 20px;
+            align-items: stretch;
+        }
+
+        .fleet-map-container {
+            width: 100%;
+            height: 550px;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+            background: #f8fafc;
+        }
+
+        #fleetMap {
+            width: 100%;
+            height: 100%;
+        }
+
+
+        /* ================================================= */
+        /* LISTA DE VEHÍCULOS */
+        /* ================================================= */
+
+        .fleet-list {
+            height: 550px;
+            overflow-y: auto;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            background: #f8fafc;
+            padding: 15px;
+        }
+
+        .fleet-list-title {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #64748b;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+            padding: 0 5px;
+        }
+
+        .fleet-vehicle {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: 0.2s ease;
+        }
+
+        .fleet-vehicle:hover {
+            border-color: #2563eb;
+            transform: translateY(-1px);
+        }
+
+        .fleet-vehicle-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .fleet-vehicle-name {
+            font-weight: 700;
+            color: #0f172a;
+        }
+
+        .fleet-vehicle-status {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.72rem;
+            font-weight: 600;
+        }
+
+        .fleet-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #94a3b8;
+        }
+
+        .fleet-online {
+            color: #16a34a;
+        }
+
+        .fleet-offline {
+            color: #dc2626;
+        }
+
+        .fleet-vehicle-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+
+        .fleet-data span {
+            display: block;
+            color: #94a3b8;
+            font-size: 0.7rem;
+            margin-bottom: 2px;
+        }
+
+        .fleet-data strong {
+            color: #334155;
+            font-size: 0.85rem;
+        }
+
+        .fleet-empty {
+            text-align: center;
+            color: #94a3b8;
+            padding: 30px 10px;
+            font-size: 0.85rem;
+        }
+
+
+        /* ================================================= */
+        /* CONTADOR DE VEHÍCULOS */
+        /* ================================================= */
+
+        .fleet-summary {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .fleet-summary-item {
+            padding: 8px 14px;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #475569;
+        }
+
+
         /* ================================================= */
         /* RESPONSIVE */
         /* ================================================= */
+
+        @media (max-width: 1000px) {
+
+            .fleet-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .fleet-list {
+                height: auto;
+                max-height: 400px;
+            }
+
+        }
 
         @media (max-width: 900px) {
 
@@ -290,6 +438,10 @@
 
             .gps-details {
                 grid-template-columns: 1fr;
+            }
+
+            .fleet-map-container {
+                height: 400px;
             }
 
         }
@@ -682,14 +834,10 @@
                     </div>
 
 
-                    <!-- ================================================= -->
                     <!-- INFORMACIÓN -->
-                    <!-- ================================================= -->
 
                     <div class="gps-info-grid">
 
-
-                        <!-- VEHÍCULO -->
 
                         <div class="gps-card">
 
@@ -706,8 +854,6 @@
                         </div>
 
 
-                        <!-- VELOCIDAD -->
-
                         <div class="gps-card">
 
                             <i class="fa-solid fa-gauge-high"></i>
@@ -723,8 +869,6 @@
                         </div>
 
 
-                        <!-- RUMBO -->
-
                         <div class="gps-card">
 
                             <i class="fa-solid fa-compass"></i>
@@ -739,8 +883,6 @@
 
                         </div>
 
-
-                        <!-- EVENTO -->
 
                         <div class="gps-card">
 
@@ -760,21 +902,18 @@
                     </div>
 
 
-                    <!-- ================================================= -->
                     <!-- MAPA -->
-                    <!-- ================================================= -->
 
                     <div class="gps-map-container">
 
-                        <div id="gpsMap">  </div>
+                        <div id="gpsMap"></div>
+
+                    </div>
 
 
-                    <!-- ================================================= -->
                     <!-- DETALLES -->
-                    <!-- ================================================= -->
 
                     <div class="gps-details">
-
 
                         <div>
 
@@ -814,13 +953,10 @@
 
                         </div>
 
-
                     </div>
 
 
-                    <!-- ================================================= -->
                     <!-- PIE -->
-                    <!-- ================================================= -->
 
                     <div class="gps-footer">
 
@@ -831,6 +967,114 @@
                     </div>
 
                 </div>
+
+
+                <!-- SEPARADOR -->
+
+                <div class="gps-separator"></div>
+
+
+                <!-- ================================================= -->
+                <!-- MONITOREO 3 -->
+                <!-- ================================================= -->
+
+                <div
+                    class="gps-monitor-box"
+                    id="monitoreo3">
+
+                    <div class="gps-monitor-header">
+
+                        <div>
+
+                            <span class="gps-label">
+                                MONITOREO 3
+                            </span>
+
+                            <h3>
+                                Mapa general de vehículos
+                            </h3>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- RESUMEN -->
+
+                    <div class="fleet-summary">
+
+                        <div class="fleet-summary-item">
+                            Total:
+                            <span id="fleetTotal">
+                                0
+                            </span>
+                        </div>
+
+                        <div class="fleet-summary-item">
+                            Conectados:
+                            <span id="fleetOnline">
+                                0
+                            </span>
+                        </div>
+
+                        <div class="fleet-summary-item">
+                            Sin conexión:
+                            <span id="fleetOffline">
+                                0
+                            </span>
+                        </div>
+
+                    </div>
+
+
+                    <!-- MAPA + LISTA -->
+
+                    <div class="fleet-layout">
+
+
+                        <!-- MAPA GENERAL -->
+
+                        <div class="fleet-map-container">
+
+                            <div id="fleetMap"></div>
+
+                        </div>
+
+
+                        <!-- LISTA -->
+
+                        <div class="fleet-list">
+
+                            <div class="fleet-list-title">
+                                VEHÍCULOS DE LA FLOTA
+                            </div>
+
+                            <div id="fleetList">
+
+                                <div class="fleet-empty">
+                                    Cargando vehículos...
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- PIE -->
+
+                    <div class="gps-footer">
+
+                        <i class="fa-solid fa-satellite-dish"></i>
+
+                        Monitoreo general de la flota
+                        · Actualización automática cada 20 segundos
+
+                    </div>
+
+                </div>
+
 
             </div>
 
@@ -962,356 +1206,940 @@
 
     <script src="script.js"></script>
 
-<!-- ================================================= -->
-<!-- MONITOREO GPS -->
-<!-- ================================================= -->
 
-<script>
+    <!-- ================================================= -->
+    <!-- MONITOREO GPS -->
+    <!-- ================================================= -->
 
-    /* ============================================= */
-    /* VARIABLES DEL MAPA */
-    /* ============================================= */
+    <script>
 
-    let gpsMap = null;
-    let gpsMarker = null;
+        /* ================================================= */
+        /* CONFIGURACIÓN */
+        /* ================================================= */
 
-
-    /* ============================================= */
-    /* INICIALIZAR MAPA */
-    /* ============================================= */
-
-    function inicializarMapaGPS(latitud, longitud) {
-
-        /* Si el mapa ya existe, no lo volvemos a crear */
-        if (gpsMap) {
-            return;
-        }
+        const GPS_WORKER =
+            "https://odd-wind-b62d.gamarritadm02.workers.dev/";
 
 
-        /* Crear mapa */
-        gpsMap = L.map("gpsMap").setView(
-            [latitud, longitud],
-            15
-        );
+        /* ================================================= */
+        /* MONITOREO 2 - VARIABLES */
+        /* ================================================= */
+
+        let gpsMap = null;
+        let gpsMarker = null;
 
 
-        /* Mapa base */
-        L.tileLayer(
-            "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-            {
-                maxZoom: 19,
-                attribution:
-                    '&copy; OpenStreetMap contributors'
+        /* ================================================= */
+        /* MONITOREO 3 - VARIABLES */
+        /* ================================================= */
+
+        let fleetMap = null;
+
+        const fleetMarkers = {};
+
+
+        /* ================================================= */
+        /* MONITOREO 2 - INICIALIZAR MAPA */
+        /* ================================================= */
+
+        function inicializarMapaGPS(
+            latitud,
+            longitud,
+            placa
+        ) {
+
+            if (gpsMap) {
+                return;
             }
-        ).addTo(gpsMap);
 
 
-        /* Crear marcador */
-        gpsMarker = L.marker(
-            [latitud, longitud]
-        ).addTo(gpsMap);
-
-
-        /* Información del vehículo */
-        gpsMarker.bindPopup(
-            `
-            <strong>GAMARRITA EXPRESS</strong><br>
-            Vehículo: BKL-812
-            `
-        );
-
-    }
-
-
-    /* ============================================= */
-    /* ACTUALIZAR MARCADOR */
-    /* ============================================= */
-
-    function actualizarMapaGPS(latitud, longitud) {
-
-        /* Si todavía no existe el mapa */
-        if (!gpsMap) {
-
-            inicializarMapaGPS(
-                latitud,
-                longitud
+            gpsMap = L.map("gpsMap").setView(
+                [latitud, longitud],
+                15
             );
 
-            return;
+
+            L.tileLayer(
+                "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+                    maxZoom: 19,
+                    attribution:
+                        "&copy; OpenStreetMap contributors"
+                }
+            ).addTo(gpsMap);
+
+
+            gpsMarker = L.marker(
+                [latitud, longitud]
+            ).addTo(gpsMap);
+
+
+            gpsMarker.bindPopup(
+                `
+                <strong>GAMARRITA EXPRESS</strong><br>
+                Vehículo: ${placa}
+                `
+            );
+
         }
 
 
-        /* Actualizar posición del marcador */
-        if (gpsMarker) {
+        /* ================================================= */
+        /* MONITOREO 2 - ACTUALIZAR MAPA */
+        /* ================================================= */
 
-            gpsMarker.setLatLng(
+        function actualizarMapaGPS(
+            latitud,
+            longitud,
+            placa
+        ) {
+
+            if (!gpsMap) {
+
+                inicializarMapaGPS(
+                    latitud,
+                    longitud,
+                    placa
+                );
+
+                return;
+
+            }
+
+
+            if (gpsMarker) {
+
+                gpsMarker.setLatLng(
+                    [latitud, longitud]
+                );
+
+
+                gpsMarker.setPopupContent(
+                    `
+                    <strong>GAMARRITA EXPRESS</strong><br>
+                    Vehículo: ${placa}
+                    `
+                );
+
+            }
+
+
+            gpsMap.panTo(
+                [latitud, longitud],
+                {
+                    animate: true,
+                    duration: 1
+                }
+            );
+
+        }
+
+
+        /* ================================================= */
+        /* MONITOREO 3 - INICIALIZAR MAPA */
+        /* ================================================= */
+
+        function inicializarFleetMap() {
+
+            if (fleetMap) {
+                return;
+            }
+
+
+            fleetMap = L.map("fleetMap").setView(
+                [-12.05, -77.00],
+                11
+            );
+
+
+            L.tileLayer(
+                "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+                    maxZoom: 19,
+                    attribution:
+                        "&copy; OpenStreetMap contributors"
+                }
+            ).addTo(fleetMap);
+
+        }
+
+
+        /* ================================================= */
+        /* MONITOREO 3 - ACTUALIZAR MARCADOR */
+        /* ================================================= */
+
+        function actualizarMarcadorFleet(
+            vehiculo
+        ) {
+
+            if (
+                vehiculo.latitud === null ||
+                vehiculo.latitud === undefined ||
+                vehiculo.longitud === null ||
+                vehiculo.longitud === undefined
+            ) {
+
+                return;
+
+            }
+
+
+            const latitud =
+                Number(vehiculo.latitud);
+
+            const longitud =
+                Number(vehiculo.longitud);
+
+
+            if (
+                !Number.isFinite(latitud) ||
+                !Number.isFinite(longitud)
+            ) {
+
+                return;
+
+            }
+
+
+            /* Crear marcador */
+
+            if (!fleetMarkers[vehiculo.vehiculo]) {
+
+                fleetMarkers[vehiculo.vehiculo] =
+                    L.marker(
+                        [latitud, longitud]
+                    ).addTo(fleetMap);
+
+            }
+
+
+            /* Actualizar posición */
+
+            fleetMarkers[
+                vehiculo.vehiculo
+            ].setLatLng(
                 [latitud, longitud]
             );
 
+
+            /* Información del marcador */
+
+            fleetMarkers[
+                vehiculo.vehiculo
+            ].bindPopup(
+                `
+                <strong>GAMARRITA EXPRESS</strong><br>
+                Vehículo: ${vehiculo.vehiculo}<br>
+                Estado: ${vehiculo.estado}<br>
+                Velocidad: ${vehiculo.velocidad || "No disponible"}<br>
+                Actualización: ${vehiculo.ultimaActualizacion || "No disponible"}
+                `
+            );
+
         }
 
 
-        /* Centrar mapa en la nueva posición */
-        gpsMap.panTo(
-            [latitud, longitud],
-            {
-                animate: true,
-                duration: 1
+        /* ================================================= */
+        /* MONITOREO 3 - ELIMINAR MARCADOR */
+        /* ================================================= */
+
+        function eliminarMarcadorFleet(
+            placa
+        ) {
+
+            if (
+                fleetMarkers[placa] &&
+                fleetMap
+            ) {
+
+                fleetMap.removeLayer(
+                    fleetMarkers[placa]
+                );
+
+                delete fleetMarkers[placa];
+
             }
-        );
 
-    }
+        }
 
 
-    /* ============================================= */
-    /* ACTUALIZAR DATOS GPS */
-    /* ============================================= */
+        /* ================================================= */
+        /* MONITOREO 3 - MOSTRAR LISTA */
+        /* ================================================= */
 
-    async function actualizarDatosGPS() {
+        function actualizarListaFleet(
+            vehiculos
+        ) {
 
-        try {
+            const lista =
+                document.getElementById(
+                    "fleetList"
+                );
 
-            const respuesta = await fetch(
-                "https://odd-wind-b62d.gamarritadm02.workers.dev/?t=" +
-                Date.now()
+
+            lista.innerHTML = "";
+
+
+            if (
+                !vehiculos ||
+                vehiculos.length === 0
+            ) {
+
+                lista.innerHTML =
+                    `
+                    <div class="fleet-empty">
+                        No hay vehículos registrados.
+                    </div>
+                    `;
+
+                return;
+
+            }
+
+
+            vehiculos.forEach(
+                vehiculo => {
+
+                    const online =
+                        vehiculo.disponible &&
+                        vehiculo.estado &&
+                        vehiculo.estado.toLowerCase()
+                            === "online";
+
+
+                    const item =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    item.className =
+                        "fleet-vehicle";
+
+
+                    item.innerHTML =
+                        `
+                        <div class="fleet-vehicle-header">
+
+                            <div class="fleet-vehicle-name">
+
+                                <i class="fa-solid fa-truck"></i>
+
+                                ${vehiculo.vehiculo}
+
+                            </div>
+
+                            <div class="
+                                fleet-vehicle-status
+                                ${online
+                                    ? "fleet-online"
+                                    : "fleet-offline"}
+                            ">
+
+                                <span
+                                    class="fleet-dot"
+                                    style="
+                                        background:
+                                        ${online
+                                            ? "#22c55e"
+                                            : "#ef4444"};
+                                    ">
+                                </span>
+
+                                ${online
+                                    ? "Online"
+                                    : "Sin conexión"}
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="fleet-vehicle-info">
+
+                            <div class="fleet-data">
+
+                                <span>
+                                    Velocidad
+                                </span>
+
+                                <strong>
+                                    ${vehiculo.velocidad || "—"}
+                                </strong>
+
+                            </div>
+
+
+                            <div class="fleet-data">
+
+                                <span>
+                                    Actualización
+                                </span>
+
+                                <strong>
+                                    ${vehiculo.ultimaActualizacion || "—"}
+                                </strong>
+
+                            </div>
+
+                        </div>
+                        `;
+
+
+                    /* Al hacer clic en un vehículo */
+
+                    item.addEventListener(
+                        "click",
+                        () => {
+
+                            if (
+                                vehiculo.latitud !== null &&
+                                vehiculo.latitud !== undefined &&
+                                vehiculo.longitud !== null &&
+                                vehiculo.longitud !== undefined &&
+                                fleetMap
+                            ) {
+
+                                fleetMap.setView(
+                                    [
+                                        Number(
+                                            vehiculo.latitud
+                                        ),
+                                        Number(
+                                            vehiculo.longitud
+                                        )
+                                    ],
+                                    15
+                                );
+
+
+                                if (
+                                    fleetMarkers[
+                                        vehiculo.vehiculo
+                                    ]
+                                ) {
+
+                                    fleetMarkers[
+                                        vehiculo.vehiculo
+                                    ].openPopup();
+
+                                }
+
+                            }
+
+                        }
+                    );
+
+
+                    lista.appendChild(item);
+
+                }
+            );
+
+        }
+
+
+        /* ================================================= */
+        /* MONITOREO 3 - AJUSTAR MAPA A TODOS */
+        /* ================================================= */
+
+        function ajustarMapaFleet(
+            vehiculos
+        ) {
+
+            if (
+                !fleetMap ||
+                !vehiculos ||
+                vehiculos.length === 0
+            ) {
+
+                return;
+
+            }
+
+
+            const posiciones = [];
+
+
+            vehiculos.forEach(
+                vehiculo => {
+
+                    if (
+                        vehiculo.disponible &&
+                        vehiculo.latitud !== null &&
+                        vehiculo.longitud !== null
+                    ) {
+
+                        posiciones.push(
+                            [
+                                Number(
+                                    vehiculo.latitud
+                                ),
+                                Number(
+                                    vehiculo.longitud
+                                )
+                            ]
+                        );
+
+                    }
+
+                }
             );
 
 
-            if (!respuesta.ok) {
+            if (
+                posiciones.length === 1
+            ) {
 
-                throw new Error(
-                    "No se pudo conectar con el servidor GPS"
+                fleetMap.setView(
+                    posiciones[0],
+                    14
+                );
+
+                return;
+
+            }
+
+
+            if (
+                posiciones.length > 1
+            ) {
+
+                const bounds =
+                    L.latLngBounds(
+                        posiciones
+                    );
+
+
+                fleetMap.fitBounds(
+                    bounds,
+                    {
+                        padding: [40, 40]
+                    }
                 );
 
             }
 
-
-            const datos =
-                await respuesta.json();
+        }
 
 
-            console.log(
-                "Datos GPS recibidos:",
-                datos
-            );
+        /* ================================================= */
+        /* MONITOREO 2 + MONITOREO 3 */
+        /* ================================================= */
+
+        async function actualizarDatosGPS() {
+
+            try {
+
+                const respuesta =
+                    await fetch(
+                        GPS_WORKER +
+                        "?t=" +
+                        Date.now()
+                    );
 
 
-            /* ========================================= */
-            /* VEHÍCULO */
-            /* ========================================= */
+                if (!respuesta.ok) {
 
-            document.getElementById(
-                "gpsPlaca"
-            ).textContent =
-                datos.vehiculo ||
-                "No disponible";
+                    throw new Error(
+                        "No se pudo conectar con el servidor GPS"
+                    );
+
+                }
 
 
-            /* ========================================= */
-            /* VELOCIDAD */
-            /* ========================================= */
-
-            document.getElementById(
-                "gpsVelocidad"
-            ).textContent =
-                datos.velocidad ||
-                "No disponible";
+                const datos =
+                    await respuesta.json();
 
 
-            /* ========================================= */
-            /* ESTADO */
-            /* ========================================= */
-
-            document.getElementById(
-                "gpsEstadoTexto"
-            ).textContent =
-                datos.estado ||
-                "No disponible";
+                console.log(
+                    "Datos GPS recibidos:",
+                    datos
+                );
 
 
-            /* ========================================= */
-            /* ÚLTIMA ACTUALIZACIÓN */
-            /* ========================================= */
+                /* ================================================= */
+                /* VERIFICAR RESPUESTA */
+                /* ================================================= */
 
-            document.getElementById(
-                "gpsHora"
-            ).textContent =
-                datos.ultimaActualizacion ||
-                "No disponible";
+                if (
+                    !datos.vehiculos ||
+                    !Array.isArray(
+                        datos.vehiculos
+                    )
+                ) {
+
+                    throw new Error(
+                        "Formato de datos GPS incorrecto"
+                    );
+
+                }
 
 
-            /* ========================================= */
-            /* LATITUD */
-            /* ========================================= */
+                const vehiculos =
+                    datos.vehiculos;
 
-            if (
-                datos.latitud !== null &&
-                datos.latitud !== undefined
-            ) {
+
+                /* ================================================= */
+                /* MONITOREO 2 - TOMAR PRIMER VEHÍCULO */
+                /* ================================================= */
+
+                const vehiculoPrincipal =
+                    vehiculos.find(
+                        vehiculo =>
+                            vehiculo.vehiculo
+                            === "BKL-812"
+                    ) ||
+                    vehiculos[0];
+
+
+                if (vehiculoPrincipal) {
+
+
+                    /* VEHÍCULO */
+
+                    document.getElementById(
+                        "gpsPlaca"
+                    ).textContent =
+                        vehiculoPrincipal.vehiculo ||
+                        "No disponible";
+
+
+                    /* VELOCIDAD */
+
+                    document.getElementById(
+                        "gpsVelocidad"
+                    ).textContent =
+                        vehiculoPrincipal.velocidad ||
+                        "No disponible";
+
+
+                    /* ESTADO */
+
+                    document.getElementById(
+                        "gpsEstadoTexto"
+                    ).textContent =
+                        vehiculoPrincipal.estado ||
+                        "No disponible";
+
+
+                    /* HORA */
+
+                    document.getElementById(
+                        "gpsHora"
+                    ).textContent =
+                        vehiculoPrincipal.ultimaActualizacion ||
+                        "No disponible";
+
+
+                    /* LATITUD */
+
+                    if (
+                        vehiculoPrincipal.latitud !== null &&
+                        vehiculoPrincipal.latitud !== undefined
+                    ) {
+
+                        document.getElementById(
+                            "gpsLatitud"
+                        ).textContent =
+                            Number(
+                                vehiculoPrincipal.latitud
+                            ).toFixed(6);
+
+                    } else {
+
+                        document.getElementById(
+                            "gpsLatitud"
+                        ).textContent =
+                            "No disponible";
+
+                    }
+
+
+                    /* LONGITUD */
+
+                    if (
+                        vehiculoPrincipal.longitud !== null &&
+                        vehiculoPrincipal.longitud !== undefined
+                    ) {
+
+                        document.getElementById(
+                            "gpsLongitud"
+                        ).textContent =
+                            Number(
+                                vehiculoPrincipal.longitud
+                            ).toFixed(6);
+
+                    } else {
+
+                        document.getElementById(
+                            "gpsLongitud"
+                        ).textContent =
+                            "No disponible";
+
+                    }
+
+
+                    /* RUMBO */
+
+                    if (
+                        vehiculoPrincipal.rumbo !== null &&
+                        vehiculoPrincipal.rumbo !== undefined
+                    ) {
+
+                        document.getElementById(
+                            "gpsRumbo"
+                        ).textContent =
+                            vehiculoPrincipal.rumbo +
+                            "°";
+
+                    } else {
+
+                        document.getElementById(
+                            "gpsRumbo"
+                        ).textContent =
+                            "No disponible";
+
+                    }
+
+
+                    /* EVENTO */
+
+                    document.getElementById(
+                        "gpsEvento"
+                    ).textContent =
+                        vehiculoPrincipal.evento ||
+                        "Sin evento";
+
+
+                    /* ESTADO VISUAL */
+
+                    const punto =
+                        document.getElementById(
+                            "gpsStatusDot"
+                        );
+
+
+                    if (
+                        vehiculoPrincipal.estado &&
+                        vehiculoPrincipal.estado
+                            .toLowerCase()
+                            === "online"
+                    ) {
+
+                        punto.style.background =
+                            "#22c55e";
+
+                    } else {
+
+                        punto.style.background =
+                            "#ef4444";
+
+                    }
+
+
+                    /* MAPA INDIVIDUAL */
+
+                    if (
+                        vehiculoPrincipal.latitud !== null &&
+                        vehiculoPrincipal.longitud !== null
+                    ) {
+
+                        actualizarMapaGPS(
+                            Number(
+                                vehiculoPrincipal.latitud
+                            ),
+                            Number(
+                                vehiculoPrincipal.longitud
+                            ),
+                            vehiculoPrincipal.vehiculo
+                        );
+
+                    }
+
+                }
+
+
+                /* ================================================= */
+                /* MONITOREO 3 - MAPA GENERAL */
+                /* ================================================= */
+
+                inicializarFleetMap();
+
+
+                /* Contadores */
+
+                let total = vehiculos.length;
+
+                let online = 0;
+
+                let offline = 0;
+
+
+                vehiculos.forEach(
+                    vehiculo => {
+
+                        const conectado =
+                            vehiculo.disponible &&
+                            vehiculo.estado &&
+                            vehiculo.estado
+                                .toLowerCase()
+                                === "online";
+
+
+                        if (conectado) {
+
+                            online++;
+
+                        } else {
+
+                            offline++;
+
+                        }
+
+
+                        if (conectado) {
+
+                            actualizarMarcadorFleet(
+                                vehiculo
+                            );
+
+                        } else {
+
+                            eliminarMarcadorFleet(
+                                vehiculo.vehiculo
+                            );
+
+                        }
+
+                    }
+                );
+
+
+                /* Actualizar lista */
+
+                actualizarListaFleet(
+                    vehiculos
+                );
+
+
+                /* Actualizar contadores */
 
                 document.getElementById(
-                    "gpsLatitud"
+                    "fleetTotal"
                 ).textContent =
-                    Number(datos.latitud).toFixed(6);
+                    total;
 
-            } else {
 
                 document.getElementById(
-                    "gpsLatitud"
+                    "fleetOnline"
                 ).textContent =
-                    "No disponible";
+                    online;
+
+
+                document.getElementById(
+                    "fleetOffline"
+                ).textContent =
+                    offline;
+
+
+                /* Ajustar mapa */
+
+                ajustarMapaFleet(
+                    vehiculos
+                );
+
+
+                /* ================================================= */
+                /* CORREGIR TAMAÑO DE MAPAS */
+                /* ================================================= */
+
+                setTimeout(
+                    () => {
+
+                        if (gpsMap) {
+
+                            gpsMap.invalidateSize();
+
+                        }
+
+                        if (fleetMap) {
+
+                            fleetMap.invalidateSize();
+
+                        }
+
+                    },
+                    300
+                );
+
 
             }
 
+            catch (error) {
 
-            /* ========================================= */
-            /* LONGITUD */
-            /* ========================================= */
+                console.error(
+                    "Error GPS:",
+                    error
+                );
 
-            if (
-                datos.longitud !== null &&
-                datos.longitud !== undefined
-            ) {
 
-                document.getElementById(
-                    "gpsLongitud"
-                ).textContent =
-                    Number(datos.longitud).toFixed(6);
-
-            } else {
+                /* Monitoreo 2 */
 
                 document.getElementById(
-                    "gpsLongitud"
+                    "gpsEstadoTexto"
                 ).textContent =
-                    "No disponible";
-
-            }
+                    "Sin conexión";
 
 
-            /* ========================================= */
-            /* RUMBO */
-            /* ========================================= */
-
-            if (
-                datos.rumbo !== null &&
-                datos.rumbo !== undefined
-            ) {
-
-                document.getElementById(
-                    "gpsRumbo"
-                ).textContent =
-                    datos.rumbo + "°";
-
-            } else {
-
-                document.getElementById(
-                    "gpsRumbo"
-                ).textContent =
-                    "No disponible";
-
-            }
-
-
-            /* ========================================= */
-            /* EVENTO */
-            /* ========================================= */
-
-            document.getElementById(
-                "gpsEvento"
-            ).textContent =
-                datos.evento ||
-                "Sin evento";
-
-
-            /* ========================================= */
-            /* ESTADO VISUAL */
-            /* ========================================= */
-
-            const punto =
                 document.getElementById(
                     "gpsStatusDot"
-                );
+                ).style.background =
+                    "#ef4444";
 
 
-            if (
-                datos.estado &&
-                datos.estado.toLowerCase() === "online"
-            ) {
+                /* Monitoreo 3 */
 
-                punto.style.background =
-                    "#22c55e";
-
-            } else {
-
-                punto.style.background =
-                    "#94a3b8";
-
-            }
+                const lista =
+                    document.getElementById(
+                        "fleetList"
+                    );
 
 
-            /* ========================================= */
-            /* ACTUALIZAR MAPA */
-            /* ========================================= */
+                if (lista) {
 
-            if (
-                datos.latitud !== null &&
-                datos.latitud !== undefined &&
-                datos.longitud !== null &&
-                datos.longitud !== undefined
-            ) {
+                    lista.innerHTML =
+                        `
+                        <div class="fleet-empty">
+                            No se pudo actualizar
+                            la información de la flota.
+                        </div>
+                        `;
 
-                actualizarMapaGPS(
-                    Number(datos.latitud),
-                    Number(datos.longitud)
-                );
+                }
 
             }
 
         }
 
-        catch (error) {
 
-            console.error(
-                "Error GPS:",
-                error
-            );
+        /* ================================================= */
+        /* PRIMERA CONSULTA */
+        /* ================================================= */
 
-
-            /* Estado */
-            document.getElementById(
-                "gpsEstadoTexto"
-            ).textContent =
-                "Sin conexión";
+        actualizarDatosGPS();
 
 
-            /* Punto rojo */
-            document.getElementById(
-                "gpsStatusDot"
-            ).style.background =
-                "#ef4444";
+        /* ================================================= */
+        /* ACTUALIZACIÓN CADA 20 SEGUNDOS */
+        /* ================================================= */
 
-        }
+        setInterval(
+            actualizarDatosGPS,
+            20000
+        );
 
-    }
-
-
-    /* ============================================= */
-    /* PRIMERA CONSULTA */
-    /* ============================================= */
-
-    actualizarDatosGPS();
-
-
-    /* ============================================= */
-    /* ACTUALIZACIÓN CADA 20 SEGUNDOS */
-    /* ============================================= */
-
-    setInterval(
-        actualizarDatosGPS,
-        20000
-    );
-
-</script>
+    </script>
 
 
 </body>
