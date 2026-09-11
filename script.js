@@ -170,3 +170,49 @@ video.addEventListener("ended", function(){
     video.play();
 
 });
+
+// ==========================================
+// MONITOREO GPS BKL-812 - DITRACK
+// ==========================================
+
+async function obtenerGPS() {
+    try {
+        const respuesta = await fetch(
+            "https://odd-wind-b62d.gamarritadm02.workers.dev/?t=" + Date.now()
+        );
+
+        if (!respuesta.ok) {
+            throw new Error("Error al consultar el servidor GPS");
+        }
+
+        const datos = await respuesta.json();
+
+        // Vehículo
+        document.getElementById("gpsPlaca").textContent =
+            datos.vehiculo || "No disponible";
+
+        // Estado
+        document.getElementById("gpsEstadoTexto").textContent =
+            datos.estado || "No disponible";
+
+        // Velocidad
+        document.getElementById("gpsVelocidad").textContent =
+            datos.velocidad || "No disponible";
+
+        // Última actualización
+        document.getElementById("gpsHora").textContent =
+            datos.ultimaActualizacion || "No disponible";
+
+    } catch (error) {
+        console.error("Error GPS:", error);
+
+        document.getElementById("gpsEstadoTexto").textContent =
+            "Sin conexión";
+    }
+}
+
+// Primera consulta al cargar la página
+obtenerGPS();
+
+// Actualizar cada 20 segundos
+setInterval(obtenerGPS, 20000);
