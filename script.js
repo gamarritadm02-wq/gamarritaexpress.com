@@ -11,7 +11,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const enlacesMenu = document.querySelectorAll(".menu-web-link");
     const secciones = document.querySelectorAll("section");
     const whatsapp = document.querySelector(".whatsapp");
-    const videoHero = document.getElementById("heroVideo");
     
     const tarjetas = document.querySelectorAll(
         ".about-card, " +
@@ -277,36 +276,28 @@ document.addEventListener("DOMContentLoaded", () => {
         passive: true
     });
 
-    /* =========================================================
-       10. VIDEO DE PORTADA
-    ========================================================= */
-    const videos = [
-        "style/av/camion.mp4",
-        "style/av/camion2.mp4"
-    ];
+            
+        /* =========================================================
+           10. IMÁGENES ROTATIVAS DE PORTADA
+        ========================================================= */
+        const imagenesHero = document.querySelectorAll(".hero-slide");
+        
+        let imagenActual = 0;
+        
+        function cambiarImagenHero() {
+            if (imagenesHero.length <= 1) return;
+        
+            imagenesHero[imagenActual].classList.remove("active");
+        
+            imagenActual = (imagenActual + 1) % imagenesHero.length;
+        
+            imagenesHero[imagenActual].classList.add("active");
+        }
+        
+        if (imagenesHero.length > 1) {
+            setInterval(cambiarImagenHero, 10000);
+        }
 
-    let videoActual = 0;
-
-    if (videoHero) {
-        videoHero.loop = false;
-        videoHero.muted = true;
-        videoHero.playsInline = true;
-
-        videoHero.addEventListener("ended", () => {
-            videoActual = (videoActual + 1) % videos.length;
-
-            videoHero.src = videos[videoActual];
-            videoHero.load();
-
-            videoHero.play().catch(() => {});
-        });
-
-        videoHero.addEventListener("error", () => {
-            console.warn("No se pudo cargar el video:", videoHero.currentSrc);
-        });
-
-        videoHero.play().catch(() => {});
-    }
 
     /* =========================================================
        11. ACTUALIZACIÓN GENERAL DE PÁGINA
