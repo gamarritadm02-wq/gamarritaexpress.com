@@ -2,1178 +2,929 @@
 <html lang="es">
 
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>GAMARRITA EXPRESS E.I.R.L.</title>
+    <title>GAMARRITA EXPRESS E.I.R.L. | Transporte de Carga</title>
 
     <meta name="description"
-        content="Empresa peruana especializada en transporte de carga a nivel nacional. Seguridad, puntualidad y compromiso.">
+          content="Gamarrita Express E.I.R.L., empresa peruana especializada en transporte terrestre de carga. Seguridad, puntualidad, eficiencia y compromiso en cada operación.">
 
-    <link rel="stylesheet" href="style.css">
+    <!-- CSS -->
+    <link rel="stylesheet" href="style/css/pagina.css">
 
     <!-- GOOGLE FONTS -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+          rel="stylesheet">
 
     <!-- FONT AWESOME -->
-    <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-
-    <!-- LEAFLET -->
-    <link
-        rel="stylesheet"
-        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
-
-    <script
-        src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
-    </script>
-
-
-    <!-- ================================================= -->
-    <!-- ESTILOS DEL MONITOREO GPS -->
-    <!-- ================================================= -->
-
-    <style>
-
-        .gps-monitor-wrapper {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .gps-monitor-box {
-            width: 100%;
-            background: #ffffff;
-            border: 1px solid #e2e8f0;
-            border-radius: 14px;
-            padding: 30px;
-            margin-bottom: 40px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
-            display: block;
-            visibility: visible;
-            position: relative;
-        }
-
-        .gps-monitor-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 25px;
-        }
-
-        .gps-label {
-            display: block;
-            font-size: 0.75rem;
-            font-weight: 700;
-            color: #2563eb;
-            letter-spacing: 1px;
-            margin-bottom: 5px;
-        }
-
-        .gps-monitor-header h3 {
-            margin: 0;
-            color: #0f172a;
-            font-size: 1.5rem;
-        }
-
-
-        /* ================================================= */
-        /* MONITOREO 1 */
-        /* ================================================= */
-
-        .ditrack-container {
-            width: 100%;
-            height: 550px;
-            overflow: hidden;
-            border-radius: 12px;
-            border: 1px solid #e2e8f0;
-            background: #f8fafc;
-        }
-
-        .ditrack-frame {
-            display: block;
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-
-
-        /* ================================================= */
-        /* ESTADO */
-        /* ================================================= */
-
-        .gps-status {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 8px 14px;
-            border-radius: 20px;
-            background: #f1f5f9;
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: #334155;
-        }
-
-        .status-dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: #94a3b8;
-        }
-
-
-        /* ================================================= */
-        /* TARJETAS */
-        /* ================================================= */
-
-        .gps-info-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 15px;
-            margin-bottom: 25px;
-        }
-
-        .gps-card {
-            padding: 20px;
-            border: 1px solid #e2e8f0;
-            border-radius: 10px;
-            background: #f8fafc;
-        }
-
-        .gps-card i {
-            display: block;
-            font-size: 20px;
-            color: #2563eb;
-            margin-bottom: 12px;
-        }
-
-        .gps-card span {
-            display: block;
-            color: #64748b;
-            font-size: 0.85rem;
-            margin-bottom: 5px;
-        }
-
-        .gps-card strong {
-            font-size: 1.25rem;
-            color: #0f172a;
-        }
-
-
-        /* ================================================= */
-        /* MAPA MONITOREO 2 */
-        /* ================================================= */
-
-        .gps-map-container {
-            width: 100%;
-            height: 500px;
-            border-radius: 12px;
-            overflow: hidden;
-            border: 1px solid #e2e8f0;
-            background: #f8fafc;
-        }
-
-        #gpsMap {
-            width: 100%;
-            height: 100%;
-        }
-
-
-        /* ================================================= */
-        /* DETALLES */
-        /* ================================================= */
-
-        .gps-details {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-            margin-top: 20px;
-        }
-
-        .gps-details div {
-            padding: 15px;
-            border: 1px solid #e2e8f0;
-            border-radius: 10px;
-            background: #ffffff;
-        }
-
-        .gps-details span {
-            display: block;
-            color: #64748b;
-            font-size: 0.8rem;
-            margin-bottom: 5px;
-        }
-
-        .gps-details strong {
-            color: #0f172a;
-        }
-
-
-        /* ================================================= */
-        /* PIE */
-        /* ================================================= */
-
-        .gps-footer {
-            margin-top: 20px;
-            text-align: center;
-            color: #64748b;
-            font-size: 0.85rem;
-        }
-
-        .gps-footer i {
-            margin-right: 5px;
-        }
-
-
-        /* ================================================= */
-        /* SEPARADOR */
-        /* ================================================= */
-
-        .gps-separator {
-            width: 100%;
-            height: 3px;
-            background: #2563eb;
-            border-radius: 10px;
-            margin: 10px 0 40px 0;
-        }
-
-
-        /* ================================================= */
-        /* MONITOREO 3 - MAPA GENERAL */
-        /* ================================================= */
-
-        .fleet-layout {
-            display: grid;
-            grid-template-columns: minmax(0, 1fr) 320px;
-            gap: 20px;
-            align-items: stretch;
-        }
-
-        .fleet-map-container {
-            width: 100%;
-            height: 550px;
-            border-radius: 12px;
-            overflow: hidden;
-            border: 1px solid #e2e8f0;
-            background: #f8fafc;
-        }
-
-        #fleetMap {
-            width: 100%;
-            height: 100%;
-        }
-
-
-        /* ================================================= */
-        /* LISTA DE VEHÍCULOS */
-        /* ================================================= */
-
-        .fleet-list {
-            height: 550px;
-            overflow-y: auto;
-            border: 1px solid #e2e8f0;
-            border-radius: 12px;
-            background: #f8fafc;
-            padding: 15px;
-        }
-
-        .fleet-list-title {
-            font-size: 0.8rem;
-            font-weight: 700;
-            color: #64748b;
-            letter-spacing: 1px;
-            margin-bottom: 15px;
-            padding: 0 5px;
-        }
-
-        .fleet-vehicle {
-            background: #ffffff;
-            border: 1px solid #e2e8f0;
-            border-radius: 10px;
-            padding: 15px;
-            margin-bottom: 10px;
-            cursor: pointer;
-            transition: 0.2s ease;
-        }
-
-        .fleet-vehicle:hover {
-            border-color: #2563eb;
-            transform: translateY(-1px);
-        }
-
-        .fleet-vehicle-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 8px;
-        }
-
-        .fleet-vehicle-name {
-            font-weight: 700;
-            color: #0f172a;
-        }
-
-        .fleet-vehicle-status {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            font-size: 0.72rem;
-            font-weight: 600;
-        }
-
-        .fleet-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: #94a3b8;
-        }
-
-        .fleet-online {
-            color: #16a34a;
-        }
-
-        .fleet-offline {
-            color: #dc2626;
-        }
-
-        .fleet-vehicle-info {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 8px;
-        }
-
-        .fleet-data span {
-            display: block;
-            color: #94a3b8;
-            font-size: 0.7rem;
-            margin-bottom: 2px;
-        }
-
-        .fleet-data strong {
-            color: #334155;
-            font-size: 0.85rem;
-        }
-
-        .fleet-empty {
-            text-align: center;
-            color: #94a3b8;
-            padding: 30px 10px;
-            font-size: 0.85rem;
-        }
-
-
-        /* ================================================= */
-        /* CONTADOR DE VEHÍCULOS */
-        /* ================================================= */
-
-        .fleet-summary {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-            margin-bottom: 20px;
-        }
-
-        .fleet-summary-item {
-            padding: 8px 14px;
-            background: #f8fafc;
-            border: 1px solid #e2e8f0;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            color: #475569;
-        }
-
-
-        /* ================================================= */
-        /* RESPONSIVE */
-        /* ================================================= */
-
-        @media (max-width: 1000px) {
-
-            .fleet-layout {
-                grid-template-columns: 1fr;
-            }
-
-            .fleet-list {
-                height: auto;
-                max-height: 400px;
-            }
-
-        }
-
-        @media (max-width: 900px) {
-
-            .gps-info-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-        }
-
-        @media (max-width: 768px) {
-
-            .gps-monitor-box {
-                padding: 15px;
-            }
-
-            .ditrack-container {
-                height: 500px;
-            }
-
-            .gps-monitor-header {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 15px;
-            }
-
-            .gps-map-container {
-                height: 400px;
-            }
-
-            .gps-details {
-                grid-template-columns: 1fr;
-            }
-
-            .fleet-map-container {
-                height: 400px;
-            }
-
-        }
-
-        @media (max-width: 480px) {
-
-            .gps-info-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .ditrack-container {
-                height: 450px;
-            }
-
-        }
-
-    </style>
-
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 </head>
-
 
 <body>
 
 
-    <!-- ================================================= -->
-    <!-- HEADER -->
-    <!-- ================================================= -->
+<!-- =========================================================
+     01. HEADER
+========================================================= -->
 
-    <header id="header">
+<header id="header" class="web-header">
 
-        <div class="container">
+    <div class="container web-header-container">
 
-            <a href="#" class="logo">
-                GAMARRITA
-                <span>EXPRESS</span>
+        <!-- LOGO -->
+        <a href="#inicio" class="web-logo">
+            <span class="web-logo-main">GAMARRITA</span>
+            <span class="web-logo-sub">EXPRESS EIRL</span>
+        </a>
+
+
+        <!-- MENÚ -->
+        <nav id="menuWeb" class="menu-web">
+            <ul>
+
+                <li>
+                    <a href="#inicio"
+                    class="menu-web-link active">
+                        Inicio
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#nosotros"
+                    class="menu-web-link">
+                        Nosotros
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#servicios"
+                    class="menu-web-link">
+                        Servicios
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#seguridad"
+                    class="menu-web-link">
+                        Seguridad
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#contacto"
+                    class="menu-web-link">
+                        Contacto
+                    </a>
+                </li>
+
+                <li class="menu-web-login-mobile">
+
+                    <a href="/login">
+
+                        <i class="fa-solid fa-user"></i>
+
+                        Ingresar al sistema
+
+                    </a>
+
+                </li>
+
+            </ul>
+
+        </nav>
+
+
+        <div class="web-header-actions">
+
+            <a href="/login" class="web-btn-login">
+                <i class="fa-solid fa-user"></i>
+                Ingresar
             </a>
 
-            <nav>
 
-                <ul>
+            <button
+                type="button"
+                id="botonMenuWeb"
+                class="web-menu-toggle"
+                aria-label="Abrir menú"
+                aria-expanded="false">
+
+                <span></span>
+                <span></span>
+                <span></span>
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- OVERLAY MÓVIL -->
+    <div id="menuWebOverlay" class="menu-web-overlay"></div>
+
+</header>
+
+
+
+<!-- =========================================================
+     02. HERO / PORTADA
+========================================================= -->
+
+<section id="inicio" class="hero">
+
+    <video id="heroVideo"
+           autoplay
+           muted
+           playsinline
+           loop
+           class="hero-video">
+
+        <source src="style/av/camion.mp4" type="video/mp4">
+
+    </video>
+
+    <div class="overlay"></div>
+
+
+    <div class="hero-content">
+
+        <span>
+            TRANSPORTE DE CARGA A NIVEL NACIONAL
+        </span>
+
+        <h1>
+            Seguridad, puntualidad y confianza en cada viaje.
+        </h1>
+
+        <p>
+            Soluciones de transporte terrestre orientadas a
+            operaciones seguras, eficientes y oportunas.
+        </p>
+
+
+        <div class="hero-buttons">
+
+            <a href="#contacto" class="btn-primary">
+                <i class="fa-solid fa-file-signature"></i>
+                Solicitar cotización
+            </a>
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     03. NOSOTROS
+========================================================= -->
+
+<section id="nosotros">
+
+    <div class="container">
+
+        <div class="section-title">
+            <span>QUIÉNES SOMOS</span>
+            <h2>Más que transporte, somos confianza.</h2>
+        </div>
+
+
+        <div class="about-grid">
+
+            <div class="about-text">
+
+                <p>
+                    <strong>GAMARRITA EXPRESS E.I.R.L.</strong>
+                    es una empresa peruana dedicada al transporte
+                    terrestre de carga, orientada a brindar soluciones
+                    seguras, eficientes y confiables.
+                </p>
+
+                <p>
+                    Trabajamos bajo principios de responsabilidad,
+                    puntualidad, prevención y mejora continua,
+                    promoviendo operaciones seguras en cada servicio.
+                </p>
+
+            </div>
+
+
+            <div class="about-card">
+
+                <div>
+                    <h3>100%</h3>
+                    <span>Compromiso con nuestros clientes</span>
+                </div>
+
+                <div>
+                    <h3>24/7</h3>
+                    <span>Atención y coordinación</span>
+                </div>
+
+                <div>
+                    <h3>SST</h3>
+                    <span>Seguridad como prioridad</span>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     04. MISIÓN Y VISIÓN
+========================================================= -->
+
+<section id="mision-vision" class="corporate-section">
+
+    <div class="container">
+
+        <div class="section-title">
+            <span>NUESTRA EMPRESA</span>
+            <h2>Comprometidos con un transporte responsable</h2>
+        </div>
+
+
+        <div class="corporate-grid">
+
+            <article class="corporate-card">
+
+                <i class="fa-solid fa-bullseye"></i>
+
+                <h3>Misión</h3>
+
+                <p>
+                    Brindar servicios de transporte terrestre de carga
+                    seguros, eficientes y oportunos mediante personal
+                    comprometido y operaciones responsables.
+                </p>
+
+            </article>
+
+
+            <article class="corporate-card">
+
+                <i class="fa-solid fa-eye"></i>
+
+                <h3>Visión</h3>
+
+                <p>
+                    Consolidarnos como una empresa reconocida por
+                    la seguridad, confiabilidad, eficiencia y calidad
+                    de nuestras operaciones.
+                </p>
+
+            </article>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     05. VALORES
+========================================================= -->
+
+<section id="valores">
+
+    <div class="container">
+
+        <div class="section-title">
+            <span>NUESTROS VALORES</span>
+            <h2>Principios que nos acompañan en cada operación</h2>
+        </div>
+
+
+        <div class="values-grid">
+
+            <article class="value-card">
+                <i class="fa-solid fa-shield-halved"></i>
+                <h3>Seguridad</h3>
+                <p>La prevención forma parte de nuestras operaciones.</p>
+            </article>
+
+
+            <article class="value-card">
+                <i class="fa-solid fa-handshake"></i>
+                <h3>Compromiso</h3>
+                <p>Asumimos cada servicio con responsabilidad.</p>
+            </article>
+
+
+            <article class="value-card">
+                <i class="fa-solid fa-clock"></i>
+                <h3>Puntualidad</h3>
+                <p>Trabajamos para cumplir los tiempos establecidos.</p>
+            </article>
+
+
+            <article class="value-card">
+                <i class="fa-solid fa-scale-balanced"></i>
+                <h3>Responsabilidad</h3>
+                <p>Actuamos responsablemente en cada operación.</p>
+            </article>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     06. SERVICIOS
+========================================================= -->
+
+<section id="servicios">
+
+    <div class="container">
+
+        <div class="section-title">
+            <span>NUESTROS SERVICIOS</span>
+            <h2>Soluciones de transporte para su empresa</h2>
+        </div>
+
+
+        <div class="services">
+
+            <article class="service">
+                <i class="fa-solid fa-truck-fast"></i>
+                <h3>Transporte Nacional</h3>
+                <p>
+                    Transporte terrestre de carga hacia
+                    diferentes destinos a nivel nacional.
+                </p>
+            </article>
+
+
+            <article class="service">
+                <i class="fa-solid fa-boxes-stacked"></i>
+                <h3>Transporte de Carga</h3>
+                <p>
+                    Traslado seguro y responsable de mercancías
+                    según las necesidades del cliente.
+                </p>
+            </article>
+
+
+            <article class="service">
+                <i class="fa-solid fa-route"></i>
+                <h3>Distribución</h3>
+                <p>
+                    Coordinación de rutas y entregas
+                    para operaciones oportunas.
+                </p>
+            </article>
+
+
+            <article class="service">
+                <i class="fa-solid fa-warehouse"></i>
+                <h3>Operaciones Logísticas</h3>
+                <p>
+                    Apoyo en transporte, carga,
+                    descarga y entrega de mercancías.
+                </p>
+            </article>
+
+
+            <article class="service">
+                <i class="fa-solid fa-location-dot"></i>
+                <h3>Seguimiento</h3>
+                <p>
+                    Seguimiento y coordinación durante
+                    el desarrollo del servicio.
+                </p>
+            </article>
+
+
+            <article class="service">
+                <i class="fa-solid fa-headset"></i>
+                <h3>Atención Personalizada</h3>
+                <p>
+                    Atención permanente a los requerimientos
+                    de nuestros clientes.
+                </p>
+            </article>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     07. SEGURIDAD Y SST
+========================================================= -->
+
+<section id="seguridad" class="safety-section">
+
+    <div class="container">
+
+        <div class="section-title">
+            <span>SEGURIDAD Y SALUD EN EL TRABAJO</span>
+            <h2>La seguridad es parte de cada viaje</h2>
+        </div>
+
+
+        <div class="safety-grid">
+
+            <div class="safety-content">
+
+                <h3>Cultura de prevención</h3>
+
+                <p>
+                    Promovemos operaciones responsables orientadas
+                    a proteger la seguridad y salud de nuestros
+                    trabajadores.
+                </p>
+
+
+                <ul class="safety-list">
 
                     <li>
-                        <a href="#inicio">Inicio</a>
+                        <i class="fa-solid fa-check"></i>
+                        Inspección preoperacional de unidades.
                     </li>
 
                     <li>
-                        <a href="#nosotros">Nosotros</a>
+                        <i class="fa-solid fa-check"></i>
+                        Identificación de peligros y riesgos.
                     </li>
 
                     <li>
-                        <a href="#servicios">Servicios</a>
+                        <i class="fa-solid fa-check"></i>
+                        Uso adecuado de equipos de protección personal.
                     </li>
 
                     <li>
-                        <a href="#seguimiento">Seguimiento GPS</a>
+                        <i class="fa-solid fa-check"></i>
+                        Capacitación e inducción de conductores.
                     </li>
 
                     <li>
-                        <a href="#contacto">Contacto</a>
+                        <i class="fa-solid fa-check"></i>
+                        Prevención de fatiga y somnolencia.
+                    </li>
+
+                    <li>
+                        <i class="fa-solid fa-check"></i>
+                        Preparación y respuesta ante emergencias.
                     </li>
 
                 </ul>
 
-            </nav>
+            </div>
+
+
+            <div class="safety-icon">
+
+                <i class="fa-solid fa-helmet-safety"></i>
+
+                <h3>Operaciones Seguras</h3>
+
+                <p>
+                    Prevención, responsabilidad y cumplimiento.
+                </p>
+
+            </div>
 
         </div>
 
-    </header>
+    </div>
+
+</section>
 
 
-    <!-- ================================================= -->
-    <!-- HERO -->
-    <!-- ================================================= -->
 
-    <section id="inicio" class="hero">
+<!-- =========================================================
+     08. NUESTRA OPERACIÓN
+========================================================= -->
 
-        <video
-            id="heroVideo"
-            autoplay
-            muted
-            playsinline
-            class="hero-video">
+<section id="operacion">
 
-            <source
-                src="camion.mp4"
-                type="video/mp4">
+    <div class="container">
 
-        </video>
+        <div class="section-title">
+            <span>NUESTRA OPERACIÓN</span>
+            <h2>Control en cada etapa del servicio</h2>
+        </div>
 
-        <div class="overlay"></div>
 
-        <div class="hero-content">
+        <div class="process-grid">
 
-            <span>
-                TRANSPORTE DE CARGA A NIVEL NACIONAL
-            </span>
+            <article class="process-card">
+                <span>01</span>
+                <i class="fa-solid fa-clipboard-check"></i>
+                <h3>Planificación</h3>
+                <p>Coordinamos los requerimientos y rutas.</p>
+            </article>
 
-            <h1>
-                Seguridad,
-                puntualidad y confianza
-                en cada viaje.
-            </h1>
+
+            <article class="process-card">
+                <span>02</span>
+                <i class="fa-solid fa-truck"></i>
+                <h3>Inspección</h3>
+                <p>Verificamos la unidad antes de la operación.</p>
+            </article>
+
+
+            <article class="process-card">
+                <span>03</span>
+                <i class="fa-solid fa-road"></i>
+                <h3>Transporte</h3>
+                <p>Ejecutamos el traslado de forma responsable.</p>
+            </article>
+
+
+            <article class="process-card">
+                <span>04</span>
+                <i class="fa-solid fa-location-crosshairs"></i>
+                <h3>Seguimiento</h3>
+                <p>Coordinamos durante el desarrollo del servicio.</p>
+            </article>
+
+
+            <article class="process-card">
+                <span>05</span>
+                <i class="fa-solid fa-circle-check"></i>
+                <h3>Entrega</h3>
+                <p>Verificamos la correcta entrega de la carga.</p>
+            </article>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     09. COBERTURA + VENTAJAS
+========================================================= -->
+
+<section id="cobertura" class="coverage-section">
+
+    <div class="container">
+
+        <div class="coverage-content">
+
+            <div>
+
+                <span class="subtitle">
+                    COBERTURA
+                </span>
+
+                <h2>
+                    Transporte terrestre a nivel nacional
+                </h2>
+
+                <p>
+                    Atendemos requerimientos de transporte
+                    según las rutas y necesidades operativas
+                    de nuestros clientes.
+                </p>
+
+                <a href="#contacto" class="btn-primary">
+                    Consultar disponibilidad
+                </a>
+
+            </div>
+
+
+            <div class="coverage-icon">
+                <i class="fa-solid fa-map-location-dot"></i>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     10. POR QUÉ ELEGIRNOS
+========================================================= -->
+
+<section id="ventajas">
+
+    <div class="container">
+
+        <div class="section-title">
+            <span>¿POR QUÉ GAMARRITA EXPRESS?</span>
+            <h2>Confianza y responsabilidad en cada servicio</h2>
+        </div>
+
+
+        <div class="benefits-grid">
+
+            <div>
+                <i class="fa-solid fa-shield"></i>
+                <h3>Seguridad</h3>
+                <p>Prevención en nuestras operaciones.</p>
+            </div>
+
+
+            <div>
+                <i class="fa-solid fa-clock"></i>
+                <h3>Puntualidad</h3>
+                <p>Coordinación orientada al cumplimiento.</p>
+            </div>
+
+
+            <div>
+                <i class="fa-solid fa-user-tie"></i>
+                <h3>Personal comprometido</h3>
+                <p>Equipo orientado a un servicio responsable.</p>
+            </div>
+
+
+            <div>
+                <i class="fa-solid fa-comments"></i>
+                <h3>Comunicación</h3>
+                <p>Coordinación permanente durante el servicio.</p>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     11. CONTACTO / COTIZACIÓN
+========================================================= -->
+
+<section id="contacto">
+
+    <div class="container">
+
+        <div class="section-title">
+
+            <span>CONTACTO</span>
+
+            <h2>
+                ¿Necesitas transportar tu carga?
+            </h2>
 
             <p>
-                Soluciones de transporte terrestre
-                para empresas de todo el Perú.
+                Contáctanos para coordinar una solución
+                de transporte según tus necesidades.
             </p>
 
-            <div class="hero-buttons">
+        </div>
 
-                <a
-                    href="#contacto"
-                    class="btn-primary">
-                    Contactos
-                </a>
 
-                <a
-                    href="https://wa.me/51999913590"
-                    class="btn-secondary"
-                    target="_blank"
-                    rel="noopener noreferrer">
-                    WhatsApp
-                </a>
+        <!-- DATOS -->
 
+        <div class="contact-grid">
+
+            <div>
+                <i class="fa-solid fa-phone"></i>
+                <h3>Teléfono</h3>
+                <p>+51 999 913 590</p>
+            </div>
+
+
+            <div>
+                <i class="fa-brands fa-whatsapp"></i>
+                <h3>WhatsApp</h3>
+                <p>+51 999 913 590</p>
+            </div>
+
+
+            <div>
+                <i class="fa-solid fa-envelope"></i>
+                <h3>Correo</h3>
+                <p>hgamarraa1984@gmail.com</p>
             </div>
 
         </div>
 
-    </section>
+
+        <!-- FORMULARIO -->
+
+        <div class="contact-form-container">
+
+            <form class="contact-form"
+                  action=""
+                  method="POST">
 
 
-    <!-- ================================================= -->
-    <!-- NOSOTROS -->
-    <!-- ================================================= -->
+                <div class="form-row">
 
-    <section id="nosotros">
+                    <div>
+                        <label for="nombre">
+                            Nombre / Empresa
+                        </label>
 
-        <div class="container">
+                        <input type="text"
+                               id="nombre"
+                               name="nombre"
+                               placeholder="Nombre o empresa"
+                               required>
+                    </div>
 
-            <div class="section-title">
 
-                <span>QUIÉNES SOMOS</span>
+                    <div>
+                        <label for="telefono">
+                            Teléfono
+                        </label>
 
-                <h2>
-                    Más que transporte,
-                    somos confianza.
-                </h2>
-
-            </div>
-
-            <div class="about-grid">
-
-                <div class="about-text">
-
-                    <p>
-                        Somos una empresa peruana dedicada al
-                        transporte terrestre de carga,
-                        comprometida con brindar un servicio seguro,
-                        puntual y eficiente para nuestros clientes.
-                    </p>
-
-                    <p>
-                        Nuestro equipo trabaja bajo una cultura
-                        de responsabilidad,
-                        prevención y mejora continua,
-                        cumpliendo con los estándares
-                        de Seguridad y Salud en el Trabajo.
-                    </p>
+                        <input type="tel"
+                               id="telefono"
+                               name="telefono"
+                               placeholder="+51"
+                               required>
+                    </div>
 
                 </div>
 
-                <div class="about-card">
+
+                <div class="form-row">
+
+                    <div>
+                        <label for="correo">
+                            Correo electrónico
+                        </label>
+
+                        <input type="email"
+                               id="correo"
+                               name="correo"
+                               placeholder="correo@empresa.com"
+                               required>
+                    </div>
+
 
                     <div>
 
-                        <h3>100%</h3>
+                        <label for="servicio">
+                            Servicio
+                        </label>
 
-                        <span>
-                            Compromiso con nuestros clientes
-                        </span>
+                        <select id="servicio"
+                                name="servicio">
 
-                    </div>
+                            <option value="">
+                                Seleccione un servicio
+                            </option>
 
-                    <div>
+                            <option value="transporte">
+                                Transporte de carga
+                            </option>
 
-                        <h3>24/7</h3>
+                            <option value="distribucion">
+                                Distribución
+                            </option>
 
-                        <span>
-                            Atención permanente
-                        </span>
+                            <option value="logistica">
+                                Operación logística
+                            </option>
 
-                    </div>
+                            <option value="otro">
+                                Otro
+                            </option>
 
-                    <div>
-
-                        <h3>SST</h3>
-
-                        <span>
-                            Seguridad como prioridad
-                        </span>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- ================================================= -->
-    <!-- SERVICIOS -->
-    <!-- ================================================= -->
-
-    <section id="servicios">
-
-        <div class="container">
-
-            <div class="section-title">
-
-                <span>NUESTROS SERVICIOS</span>
-
-                <h2>
-                    Soluciones de transporte para su empresa
-                </h2>
-
-            </div>
-
-            <div class="services">
-
-                <article class="service">
-
-                    <i class="fa-solid fa-truck-fast"></i>
-
-                    <h3>
-                        Transporte Nacional
-                    </h3>
-
-                    <p>
-                        Transporte terrestre de carga
-                        con cobertura nacional.
-                    </p>
-
-                </article>
-
-                <article class="service">
-
-                    <i class="fa-solid fa-box"></i>
-
-                    <h3>
-                        Distribución
-                    </h3>
-
-                    <p>
-                        Entregas seguras
-                        y oportunas.
-                    </p>
-
-                </article>
-
-                <article class="service">
-
-                    <i class="fa-solid fa-shield-halved"></i>
-
-                    <h3>
-                        Seguridad SST
-                    </h3>
-
-                    <p>
-                        Operaciones alineadas
-                        con las normas de seguridad.
-                    </p>
-
-                </article>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- ================================================= -->
-    <!-- SEGUIMIENTO GPS -->
-    <!-- ================================================= -->
-
-    <section id="seguimiento">
-
-        <div class="container">
-
-            <div class="section-title">
-
-                <span>
-                    MONITOREO EN TIEMPO REAL
-                </span>
-
-                <h2>
-                    Rastreo de Flota
-                </h2>
-
-            </div>
-
-
-            <div class="gps-monitor-wrapper">
-
-
-                <!-- ================================================= -->
-                <!-- MONITOREO 1 -->
-                <!-- ================================================= -->
-
-                <div
-                    class="gps-monitor-box"
-                    id="monitoreo1">
-
-                    <div class="gps-monitor-header">
-
-                        <div>
-
-                            <span class="gps-label">
-                                MONITOREO 1
-                            </span>
-
-                            <h3>
-                                Plataforma Ditrack
-                            </h3>
-
-                        </div>
-
-                    </div>
-
-                    <div class="ditrack-container">
-
-                        <iframe
-                            src="https://ditrack.pe/t/qkf2SXu8xLGvrJ2b3Z6cr0bPztkFRbPRIPAYP_AVrOg"
-                            class="ditrack-frame"
-                            title="Monitoreo GPS GAMARRITA EXPRESS"
-                            allow="fullscreen"
-                            allowfullscreen>
-                        </iframe>
+                        </select>
 
                     </div>
 
                 </div>
-
-
-                <!-- SEPARADOR -->
-
-                <div class="gps-separator"></div>
-
-
-                <!-- ================================================= -->
-                <!-- MONITOREO 2 -->
-                <!-- ================================================= -->
-
-                <div
-                    class="gps-monitor-box"
-                    id="monitoreo2">
-
-                    <div class="gps-monitor-header">
-
-                        <div>
-
-                            <span class="gps-label">
-                                MONITOREO 2
-                            </span>
-
-                            <h3>
-                                Datos GPS del vehículo
-                            </h3>
-
-                        </div>
-
-                        <div
-                            id="gpsEstado"
-                            class="gps-status">
-
-                            <span
-                                class="status-dot"
-                                id="gpsStatusDot">
-                            </span>
-
-                            <span id="gpsEstadoTexto">
-                                Esperando datos
-                            </span>
-
-                        </div>
-
-                    </div>
-
-
-                    <!-- INFORMACIÓN -->
-
-                    <div class="gps-info-grid">
-
-
-                        <div class="gps-card">
-
-                            <i class="fa-solid fa-truck"></i>
-
-                            <span>
-                                Vehículo
-                            </span>
-
-                            <strong id="gpsPlaca">
-                                Cargando...
-                            </strong>
-
-                        </div>
-
-
-                        <div class="gps-card">
-
-                            <i class="fa-solid fa-gauge-high"></i>
-
-                            <span>
-                                Velocidad
-                            </span>
-
-                            <strong id="gpsVelocidad">
-                                Cargando...
-                            </strong>
-
-                        </div>
-
-
-                        <div class="gps-card">
-
-                            <i class="fa-solid fa-compass"></i>
-
-                            <span>
-                                Rumbo
-                            </span>
-
-                            <strong id="gpsRumbo">
-                                No disponible
-                            </strong>
-
-                        </div>
-
-
-                        <div class="gps-card">
-
-                            <i class="fa-solid fa-circle-info"></i>
-
-                            <span>
-                                Evento
-                            </span>
-
-                            <strong id="gpsEvento">
-                                No disponible
-                            </strong>
-
-                        </div>
-
-
-                    </div>
-
-
-                    <!-- MAPA -->
-
-                    <div class="gps-map-container">
-
-                        <div id="gpsMap"></div>
-
-                    </div>
-
-
-                    <!-- DETALLES -->
-
-                    <div class="gps-details">
-
-                        <div>
-
-                            <span>
-                                Latitud
-                            </span>
-
-                            <strong id="gpsLatitud">
-                                No disponible
-                            </strong>
-
-                        </div>
-
-
-                        <div>
-
-                            <span>
-                                Longitud
-                            </span>
-
-                            <strong id="gpsLongitud">
-                                No disponible
-                            </strong>
-
-                        </div>
-
-
-                        <div>
-
-                            <span>
-                                Última actualización
-                            </span>
-
-                            <strong id="gpsHora">
-                                Cargando...
-                            </strong>
-
-                        </div>
-
-                    </div>
-
-
-                    <!-- PIE -->
-
-                    <div class="gps-footer">
-
-                        <i class="fa-solid fa-satellite-dish"></i>
-
-                        Datos de posicionamiento GPS
-
-                    </div>
-
-                </div>
-
-
-                <!-- SEPARADOR -->
-
-                <div class="gps-separator"></div>
-
-
-                <!-- ================================================= -->
-                <!-- MONITOREO 3 -->
-                <!-- ================================================= -->
-
-                <div
-                    class="gps-monitor-box"
-                    id="monitoreo3">
-
-                    <div class="gps-monitor-header">
-
-                        <div>
-
-                            <span class="gps-label">
-                                MONITOREO 3
-                            </span>
-
-                            <h3>
-                                Mapa general de vehículos
-                            </h3>
-
-                        </div>
-
-                    </div>
-
-
-                    <!-- RESUMEN -->
-
-                    <div class="fleet-summary">
-
-                        <div class="fleet-summary-item">
-                            Total:
-                            <span id="fleetTotal">
-                                0
-                            </span>
-                        </div>
-
-                        <div class="fleet-summary-item">
-                            Conectados:
-                            <span id="fleetOnline">
-                                0
-                            </span>
-                        </div>
-
-                        <div class="fleet-summary-item">
-                            Sin conexión:
-                            <span id="fleetOffline">
-                                0
-                            </span>
-                        </div>
-
-                    </div>
-
-
-                    <!-- MAPA + LISTA -->
-
-                    <div class="fleet-layout">
-
-
-                        <!-- MAPA GENERAL -->
-
-                        <div class="fleet-map-container">
-
-                            <div id="fleetMap"></div>
-
-                        </div>
-
-
-                        <!-- LISTA -->
-
-                        <div class="fleet-list">
-
-                            <div class="fleet-list-title">
-                                VEHÍCULOS DE LA FLOTA
-                            </div>
-
-                            <div id="fleetList">
-
-                                <div class="fleet-empty">
-                                    Cargando vehículos...
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-
-                    <!-- PIE -->
-
-                    <div class="gps-footer">
-
-                        <i class="fa-solid fa-satellite-dish"></i>
-
-                        Monitoreo general de la flota
-                        · Actualización automática cada 20 segundos
-
-                    </div>
-
-                </div>
-
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- ================================================= -->
-    <!-- CONTACTO -->
-    <!-- ================================================= -->
-
-    <section id="contacto">
-
-        <div class="container">
-
-            <div class="section-title">
-
-                <span>
-                    CONTACTO
-                </span>
-
-                <h2>
-                    Estamos listos para atenderte
-                </h2>
-
-            </div>
-
-            <div class="contact-grid">
 
 
                 <div>
 
+                    <label for="mensaje">
+                        Mensaje
+                    </label>
+
+                    <textarea id="mensaje"
+                              name="mensaje"
+                              rows="4"
+                              placeholder="Cuéntanos qué necesitas transportar..."></textarea>
+
+                </div>
+
+
+                <button type="submit"
+                        class="btn-primary">
+
+                    <i class="fa-solid fa-paper-plane"></i>
+
+                    Enviar solicitud
+
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     12. FOOTER
+========================================================= -->
+
+<footer>
+
+    <div class="container">
+
+        <div class="footer-grid">
+
+
+            <div class="footer-company">
+
+                <h3>
+                    GAMARRITA
+                    <span>EXPRESS EIRL</span>
+                </h3>
+
+                <p>
+                    Transporte de carga con seguridad,
+                    puntualidad y confianza.
+                </p>
+
+            </div>
+
+
+            <div>
+
+                <h4>Empresa</h4>
+
+                <ul>
+                    <li><a href="#nosotros">Nosotros</a></li>
+                    <li><a href="#mision-vision">Misión y Visión</a></li>
+                    <li><a href="#valores">Valores</a></li>
+                    <li><a href="#seguridad">Seguridad</a></li>
+                </ul>
+
+            </div>
+
+
+            <div>
+
+                <h4>Servicios</h4>
+
+                <ul>
+                    <li><a href="#servicios">Transporte de carga</a></li>
+                    <li><a href="#servicios">Distribución</a></li>
+                    <li><a href="#operacion">Nuestra operación</a></li>
+                    <li><a href="#cobertura">Cobertura</a></li>
+                </ul>
+
+            </div>
+
+
+            <div>
+
+                <h4>Contacto</h4>
+
+                <p>
                     <i class="fa-solid fa-phone"></i>
+                    +51 999 913 590
+                </p>
 
-                    <h3>
-                        Teléfono
-                    </h3>
-
-                    <p>
-                        +51 999 913 590
-                    </p>
-
-                </div>
-
-
-                <div>
-
-                    <i class="fa-brands fa-whatsapp"></i>
-
-                    <h3>
-                        WhatsApp
-                    </h3>
-
-                    <p>
-                        +51 999 913 590
-                    </p>
-
-                </div>
-
-
-                <div>
-
+                <p>
                     <i class="fa-solid fa-envelope"></i>
+                    hgamarraa1984@gmail.com
+                </p>
 
-                    <h3>
-                        Correo
-                    </h3>
-
-                    <p>
-                        hgamarraa1984@gmail.com
-                    </p>
-
-                </div>
-
+                <p>
+                    <i class="fa-solid fa-location-dot"></i>
+                    Lima, Perú
+                </p>
 
             </div>
 
         </div>
 
-    </section>
 
-
-    <!-- ================================================= -->
-    <!-- FOOTER -->
-    <!-- ================================================= -->
-
-    <footer>
-
-        <div class="container">
-
-            <h3>
-                GAMARRITA EXPRESS E.I.R.L.
-            </h3>
-
-            <p>
-                Transporte de carga con seguridad,
-                puntualidad y confianza.
-            </p>
+        <div class="footer-bottom">
 
             <small>
                 © 2026 GAMARRITA EXPRESS E.I.R.L.
@@ -1182,966 +933,33 @@
 
         </div>
 
-    </footer>
+    </div>
 
+</footer>
 
-    <!-- ================================================= -->
-    <!-- WHATSAPP -->
-    <!-- ================================================= -->
 
-    <a
-        href="https://wa.me/51999913590"
-        class="whatsapp"
-        target="_blank"
-        rel="noopener noreferrer">
 
-        <i class="fa-brands fa-whatsapp"></i>
+<!-- =========================================================
+     13. WHATSAPP
+========================================================= -->
 
-    </a>
+<a href="https://wa.me/51999913590"
+   class="whatsapp"
+   target="_blank"
+   rel="noopener noreferrer"
+   aria-label="Contactar por WhatsApp">
 
+    <i class="fa-brands fa-whatsapp"></i>
 
-    <!-- ================================================= -->
-    <!-- SCRIPT PRINCIPAL -->
-    <!-- ================================================= -->
+</a>
 
-    <script src="script.js"></script>
 
 
-    <!-- ================================================= -->
-    <!-- MONITOREO GPS -->
-    <!-- ================================================= -->
+<!-- =========================================================
+     14. JAVASCRIPT
+========================================================= -->
 
-    <script>
-
-        /* ================================================= */
-        /* CONFIGURACIÓN */
-        /* ================================================= */
-
-        const GPS_WORKER =
-            "https://odd-wind-b62d.gamarritadm02.workers.dev/";
-
-
-        /* ================================================= */
-        /* MONITOREO 2 - VARIABLES */
-        /* ================================================= */
-
-        let gpsMap = null;
-        let gpsMarker = null;
-
-
-        /* ================================================= */
-        /* MONITOREO 3 - VARIABLES */
-        /* ================================================= */
-
-        let fleetMap = null;
-
-        const fleetMarkers = {};
-
-
-        /* ================================================= */
-        /* MONITOREO 2 - INICIALIZAR MAPA */
-        /* ================================================= */
-
-        function inicializarMapaGPS(
-            latitud,
-            longitud,
-            placa
-        ) {
-
-            if (gpsMap) {
-                return;
-            }
-
-
-            gpsMap = L.map("gpsMap").setView(
-                [latitud, longitud],
-                15
-            );
-
-
-            L.tileLayer(
-                "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-                {
-                    maxZoom: 19,
-                    attribution:
-                        "&copy; OpenStreetMap contributors"
-                }
-            ).addTo(gpsMap);
-
-
-            gpsMarker = L.marker(
-                [latitud, longitud]
-            ).addTo(gpsMap);
-
-
-            gpsMarker.bindPopup(
-                `
-                <strong>GAMARRITA EXPRESS</strong><br>
-                Vehículo: ${placa}
-                `
-            );
-
-        }
-
-
-        /* ================================================= */
-        /* MONITOREO 2 - ACTUALIZAR MAPA */
-        /* ================================================= */
-
-        function actualizarMapaGPS(
-            latitud,
-            longitud,
-            placa
-        ) {
-
-            if (!gpsMap) {
-
-                inicializarMapaGPS(
-                    latitud,
-                    longitud,
-                    placa
-                );
-
-                return;
-
-            }
-
-
-            if (gpsMarker) {
-
-                gpsMarker.setLatLng(
-                    [latitud, longitud]
-                );
-
-
-                gpsMarker.setPopupContent(
-                    `
-                    <strong>GAMARRITA EXPRESS</strong><br>
-                    Vehículo: ${placa}
-                    `
-                );
-
-            }
-
-
-            gpsMap.panTo(
-                [latitud, longitud],
-                {
-                    animate: true,
-                    duration: 1
-                }
-            );
-
-        }
-
-
-        /* ================================================= */
-        /* MONITOREO 3 - INICIALIZAR MAPA */
-        /* ================================================= */
-
-        function inicializarFleetMap() {
-
-            if (fleetMap) {
-                return;
-            }
-
-
-            fleetMap = L.map("fleetMap").setView(
-                [-12.05, -77.00],
-                11
-            );
-
-
-            L.tileLayer(
-                "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-                {
-                    maxZoom: 19,
-                    attribution:
-                        "&copy; OpenStreetMap contributors"
-                }
-            ).addTo(fleetMap);
-
-        }
-
-
-        /* ================================================= */
-        /* MONITOREO 3 - ACTUALIZAR MARCADOR */
-        /* ================================================= */
-
-        function actualizarMarcadorFleet(
-            vehiculo
-        ) {
-
-            if (
-                vehiculo.latitud === null ||
-                vehiculo.latitud === undefined ||
-                vehiculo.longitud === null ||
-                vehiculo.longitud === undefined
-            ) {
-
-                return;
-
-            }
-
-
-            const latitud =
-                Number(vehiculo.latitud);
-
-            const longitud =
-                Number(vehiculo.longitud);
-
-
-            if (
-                !Number.isFinite(latitud) ||
-                !Number.isFinite(longitud)
-            ) {
-
-                return;
-
-            }
-
-
-            /* Crear marcador */
-
-            if (!fleetMarkers[vehiculo.vehiculo]) {
-
-                fleetMarkers[vehiculo.vehiculo] =
-                    L.marker(
-                        [latitud, longitud]
-                    ).addTo(fleetMap);
-
-            }
-
-
-            /* Actualizar posición */
-
-            fleetMarkers[
-                vehiculo.vehiculo
-            ].setLatLng(
-                [latitud, longitud]
-            );
-
-
-            /* Información del marcador */
-
-            fleetMarkers[
-                vehiculo.vehiculo
-            ].bindPopup(
-                `
-                <strong>GAMARRITA EXPRESS</strong><br>
-                Vehículo: ${vehiculo.vehiculo}<br>
-                Estado: ${vehiculo.estado}<br>
-                Velocidad: ${vehiculo.velocidad || "No disponible"}<br>
-                Actualización: ${vehiculo.ultimaActualizacion || "No disponible"}
-                `
-            );
-
-        }
-
-
-        /* ================================================= */
-        /* MONITOREO 3 - ELIMINAR MARCADOR */
-        /* ================================================= */
-
-        function eliminarMarcadorFleet(
-            placa
-        ) {
-
-            if (
-                fleetMarkers[placa] &&
-                fleetMap
-            ) {
-
-                fleetMap.removeLayer(
-                    fleetMarkers[placa]
-                );
-
-                delete fleetMarkers[placa];
-
-            }
-
-        }
-
-
-        /* ================================================= */
-        /* MONITOREO 3 - MOSTRAR LISTA */
-        /* ================================================= */
-
-        function actualizarListaFleet(
-            vehiculos
-        ) {
-
-            const lista =
-                document.getElementById(
-                    "fleetList"
-                );
-
-
-            lista.innerHTML = "";
-
-
-            if (
-                !vehiculos ||
-                vehiculos.length === 0
-            ) {
-
-                lista.innerHTML =
-                    `
-                    <div class="fleet-empty">
-                        No hay vehículos registrados.
-                    </div>
-                    `;
-
-                return;
-
-            }
-
-
-            vehiculos.forEach(
-                vehiculo => {
-
-                    const online =
-                        vehiculo.disponible &&
-                        vehiculo.estado &&
-                        vehiculo.estado.toLowerCase()
-                            === "online";
-
-
-                    const item =
-                        document.createElement(
-                            "div"
-                        );
-
-
-                    item.className =
-                        "fleet-vehicle";
-
-
-                    item.innerHTML =
-                        `
-                        <div class="fleet-vehicle-header">
-
-                            <div class="fleet-vehicle-name">
-
-                                <i class="fa-solid fa-truck"></i>
-
-                                ${vehiculo.vehiculo}
-
-                            </div>
-
-                            <div class="
-                                fleet-vehicle-status
-                                ${online
-                                    ? "fleet-online"
-                                    : "fleet-offline"}
-                            ">
-
-                                <span
-                                    class="fleet-dot"
-                                    style="
-                                        background:
-                                        ${online
-                                            ? "#22c55e"
-                                            : "#ef4444"};
-                                    ">
-                                </span>
-
-                                ${online
-                                    ? "Online"
-                                    : "Sin conexión"}
-
-                            </div>
-
-                        </div>
-
-
-                        <div class="fleet-vehicle-info">
-
-                            <div class="fleet-data">
-
-                                <span>
-                                    Velocidad
-                                </span>
-
-                                <strong>
-                                    ${vehiculo.velocidad || "—"}
-                                </strong>
-
-                            </div>
-
-
-                            <div class="fleet-data">
-
-                                <span>
-                                    Actualización
-                                </span>
-
-                                <strong>
-                                    ${vehiculo.ultimaActualizacion || "—"}
-                                </strong>
-
-                            </div>
-
-                        </div>
-                        `;
-
-
-                    /* Al hacer clic en un vehículo */
-
-                    item.addEventListener(
-                        "click",
-                        () => {
-
-                            if (
-                                vehiculo.latitud !== null &&
-                                vehiculo.latitud !== undefined &&
-                                vehiculo.longitud !== null &&
-                                vehiculo.longitud !== undefined &&
-                                fleetMap
-                            ) {
-
-                                fleetMap.setView(
-                                    [
-                                        Number(
-                                            vehiculo.latitud
-                                        ),
-                                        Number(
-                                            vehiculo.longitud
-                                        )
-                                    ],
-                                    15
-                                );
-
-
-                                if (
-                                    fleetMarkers[
-                                        vehiculo.vehiculo
-                                    ]
-                                ) {
-
-                                    fleetMarkers[
-                                        vehiculo.vehiculo
-                                    ].openPopup();
-
-                                }
-
-                            }
-
-                        }
-                    );
-
-
-                    lista.appendChild(item);
-
-                }
-            );
-
-        }
-
-
-        /* ================================================= */
-        /* MONITOREO 3 - AJUSTAR MAPA A TODOS */
-        /* ================================================= */
-
-        function ajustarMapaFleet(
-            vehiculos
-        ) {
-
-            if (
-                !fleetMap ||
-                !vehiculos ||
-                vehiculos.length === 0
-            ) {
-
-                return;
-
-            }
-
-
-            const posiciones = [];
-
-
-            vehiculos.forEach(
-                vehiculo => {
-
-                    if (
-                        vehiculo.disponible &&
-                        vehiculo.latitud !== null &&
-                        vehiculo.longitud !== null
-                    ) {
-
-                        posiciones.push(
-                            [
-                                Number(
-                                    vehiculo.latitud
-                                ),
-                                Number(
-                                    vehiculo.longitud
-                                )
-                            ]
-                        );
-
-                    }
-
-                }
-            );
-
-
-            if (
-                posiciones.length === 1
-            ) {
-
-                fleetMap.setView(
-                    posiciones[0],
-                    14
-                );
-
-                return;
-
-            }
-
-
-            if (
-                posiciones.length > 1
-            ) {
-
-                const bounds =
-                    L.latLngBounds(
-                        posiciones
-                    );
-
-
-                fleetMap.fitBounds(
-                    bounds,
-                    {
-                        padding: [40, 40]
-                    }
-                );
-
-            }
-
-        }
-
-
-        /* ================================================= */
-        /* MONITOREO 2 + MONITOREO 3 */
-        /* ================================================= */
-
-        async function actualizarDatosGPS() {
-
-            try {
-
-                const respuesta =
-                    await fetch(
-                        GPS_WORKER +
-                        "?t=" +
-                        Date.now()
-                    );
-
-
-                if (!respuesta.ok) {
-
-                    throw new Error(
-                        "No se pudo conectar con el servidor GPS"
-                    );
-
-                }
-
-
-                const datos =
-                    await respuesta.json();
-
-
-                console.log(
-                    "Datos GPS recibidos:",
-                    datos
-                );
-
-
-                /* ================================================= */
-                /* VERIFICAR RESPUESTA */
-                /* ================================================= */
-
-                if (
-                    !datos.vehiculos ||
-                    !Array.isArray(
-                        datos.vehiculos
-                    )
-                ) {
-
-                    throw new Error(
-                        "Formato de datos GPS incorrecto"
-                    );
-
-                }
-
-
-                const vehiculos =
-                    datos.vehiculos;
-
-
-                /* ================================================= */
-                /* MONITOREO 2 - TOMAR PRIMER VEHÍCULO */
-                /* ================================================= */
-
-                const vehiculoPrincipal =
-                    vehiculos.find(
-                        vehiculo =>
-                            vehiculo.vehiculo
-                            === "BKL-812"
-                    ) ||
-                    vehiculos[0];
-
-
-                if (vehiculoPrincipal) {
-
-
-                    /* VEHÍCULO */
-
-                    document.getElementById(
-                        "gpsPlaca"
-                    ).textContent =
-                        vehiculoPrincipal.vehiculo ||
-                        "No disponible";
-
-
-                    /* VELOCIDAD */
-
-                    document.getElementById(
-                        "gpsVelocidad"
-                    ).textContent =
-                        vehiculoPrincipal.velocidad ||
-                        "No disponible";
-
-
-                    /* ESTADO */
-
-                    document.getElementById(
-                        "gpsEstadoTexto"
-                    ).textContent =
-                        vehiculoPrincipal.estado ||
-                        "No disponible";
-
-
-                    /* HORA */
-
-                    document.getElementById(
-                        "gpsHora"
-                    ).textContent =
-                        vehiculoPrincipal.ultimaActualizacion ||
-                        "No disponible";
-
-
-                    /* LATITUD */
-
-                    if (
-                        vehiculoPrincipal.latitud !== null &&
-                        vehiculoPrincipal.latitud !== undefined
-                    ) {
-
-                        document.getElementById(
-                            "gpsLatitud"
-                        ).textContent =
-                            Number(
-                                vehiculoPrincipal.latitud
-                            ).toFixed(6);
-
-                    } else {
-
-                        document.getElementById(
-                            "gpsLatitud"
-                        ).textContent =
-                            "No disponible";
-
-                    }
-
-
-                    /* LONGITUD */
-
-                    if (
-                        vehiculoPrincipal.longitud !== null &&
-                        vehiculoPrincipal.longitud !== undefined
-                    ) {
-
-                        document.getElementById(
-                            "gpsLongitud"
-                        ).textContent =
-                            Number(
-                                vehiculoPrincipal.longitud
-                            ).toFixed(6);
-
-                    } else {
-
-                        document.getElementById(
-                            "gpsLongitud"
-                        ).textContent =
-                            "No disponible";
-
-                    }
-
-
-                    /* RUMBO */
-
-                    if (
-                        vehiculoPrincipal.rumbo !== null &&
-                        vehiculoPrincipal.rumbo !== undefined
-                    ) {
-
-                        document.getElementById(
-                            "gpsRumbo"
-                        ).textContent =
-                            vehiculoPrincipal.rumbo +
-                            "°";
-
-                    } else {
-
-                        document.getElementById(
-                            "gpsRumbo"
-                        ).textContent =
-                            "No disponible";
-
-                    }
-
-
-                    /* EVENTO */
-
-                    document.getElementById(
-                        "gpsEvento"
-                    ).textContent =
-                        vehiculoPrincipal.evento ||
-                        "Sin evento";
-
-
-                    /* ESTADO VISUAL */
-
-                    const punto =
-                        document.getElementById(
-                            "gpsStatusDot"
-                        );
-
-
-                    if (
-                        vehiculoPrincipal.estado &&
-                        vehiculoPrincipal.estado
-                            .toLowerCase()
-                            === "online"
-                    ) {
-
-                        punto.style.background =
-                            "#22c55e";
-
-                    } else {
-
-                        punto.style.background =
-                            "#ef4444";
-
-                    }
-
-
-                    /* MAPA INDIVIDUAL */
-
-                    if (
-                        vehiculoPrincipal.latitud !== null &&
-                        vehiculoPrincipal.longitud !== null
-                    ) {
-
-                        actualizarMapaGPS(
-                            Number(
-                                vehiculoPrincipal.latitud
-                            ),
-                            Number(
-                                vehiculoPrincipal.longitud
-                            ),
-                            vehiculoPrincipal.vehiculo
-                        );
-
-                    }
-
-                }
-
-
-                /* ================================================= */
-                /* MONITOREO 3 - MAPA GENERAL */
-                /* ================================================= */
-
-                inicializarFleetMap();
-
-
-                /* Contadores */
-
-                let total = vehiculos.length;
-
-                let online = 0;
-
-                let offline = 0;
-
-
-                vehiculos.forEach(
-                    vehiculo => {
-
-                        const conectado =
-                            vehiculo.disponible &&
-                            vehiculo.estado &&
-                            vehiculo.estado
-                                .toLowerCase()
-                                === "online";
-
-
-                        if (conectado) {
-
-                            online++;
-
-                        } else {
-
-                            offline++;
-
-                        }
-
-
-                        if (conectado) {
-
-                            actualizarMarcadorFleet(
-                                vehiculo
-                            );
-
-                        } else {
-
-                            eliminarMarcadorFleet(
-                                vehiculo.vehiculo
-                            );
-
-                        }
-
-                    }
-                );
-
-
-                /* Actualizar lista */
-
-                actualizarListaFleet(
-                    vehiculos
-                );
-
-
-                /* Actualizar contadores */
-
-                document.getElementById(
-                    "fleetTotal"
-                ).textContent =
-                    total;
-
-
-                document.getElementById(
-                    "fleetOnline"
-                ).textContent =
-                    online;
-
-
-                document.getElementById(
-                    "fleetOffline"
-                ).textContent =
-                    offline;
-
-
-                /* Ajustar mapa */
-
-                ajustarMapaFleet(
-                    vehiculos
-                );
-
-
-                /* ================================================= */
-                /* CORREGIR TAMAÑO DE MAPAS */
-                /* ================================================= */
-
-                setTimeout(
-                    () => {
-
-                        if (gpsMap) {
-
-                            gpsMap.invalidateSize();
-
-                        }
-
-                        if (fleetMap) {
-
-                            fleetMap.invalidateSize();
-
-                        }
-
-                    },
-                    300
-                );
-
-
-            }
-
-            catch (error) {
-
-                console.error(
-                    "Error GPS:",
-                    error
-                );
-
-
-                /* Monitoreo 2 */
-
-                document.getElementById(
-                    "gpsEstadoTexto"
-                ).textContent =
-                    "Sin conexión";
-
-
-                document.getElementById(
-                    "gpsStatusDot"
-                ).style.background =
-                    "#ef4444";
-
-
-                /* Monitoreo 3 */
-
-                const lista =
-                    document.getElementById(
-                        "fleetList"
-                    );
-
-
-                if (lista) {
-
-                    lista.innerHTML =
-                        `
-                        <div class="fleet-empty">
-                            No se pudo actualizar
-                            la información de la flota.
-                        </div>
-                        `;
-
-                }
-
-            }
-
-        }
-
-
-        /* ================================================= */
-        /* PRIMERA CONSULTA */
-        /* ================================================= */
-
-        actualizarDatosGPS();
-
-
-        /* ================================================= */
-        /* ACTUALIZACIÓN CADA 20 SEGUNDOS */
-        /* ================================================= */
-
-        setInterval(
-            actualizarDatosGPS,
-            20000
-        );
-
-    </script>
-
+<script src="public/js/pagina.js"></script>
 
 </body>
-
 </html>
