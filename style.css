@@ -617,37 +617,68 @@ section:not(.hero) {
     font-size: 19px;
 }
 
+
 /* =========================================================
    14. NUESTRA FLOTA
 ========================================================= */
 #flota {
     background: #fff;
+    padding: 110px 0;
+}
+#flota .container {
+    width: min(1600px, 96%);
+    max-width: none;
+}
+#flota .section-title {
+    max-width: 1000px;
+    margin-bottom: 35px;
+}
+#flota .section-title h2 {
+    font-size: clamp(36px, 4vw, 52px);
+}
+#flota .section-intro {
+    max-width: 950px;
+    font-size: 19px;
+    margin: 0 auto 55px;
 }
 .fleet-grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 28px;
+    gap: 35px;
 }
 .fleet-card {
     overflow: hidden;
     text-align: center;
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .10);
+    transition: transform .3s ease, box-shadow .3s ease;
+}
+.fleet-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, .15);
 }
 .fleet-card img {
+    display: block;
     width: 100%;
-    height: 220px;
-    object-fit: cover;
+    height: 350px;
+    object-fit: contain;
+    padding: 12px;
     transition: transform .4s ease;
 }
 .fleet-card:hover img {
-    transform: scale(1.05);
+    transform: scale(1.06);
 }
 .fleet-card h3 {
     position: relative;
-    padding: 22px 15px;
     margin: 0;
+    padding: 25px 15px;
     background: #fff;
-    font-size: 19px;
+    color: #002b5b;
+    font-size: 24px;
+    font-weight: 700;
 }
+
 
 /* =========================================================
    15. COBERTURA NACIONAL
