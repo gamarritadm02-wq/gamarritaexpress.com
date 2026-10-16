@@ -1049,6 +1049,20 @@ section.show {
     .coverage-content {
         text-align: center;
     }
+   
+   #flota .container {
+        width: 94%;
+    }
+    #flota .fleet-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 25px;
+    }
+    #flota .fleet-card img {
+        height: 330px;
+    }
+    #flota .fleet-card h3 {
+        font-size: 22px;
+    }
 }
 
 /* =========================================================
@@ -1203,6 +1217,30 @@ section.show {
         width: 56px;
         height: 56px;
         font-size: 27px;
+    }
+    #flota {
+        padding: 75px 0;
+    }
+    #flota .container {
+        width: 92%;
+    }
+    #flota .section-title h2 {
+        font-size: 32px;
+    }
+    #flota .section-intro {
+        font-size: 16px;
+        margin-bottom: 35px;
+    }
+    #flota .fleet-grid {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+    #flota .fleet-card img {
+        height: 300px;
+    }
+    #flota .fleet-card h3 {
+        font-size: 21px;
+        padding: 20px 12px;
     }
 }
 
