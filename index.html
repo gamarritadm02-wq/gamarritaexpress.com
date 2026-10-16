@@ -1,1273 +1,610 @@
+
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>GAMARRITA EXPRESS E.I.R.L. | Transporte de Carga</title>
-
-    <meta name="description"
-          content="Gamarrita Express E.I.R.L., empresa peruana especializada en transporte terrestre de carga. Seguridad, puntualidad, eficiencia y compromiso en cada operación.">
-
-    <!-- CSS -->
+    <meta name="description" content="Gamarrita Express E.I.R.L., empresa peruana especializada en transporte terrestre de carga.">
     <link rel="stylesheet" href="style.css">
-
-    <!-- GOOGLE FONTS -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
-          rel="stylesheet">
-
-    <!-- FONT AWESOME -->
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 </head>
-
 <body>
-
-
 <!-- =========================================================
      01. HEADER
 ========================================================= -->
-
 <header id="header" class="web-header">
-
     <div class="container web-header-container">
-
-        <!-- LOGO -->
         <a href="#inicio" class="web-logo">
             <span class="web-logo-main">GAMARRITA</span>
             <span class="web-logo-sub">EXPRESS EIRL</span>
         </a>
-
-
-        <!-- MENÚ -->
         <nav id="menuWeb" class="menu-web">
             <ul>
-
-                <li>
-                    <a href="#inicio"
-                    class="menu-web-link active">
-                        Inicio
-                    </a>
-                </li>
-
-                <li>
-                    <a href="#nosotros"
-                    class="menu-web-link">
-                        Nosotros
-                    </a>
-                </li>
-
-                <li>
-                    <a href="#servicios"
-                    class="menu-web-link">
-                        Servicios
-                    </a>
-                </li>
-
-                <li>
-                    <a href="#seguridad"
-                    class="menu-web-link">
-                        Seguridad
-                    </a>
-                </li>
-
-                <li>
-                    <a href="#contacto"
-                    class="menu-web-link">
-                        Contacto
-                    </a>
-                </li>
-
+                <li><a href="#inicio" class="menu-web-link active">Inicio</a></li>
+                <li><a href="#nosotros" class="menu-web-link">Nosotros</a></li>
+                <li><a href="#valores" class="menu-web-link">Valores</a></li>
+                <li><a href="#servicios" class="menu-web-link">Servicios</a></li>
+                <li><a href="#flota" class="menu-web-link">Flota</a></li>
+                <li><a href="#seguridad" class="menu-web-link">Seguridad</a></li>
+                <li><a href="#contacto" class="menu-web-link">Contacto</a></li>
                 <li class="menu-web-login-mobile">
-
-                    <a href="/login">
-
-                        <i class="fa-solid fa-user"></i>
-
-                        Ingresar al sistema
-
-                    </a>
-
+                    <a href="/login"><i class="fa-solid fa-user"></i> Ingresar al sistema</a>
                 </li>
-
             </ul>
-
         </nav>
-
-
         <div class="web-header-actions">
-
             <a href="/login" class="web-btn-login">
-                <i class="fa-solid fa-user"></i>
-                Ingresar
+                <i class="fa-solid fa-user"></i> Ingresar
             </a>
-
-
-            <button
-                type="button"
-                id="botonMenuWeb"
-                class="web-menu-toggle"
-                aria-label="Abrir menú"
-                aria-expanded="false">
-
+            <button type="button" id="botonMenuWeb" class="web-menu-toggle" aria-label="Abrir menú" aria-expanded="false">
                 <span></span>
                 <span></span>
                 <span></span>
-
             </button>
-
         </div>
-
     </div>
-
-
-    <!-- OVERLAY MÓVIL -->
     <div id="menuWebOverlay" class="menu-web-overlay"></div>
-
 </header>
 
-
-
 <!-- =========================================================
-     02. HERO / PORTADA
+     02. PORTADA
 ========================================================= -->
-
 <section id="inicio" class="hero">
-
-    <video id="heroVideo"
-           autoplay
-           muted
-           playsinline
-           loop
-           class="hero-video">
-
+    <video id="heroVideo" autoplay muted playsinline loop class="hero-video">
         <source src="style/av/camion.mp4" type="video/mp4">
-
     </video>
-
     <div class="overlay"></div>
-
-
     <div class="hero-content">
-
-        <span>
-            TRANSPORTE DE CARGA A NIVEL NACIONAL
-        </span>
-
-        <h1>
-            Seguridad, puntualidad y confianza en cada viaje.
-        </h1>
-
-        <p>
-            Soluciones de transporte terrestre orientadas a
-            operaciones seguras, eficientes y oportunas.
-        </p>
-
-
+        <span>TRANSPORTE DE CARGA A NIVEL NACIONAL</span>
+        <h1>Seguridad, puntualidad y confianza en cada viaje.</h1>
+        <p>Soluciones de transporte terrestre orientadas a operaciones seguras, eficientes y oportunas.</p>
         <div class="hero-buttons">
-
             <a href="#contacto" class="btn-primary">
-                <i class="fa-solid fa-file-signature"></i>
-                Solicitar cotización
+                <i class="fa-solid fa-file-signature"></i> Solicitar cotización
             </a>
         </div>
-
     </div>
-
 </section>
-
-    
-
 
 <!-- =========================================================
      03. NOSOTROS
 ========================================================= -->
-
 <section id="nosotros">
-
     <div class="container">
-
         <div class="section-title">
             <span>QUIÉNES SOMOS</span>
             <h2>Más que transporte, somos confianza.</h2>
         </div>
-
-
         <div class="about-grid">
-
             <div class="about-text">
-
-                <p>
-                    <strong>GAMARRITA EXPRESS E.I.R.L.</strong>
-                    es una empresa peruana dedicada al transporte
-                    terrestre de carga, orientada a brindar soluciones
-                    seguras, eficientes y confiables.
-                </p>
-
-                <p>
-                    Trabajamos bajo principios de responsabilidad,
-                    puntualidad, prevención y mejora continua,
-                    promoviendo operaciones seguras en cada servicio.
-                </p>
-
+                <p><strong>GAMARRITA EXPRESS E.I.R.L.</strong> es una empresa peruana dedicada al transporte terrestre de carga, orientada a brindar soluciones seguras, eficientes y confiables.</p>
+                <p>Trabajamos bajo principios de responsabilidad, puntualidad, prevención y mejora continua, promoviendo operaciones seguras en cada servicio.</p>
             </div>
-
-
             <div class="about-card">
-
                 <div>
                     <h3>100%</h3>
                     <span>Compromiso con nuestros clientes</span>
                 </div>
-
                 <div>
                     <h3>24/7</h3>
                     <span>Atención y coordinación</span>
                 </div>
-
                 <div>
                     <h3>SST</h3>
                     <span>Seguridad como prioridad</span>
                 </div>
-
             </div>
-
         </div>
-
     </div>
-
 </section>
-
-
 
 <!-- =========================================================
      04. MISIÓN Y VISIÓN
 ========================================================= -->
-
 <section id="mision-vision" class="corporate-section">
-
     <div class="container">
-
         <div class="section-title">
             <span>NUESTRA EMPRESA</span>
             <h2>Comprometidos con un transporte responsable</h2>
         </div>
-
-
         <div class="corporate-grid">
-
             <article class="corporate-card">
-
                 <i class="fa-solid fa-bullseye"></i>
-
                 <h3>Misión</h3>
-
-                <p>
-                    Brindar servicios de transporte terrestre de carga
-                    seguros, eficientes y oportunos mediante personal
-                    comprometido y operaciones responsables.
-                </p>
-
+                <p>Brindar servicios de transporte terrestre de carga seguros, eficientes y oportunos mediante personal comprometido y operaciones responsables.</p>
             </article>
-
-
             <article class="corporate-card">
-
                 <i class="fa-solid fa-eye"></i>
-
                 <h3>Visión</h3>
-
-                <p>
-                    Consolidarnos como una empresa reconocida por
-                    la seguridad, confiabilidad, eficiencia y calidad
-                    de nuestras operaciones.
-                </p>
-
+                <p>Consolidarnos como una empresa reconocida por la seguridad, confiabilidad, eficiencia y calidad de nuestras operaciones.</p>
             </article>
-
         </div>
-
     </div>
-
 </section>
-
-
 
 <!-- =========================================================
      05. NUESTROS VALORES
 ========================================================= -->
-
 <section id="valores">
-
     <div class="container">
-
         <div class="section-title">
             <span>03 / CULTURA</span>
             <h2>Nuestros Valores</h2>
         </div>
-
         <div class="values-grid">
-
-            <!-- 01. COMPROMISO Y VOCACIÓN DE SERVICIO -->
             <article class="value-card">
                 <i class="fa-solid fa-handshake"></i>
-
                 <h3>Compromiso y Vocación de Servicio</h3>
-
-                <p>
-                    No solo brindamos un servicio de transporte;
-                    acompañamos y asesoramos a nuestros clientes
-                    en cada etapa del proceso. Simplificamos su
-                    gestión logística con atención personalizada
-                    y respuesta inmediata.
-                </p>
+                <p>No solo brindamos un servicio de transporte; acompañamos y asesoramos a nuestros clientes en cada etapa del proceso. Simplificamos su gestión logística con atención personalizada y respuesta inmediata.</p>
             </article>
-
-            <!-- 02. ÉTICA, TRANSPARENCIA Y LEALTAD -->
             <article class="value-card">
                 <i class="fa-solid fa-scale-balanced"></i>
-
                 <h3>Ética, Transparencia y Lealtad</h3>
-
-                <p>
-                    Actuamos con total honestidad y sinceridad
-                    en cada operación. Construimos relaciones
-                    duraderas y confiables con nuestros clientes,
-                    colaboradores y aliados.
-                </p>
+                <p>Actuamos con total honestidad y sinceridad en cada operación. Construimos relaciones duraderas y confiables con nuestros clientes, colaboradores y aliados.</p>
             </article>
-
-            <!-- 03. EXCELENCIA Y CALIDAD -->
             <article class="value-card">
                 <i class="fa-solid fa-award"></i>
-
                 <h3>Búsqueda de la Excelencia y Calidad</h3>
-
-                <p>
-                    La calidad es irrenunciable. Nos esforzamos
-                    continuamente por superar las expectativas,
-                    respaldados por la confianza de nuestros
-                    clientes y la constante innovación en
-                    nuestras soluciones.
-                </p>
+                <p>La calidad es irrenunciable. Nos esforzamos continuamente por superar las expectativas, respaldados por la confianza de nuestros clientes y la constante innovación en nuestras soluciones.</p>
             </article>
-
-            <!-- 04. PUNTUALIDAD Y RESPONSABILIDAD -->
             <article class="value-card">
                 <i class="fa-solid fa-clock"></i>
-
                 <h3>Puntualidad y Responsabilidad</h3>
-
-                <p>
-                    Cumplimos nuestros compromisos en tiempo
-                    y forma, respetando los estándares,
-                    las normativas vigentes y las máximas
-                    garantías de seguridad.
-                </p>
+                <p>Cumplimos nuestros compromisos en tiempo y forma, respetando los estándares, las normativas vigentes y las máximas garantías de seguridad.</p>
             </article>
-
-            <!-- 05. RESPETO Y SOSTENIBILIDAD -->
             <article class="value-card">
                 <i class="fa-solid fa-leaf"></i>
-
                 <h3>Respeto y Sostenibilidad</h3>
-
-                <p>
-                    Valoramos a las personas, promoviendo un
-                    trato cortés y equitativo. Operamos con
-                    conciencia social y ambiental para
-                    contribuir a un futuro mejor para
-                    las próximas generaciones.
-                </p>
+                <p>Valoramos a las personas, promoviendo un trato cortés y equitativo. Operamos con conciencia social y ambiental para contribuir a un futuro mejor para las próximas generaciones.</p>
             </article>
-
         </div>
-
     </div>
-
 </section>
-    
-<!-- =========================================================
-     05. CALIDAD
-========================================================= -->
-    
- <section class="corporate-section" id="calidad">
-   <div class="container">
-    <div class="section-title">
-     <span>
-      COMPROMISO CON LA CALIDAD
-     </span>
-     <h2>
-      Calidad y mejora continua
-     </h2>
-    </div>
-    <p class="section-intro">
-     Buscamos la satisfacci&oacute;n de nuestros clientes mediante personal calificado, unidades adecuadas y mejora continua.
-    </p>
-    <div class="values-grid">
-     <article class="value-card">
-      <i class="fa-solid fa-arrow-trend-up">
-      </i>
-      <h3>
-       Mejora continua
-      </h3>
-      <p>
-       Perfeccionamiento de nuestros procesos.
-      </p>
-     </article>
-     <article class="value-card">
-      <i class="fa-solid fa-comments">
-      </i>
-      <h3>
-       Comunicaci&oacute;n
-      </h3>
-      <p>
-       Escuchamos y atendemos a nuestros clientes.
-      </p>
-     </article>
-     <article class="value-card">
-      <i class="fa-solid fa-scale-balanced">
-      </i>
-      <h3>
-       Cumplimiento
-      </h3>
-      <p>
-       Respeto por requisitos legales y operativos.
-      </p>
-     </article>
-     <article class="value-card">
-      <i class="fa-solid fa-users">
-      </i>
-      <h3>
-       Personal capacitado
-      </h3>
-      <p>
-       Formaci&oacute;n y evaluaci&oacute;n del equipo.
-      </p>
-     </article>
-    </div>
-   </div>
-  </section>
-
 
 <!-- =========================================================
-     05. VALORES
+     06. CALIDAD
 ========================================================= -->
-
-<section id="valores">
-
+<section id="calidad" class="corporate-section">
     <div class="container">
+        <div class="section-title">
+            <span>COMPROMISO CON LA CALIDAD</span>
+            <h2>Calidad y mejora continua</h2>
+        </div>
+        <p class="section-intro">Buscamos la satisfacción de nuestros clientes mediante personal calificado, unidades adecuadas y mejora continua.</p>
+        <div class="values-grid">
+            <article class="value-card">
+                <i class="fa-solid fa-arrow-trend-up"></i>
+                <h3>Mejora Continua</h3>
+                <p>Perfeccionamiento de nuestros procesos.</p>
+            </article>
+            <article class="value-card">
+                <i class="fa-solid fa-comments"></i>
+                <h3>Comunicación</h3>
+                <p>Escuchamos y atendemos a nuestros clientes.</p>
+            </article>
+            <article class="value-card">
+                <i class="fa-solid fa-scale-balanced"></i>
+                <h3>Cumplimiento</h3>
+                <p>Respeto por requisitos legales y operativos.</p>
+            </article>
+            <article class="value-card">
+                <i class="fa-solid fa-users"></i>
+                <h3>Personal Capacitado</h3>
+                <p>Formación y evaluación del equipo.</p>
+            </article>
+        </div>
+    </div>
+</section>
 
+<!-- =========================================================
+     07. PILARES OPERATIVOS
+========================================================= -->
+<section id="pilares">
+    <div class="container">
         <div class="section-title">
             <span>NUESTROS PILARES OPERATIVOS</span>
             <h2>Principios que nos acompañan en cada operación</h2>
         </div>
-
-
         <div class="values-grid">
-
             <article class="value-card">
                 <i class="fa-solid fa-shield-halved"></i>
                 <h3>Seguridad</h3>
                 <p>La prevención forma parte de nuestras operaciones.</p>
             </article>
-
-
             <article class="value-card">
                 <i class="fa-solid fa-handshake"></i>
                 <h3>Compromiso</h3>
                 <p>Asumimos cada servicio con responsabilidad.</p>
             </article>
-
-
             <article class="value-card">
                 <i class="fa-solid fa-clock"></i>
                 <h3>Puntualidad</h3>
                 <p>Trabajamos para cumplir los tiempos establecidos.</p>
             </article>
-
-
             <article class="value-card">
                 <i class="fa-solid fa-scale-balanced"></i>
                 <h3>Responsabilidad</h3>
                 <p>Actuamos responsablemente en cada operación.</p>
             </article>
-
         </div>
-
     </div>
-
 </section>
 
-
-
-
 <!-- =========================================================
-     06. SERVICIOS
+     08. SERVICIOS
 ========================================================= -->
-
 <section id="servicios">
-
     <div class="container">
-
         <div class="section-title">
             <span>NUESTROS SERVICIOS</span>
             <h2>Soluciones de transporte y logística para su empresa</h2>
         </div>
-
         <div class="services">
-
-            <!-- 01. TRANSPORTE DE CARGA PESADA -->
             <article class="service">
                 <i class="fa-solid fa-truck-moving"></i>
                 <h3>Transporte de Carga Pesada</h3>
-                <p>
-                    Nos encargamos de transportar cargas de gran
-                    tamaño y peso, utilizando equipos especializados
-                    y personal capacitado para garantizar entregas
-                    seguras y puntuales.
-                </p>
+                <p>Nos encargamos de transportar cargas de gran tamaño y peso, utilizando equipos especializados y personal capacitado para garantizar entregas seguras y puntuales.</p>
             </article>
-
-            <!-- 02. TRANSPORTE DE CARGA LIVIANA -->
             <article class="service">
                 <i class="fa-solid fa-truck"></i>
                 <h3>Transporte de Carga Liviana</h3>
-                <p>
-                    Brindamos soluciones para el traslado de cargas
-                    livianas, garantizando entregas rápidas y seguras
-                    con la misma atención y profesionalismo que
-                    ofrecemos para cargas pesadas.
-                </p>
+                <p>Brindamos soluciones para el traslado de cargas livianas, garantizando entregas rápidas y seguras con la misma atención y profesionalismo que ofrecemos para cargas pesadas.</p>
             </article>
-
-            <!-- 03. CARGA MATPEL -->
             <article class="service">
                 <i class="fa-solid fa-triangle-exclamation"></i>
                 <h3>Transporte de Carga MATPEL</h3>
-                <p>
-                    Realizamos el transporte de materiales peligrosos
-                    con especial cuidado y cumpliendo las regulaciones
-                    correspondientes, priorizando la seguridad de
-                    la carga, las personas y el entorno.
-                </p>
+                <p>Realizamos el transporte de materiales peligrosos con especial cuidado y cumpliendo las regulaciones correspondientes, priorizando la seguridad de la carga, las personas y el entorno.</p>
             </article>
-
-            <!-- 04. CARGA IQBF -->
             <article class="service">
                 <i class="fa-solid fa-flask"></i>
                 <h3>Transporte de Carga IQBF</h3>
-                <p>
-                    Ofrecemos soluciones especializadas para el
-                    transporte de insumos químicos y bienes
-                    fiscalizados, cumpliendo los estándares de
-                    calidad y seguridad requeridos.
-                </p>
+                <p>Ofrecemos soluciones especializadas para el transporte de insumos químicos y bienes fiscalizados, cumpliendo los estándares de calidad y seguridad requeridos.</p>
             </article>
-
-            <!-- 05. CARGA VARIADA -->
             <article class="service">
                 <i class="fa-solid fa-boxes-stacked"></i>
                 <h3>Transporte de Carga Variada</h3>
-                <p>
-                    Brindamos un servicio integral de transporte
-                    para diferentes tipos de mercancías,
-                    adaptándonos a sus características y
-                    necesidades para realizar entregas
-                    seguras y eficientes.
-                </p>
+                <p>Brindamos un servicio integral de transporte para diferentes tipos de mercancías, adaptándonos a sus características y necesidades para realizar entregas seguras y eficientes.</p>
             </article>
-
-            <!-- 06. CARGA SOBREDIMENSIONADA -->
             <article class="service">
                 <i class="fa-solid fa-truck-ramp-box"></i>
                 <h3>Transporte de Carga Sobredimensionada</h3>
-                <p>
-                    Nos especializamos en el traslado de cargas
-                    con dimensiones excepcionales, utilizando
-                    equipos adecuados y personal capacitado
-                    para desarrollar operaciones seguras
-                    y eficientes.
-                </p>
+                <p>Nos especializamos en el traslado de cargas con dimensiones excepcionales, utilizando equipos adecuados y personal capacitado para desarrollar operaciones seguras y eficientes.</p>
             </article>
-
-            <!-- 07. ALQUILER DE VEHÍCULOS -->
             <article class="service">
                 <i class="fa-solid fa-key"></i>
                 <h3>Alquiler de Vehículos</h3>
-                <p>
-                    Ponemos a disposición una flota de vehículos
-                    modernos y debidamente mantenidos para
-                    atender necesidades de transporte en
-                    proyectos específicos o servicios
-                    de largo plazo.
-                </p>
+                <p>Ponemos a disposición una flota de vehículos modernos y debidamente mantenidos para atender necesidades de transporte en proyectos específicos o servicios de largo plazo.</p>
             </article>
-
-            <!-- 08. DISTRIBUCIÓN LOGÍSTICA -->
             <article class="service">
                 <i class="fa-solid fa-route"></i>
                 <h3>Distribución Logística</h3>
-                <p>
-                    Gestionamos la distribución eficiente de
-                    mercancías, optimizando rutas y tiempos
-                    de entrega para contribuir a la
-                    satisfacción de nuestros clientes
-                    y a la eficiencia de sus operaciones.
-                </p>
+                <p>Gestionamos la distribución eficiente de mercancías, optimizando rutas y tiempos de entrega para contribuir a la satisfacción de nuestros clientes y a la eficiencia de sus operaciones.</p>
             </article>
-
-            <!-- 09. SERVICIO DE ESCOLTA -->
             <article class="service">
                 <i class="fa-solid fa-shield-halved"></i>
                 <h3>Servicio de Escolta</h3>
-                <p>
-                    Brindamos acompañamiento especializado
-                    durante el transporte de carga,
-                    contribuyendo a la seguridad y
-                    protección de las mercancías
-                    durante su traslado.
-                </p>
+                <p>Brindamos acompañamiento especializado durante el transporte de carga, contribuyendo a la seguridad y protección de las mercancías durante su traslado.</p>
             </article>
-
-            <!-- 10. SERVICIO DE ALMACENAJE -->
             <article class="service">
                 <i class="fa-solid fa-warehouse"></i>
                 <h3>Servicio de Almacenaje</h3>
-                <p>
-                    Ofrecemos soluciones de almacenamiento
-                    de mercancías en instalaciones
-                    adecuadas y seguras, adaptándonos
-                    a los requerimientos logísticos
-                    de nuestros clientes.
-                </p>
+                <p>Ofrecemos soluciones de almacenamiento de mercancías en instalaciones adecuadas y seguras, adaptándonos a los requerimientos logísticos de nuestros clientes.</p>
             </article>
-
-            <!-- 11. SEGUIMIENTO -->
             <article class="service">
                 <i class="fa-solid fa-location-dot"></i>
                 <h3>Seguimiento de Carga</h3>
-                <p>
-                    Realizamos el seguimiento y la coordinación
-                    de los servicios de transporte durante
-                    su ejecución, manteniendo una comunicación
-                    constante sobre el desarrollo de
-                    cada operación.
-                </p>
+                <p>Realizamos el seguimiento y la coordinación de los servicios de transporte durante su ejecución, manteniendo una comunicación constante sobre el desarrollo de cada operación.</p>
             </article>
-
-            <!-- 12. ATENCIÓN PERSONALIZADA -->
             <article class="service">
                 <i class="fa-solid fa-headset"></i>
                 <h3>Atención Personalizada</h3>
-                <p>
-                    Brindamos atención y asesoramiento
-                    personalizado para atender los
-                    requerimientos de nuestros clientes,
-                    ofreciendo soluciones de transporte
-                    y logística adaptadas a sus necesidades.
-                </p>
+                <p>Brindamos atención y asesoramiento personalizado para atender los requerimientos de nuestros clientes, ofreciendo soluciones de transporte y logística adaptadas a sus necesidades.</p>
             </article>
-
         </div>
-
     </div>
-
 </section>
 
-
-
-
 <!-- =========================================================
-     07. SEGURIDAD Y SST
+     09. SEGURIDAD Y SST
 ========================================================= -->
-
 <section id="seguridad" class="safety-section">
-
     <div class="container">
-
         <div class="section-title">
             <span>SEGURIDAD Y SALUD EN EL TRABAJO</span>
             <h2>La seguridad es parte de cada viaje</h2>
         </div>
-
-
         <div class="safety-grid">
-
             <div class="safety-content">
-
-                <h3>Cultura de prevención</h3>
-
-                <p>
-                    Promovemos operaciones responsables orientadas
-                    a proteger la seguridad y salud de nuestros
-                    trabajadores.
-                </p>
-
-
+                <h3>Cultura de Prevención</h3>
+                <p>Promovemos operaciones responsables orientadas a proteger la seguridad y salud de nuestros trabajadores.</p>
                 <ul class="safety-list">
-
-                    <li>
-                        <i class="fa-solid fa-check"></i>
-                        Inspección preoperacional de unidades.
-                    </li>
-
-                    <li>
-                        <i class="fa-solid fa-check"></i>
-                        Identificación de peligros y riesgos.
-                    </li>
-
-                    <li>
-                        <i class="fa-solid fa-check"></i>
-                        Uso adecuado de equipos de protección personal.
-                    </li>
-
-                    <li>
-                        <i class="fa-solid fa-check"></i>
-                        Capacitación e inducción de conductores.
-                    </li>
-
-                    <li>
-                        <i class="fa-solid fa-check"></i>
-                        Prevención de fatiga y somnolencia.
-                    </li>
-
-                    <li>
-                        <i class="fa-solid fa-check"></i>
-                        Preparación y respuesta ante emergencias.
-                    </li>
-
+                    <li><i class="fa-solid fa-check"></i> Inspección preoperacional de unidades.</li>
+                    <li><i class="fa-solid fa-check"></i> Identificación de peligros y riesgos.</li>
+                    <li><i class="fa-solid fa-check"></i> Uso adecuado de equipos de protección personal.</li>
+                    <li><i class="fa-solid fa-check"></i> Capacitación e inducción de conductores.</li>
+                    <li><i class="fa-solid fa-check"></i> Prevención de fatiga y somnolencia.</li>
+                    <li><i class="fa-solid fa-check"></i> Preparación y respuesta ante emergencias.</li>
                 </ul>
-
             </div>
-
-
             <div class="safety-icon">
-
                 <i class="fa-solid fa-helmet-safety"></i>
-
                 <h3>Operaciones Seguras</h3>
-
-                <p>
-                    Prevención, responsabilidad y cumplimiento.
-                </p>
-
+                <p>Prevención, responsabilidad y cumplimiento.</p>
             </div>
-
         </div>
-
     </div>
-
 </section>
 
-
-
 <!-- =========================================================
-     08. NUESTRA OPERACIÓN
+     10. NUESTRA OPERACIÓN
 ========================================================= -->
-
 <section id="operacion">
-
     <div class="container">
-
         <div class="section-title">
             <span>NUESTRA OPERACIÓN</span>
             <h2>Control en cada etapa del servicio</h2>
         </div>
-
-
         <div class="process-grid">
-
             <article class="process-card">
                 <span>01</span>
                 <i class="fa-solid fa-clipboard-check"></i>
                 <h3>Planificación</h3>
                 <p>Coordinamos los requerimientos y rutas.</p>
             </article>
-
-
             <article class="process-card">
                 <span>02</span>
                 <i class="fa-solid fa-truck"></i>
                 <h3>Inspección</h3>
                 <p>Verificamos la unidad antes de la operación.</p>
             </article>
-
-
             <article class="process-card">
                 <span>03</span>
                 <i class="fa-solid fa-road"></i>
                 <h3>Transporte</h3>
                 <p>Ejecutamos el traslado de forma responsable.</p>
             </article>
-
-
             <article class="process-card">
                 <span>04</span>
                 <i class="fa-solid fa-location-crosshairs"></i>
                 <h3>Seguimiento</h3>
                 <p>Coordinamos durante el desarrollo del servicio.</p>
             </article>
-
-
             <article class="process-card">
                 <span>05</span>
                 <i class="fa-solid fa-circle-check"></i>
                 <h3>Entrega</h3>
                 <p>Verificamos la correcta entrega de la carga.</p>
             </article>
-
         </div>
-
     </div>
-
-    <!-- =========================================================
-     09. NUESTRA FLOTA
-========================================================= -->
-
 </section>
-<section id="flota">
-   <div class="container">
-    <div class="section-title">
-     <span>
-      NUESTRA FLOTA
-     </span>
-     <h2>
-      Unidades para cada necesidad
-     </h2>
-    </div>
-    <p class="section-intro">
-     Unidades adaptadas a diferentes pesos, dimensiones y necesidades de transporte.
-    </p>
-    <div class="fleet-grid">
-     <article class="fleet-card">
-      <img alt="Cama baja" loading="lazy" src="imagenes/img_camabaja.jpg"/>
-      <h3>
-       Cama baja
-      </h3>
-     </article>
-     <article class="fleet-card">
-      <img alt="Semitr&aacute;iler" loading="lazy" src="imagenes/img_semitrailer.jpg"/>
-      <h3>
-       Semitr&aacute;iler
-      </h3>
-     </article>
-     <article class="fleet-card">
-      <img alt="Furg&oacute;n" loading="lazy" src="imagenes/img_furgon.jpg"/>
-      <h3>
-       Furg&oacute;n
-      </h3>
-     </article>
-     <article class="fleet-card">
-      <img alt="Rebatible / baranda" loading="lazy" src="imagenes/img_rebatible.jpg"/>
-      <h3>
-       Rebatible / baranda
-      </h3>
-     </article>
-     <article class="fleet-card">
-      <img alt="Ala de gaviota" loading="lazy" src="imagenes/img_aladegaviota.jpg"/>
-      <h3>
-       Ala de gaviota
-      </h3>
-     </article>
-     <article class="fleet-card">
-      <img alt="Camioneta de escolta" loading="lazy" src="imagenes/img_escolta.jpg"/>
-      <h3>
-       Camioneta de escolta
-      </h3>
-     </article>
-    </div>
-   </div>
-  </section>
-
 
 <!-- =========================================================
-     09. COBERTURA + VENTAJAS
+     11. NUESTRA FLOTA
 ========================================================= -->
-
-<section id="cobertura" class="coverage-section">
-
+<section id="flota">
     <div class="container">
+        <div class="section-title">
+            <span>NUESTRA FLOTA</span>
+            <h2>Unidades para cada necesidad</h2>
+        </div>
+        <p class="section-intro">Unidades adaptadas a diferentes pesos, dimensiones y necesidades de transporte.</p>
+        <div class="fleet-grid">
+            <article class="fleet-card">
+                <img src="imagenes/img_camabaja.jpg" alt="Cama baja" loading="lazy">
+                <h3>Cama Baja</h3>
+            </article>
+            <article class="fleet-card">
+                <img src="imagenes/img_semitrailer.jpg" alt="Semitráiler" loading="lazy">
+                <h3>Semitráiler</h3>
+            </article>
+            <article class="fleet-card">
+                <img src="imagenes/img_furgon.jpg" alt="Furgón" loading="lazy">
+                <h3>Furgón</h3>
+            </article>
+            <article class="fleet-card">
+                <img src="imagenes/img_rebatible.jpg" alt="Rebatible o baranda" loading="lazy">
+                <h3>Rebatible / Baranda</h3>
+            </article>
+            <article class="fleet-card">
+                <img src="imagenes/img_aladegaviota.jpg" alt="Ala de gaviota" loading="lazy">
+                <h3>Ala de Gaviota</h3>
+            </article>
+            <article class="fleet-card">
+                <img src="imagenes/img_escolta.jpg" alt="Camioneta de escolta" loading="lazy">
+                <h3>Camioneta de Escolta</h3>
+            </article>
+        </div>
+    </div>
+</section>
 
+<!-- =========================================================
+     12. COBERTURA
+========================================================= -->
+<section id="cobertura" class="coverage-section">
+    <div class="container">
+        <div class="section-title">
+            <span>COBERTURA NACIONAL</span>
+            <h2>Transporte terrestre a nivel nacional</h2>
+        </div>
         <div class="coverage-content">
-
             <div>
-
-                <span class="subtitle">
-                    COBERTURA
-                </span>
-
-                <h2>
-                    Transporte terrestre a nivel nacional
-                </h2>
-
-                <p>
-                    Atendemos requerimientos de transporte
-                    según las rutas y necesidades operativas
-                    de nuestros clientes.
-                </p>
-
-                <a href="#contacto" class="btn-primary">
-                    Consultar disponibilidad
-                </a>
-
+                <p>Atendemos requerimientos de transporte según las rutas y necesidades operativas de nuestros clientes.</p>
+                <a href="#contacto" class="btn-primary">Consultar disponibilidad</a>
             </div>
-
-
             <div class="coverage-icon">
                 <i class="fa-solid fa-map-location-dot"></i>
             </div>
-
         </div>
-
     </div>
-
 </section>
 
-
-
 <!-- =========================================================
-     10. POR QUÉ ELEGIRNOS
+     13. POR QUÉ ELEGIRNOS
 ========================================================= -->
-
 <section id="ventajas">
-
     <div class="container">
-
         <div class="section-title">
             <span>¿POR QUÉ GAMARRITA EXPRESS?</span>
             <h2>Confianza y responsabilidad en cada servicio</h2>
         </div>
-
-
         <div class="benefits-grid">
-
             <div>
                 <i class="fa-solid fa-shield"></i>
                 <h3>Seguridad</h3>
                 <p>Prevención en nuestras operaciones.</p>
             </div>
-
-
             <div>
                 <i class="fa-solid fa-clock"></i>
                 <h3>Puntualidad</h3>
                 <p>Coordinación orientada al cumplimiento.</p>
             </div>
-
-
             <div>
                 <i class="fa-solid fa-user-tie"></i>
-                <h3>Personal comprometido</h3>
+                <h3>Personal Comprometido</h3>
                 <p>Equipo orientado a un servicio responsable.</p>
             </div>
-
-
             <div>
                 <i class="fa-solid fa-comments"></i>
                 <h3>Comunicación</h3>
                 <p>Coordinación permanente durante el servicio.</p>
             </div>
-
         </div>
-
     </div>
-
 </section>
 
-
-
 <!-- =========================================================
-     11. CONTACTO / COTIZACIÓN
+     14. CONTACTO Y COTIZACIÓN
 ========================================================= -->
-
 <section id="contacto">
-
     <div class="container">
-
         <div class="section-title">
-
             <span>CONTACTO</span>
-
-            <h2>
-                ¿Necesitas transportar tu carga?
-            </h2>
-
-            <p>
-                Contáctanos para coordinar una solución
-                de transporte según tus necesidades.
-            </p>
-
+            <h2>¿Necesitas transportar tu carga?</h2>
+            <p>Contáctanos para coordinar una solución de transporte según tus necesidades.</p>
         </div>
-
-
-        <!-- DATOS -->
-
         <div class="contact-grid">
-
             <div>
                 <i class="fa-solid fa-phone"></i>
                 <h3>Teléfono</h3>
                 <p>+51 999 913 590</p>
             </div>
-
-
             <div>
                 <i class="fa-brands fa-whatsapp"></i>
                 <h3>WhatsApp</h3>
                 <p>+51 999 913 590</p>
             </div>
-
-
             <div>
                 <i class="fa-solid fa-envelope"></i>
                 <h3>Correo</h3>
                 <p>hgamarraa1984@gmail.com</p>
             </div>
-
         </div>
-
-
-        <!-- FORMULARIO -->
-
         <div class="contact-form-container">
-
-            <form class="contact-form"
-                  action=""
-                  method="POST">
-
-
+            <form class="contact-form" action="" method="POST">
                 <div class="form-row">
-
                     <div>
-                        <label for="nombre">
-                            Nombre / Empresa
-                        </label>
-
-                        <input type="text"
-                               id="nombre"
-                               name="nombre"
-                               placeholder="Nombre o empresa"
-                               required>
+                        <label for="nombre">Nombre / Empresa</label>
+                        <input type="text" id="nombre" name="nombre" placeholder="Nombre o empresa" required>
                     </div>
-
-
                     <div>
-                        <label for="telefono">
-                            Teléfono
-                        </label>
-
-                        <input type="tel"
-                               id="telefono"
-                               name="telefono"
-                               placeholder="+51"
-                               required>
+                        <label for="telefono">Teléfono</label>
+                        <input type="tel" id="telefono" name="telefono" placeholder="+51" required>
                     </div>
-
                 </div>
-
-
                 <div class="form-row">
-
                     <div>
-                        <label for="correo">
-                            Correo electrónico
-                        </label>
-
-                        <input type="email"
-                               id="correo"
-                               name="correo"
-                               placeholder="correo@empresa.com"
-                               required>
+                        <label for="correo">Correo electrónico</label>
+                        <input type="email" id="correo" name="correo" placeholder="correo@empresa.com" required>
                     </div>
-
-
                     <div>
-
-                        <label for="servicio">
-                            Servicio
-                        </label>
-
-                        <select id="servicio"
-                                name="servicio">
-
-                            <option value="">
-                                Seleccione un servicio
-                            </option>
-
-                            <option value="transporte">
-                                Transporte de carga
-                            </option>
-
-                            <option value="distribucion">
-                                Distribución
-                            </option>
-
-                            <option value="logistica">
-                                Operación logística
-                            </option>
-
-                            <option value="otro">
-                                Otro
-                            </option>
-
+                        <label for="servicio">Servicio</label>
+                        <select id="servicio" name="servicio">
+                            <option value="">Seleccione un servicio</option>
+                            <option value="pesada">Carga pesada</option>
+                            <option value="liviana">Carga liviana</option>
+                            <option value="matpel">Carga MATPEL</option>
+                            <option value="iqbf">Carga IQBF</option>
+                            <option value="variada">Carga variada</option>
+                            <option value="sobredimensionada">Carga sobredimensionada</option>
+                            <option value="alquiler">Alquiler de vehículos</option>
+                            <option value="distribucion">Distribución logística</option>
+                            <option value="escolta">Servicio de escolta</option>
+                            <option value="almacenaje">Almacenaje</option>
+                            <option value="otro">Otro</option>
                         </select>
-
                     </div>
-
                 </div>
-
-
                 <div>
-
-                    <label for="mensaje">
-                        Mensaje
-                    </label>
-
-                    <textarea id="mensaje"
-                              name="mensaje"
-                              rows="4"
-                              placeholder="Cuéntanos qué necesitas transportar..."></textarea>
-
+                    <label for="mensaje">Mensaje</label>
+                    <textarea id="mensaje" name="mensaje" rows="4" placeholder="Cuéntanos qué necesitas transportar..."></textarea>
                 </div>
-
-
-                <button type="submit"
-                        class="btn-primary">
-
-                    <i class="fa-solid fa-paper-plane"></i>
-
-                    Enviar solicitud
-
+                <button type="submit" class="btn-primary">
+                    <i class="fa-solid fa-paper-plane"></i> Enviar solicitud
                 </button>
-
             </form>
-
         </div>
-
     </div>
-
 </section>
 
-
-
 <!-- =========================================================
-     12. FOOTER
+     15. FOOTER
 ========================================================= -->
-
 <footer>
-
     <div class="container">
-
         <div class="footer-grid">
-
-
             <div class="footer-company">
-
-                <h3>
-                    GAMARRITA
-                    <span>EXPRESS EIRL</span>
-                </h3>
-
-                <p>
-                    Transporte de carga con seguridad,
-                    puntualidad y confianza.
-                </p>
-
+                <h3>GAMARRITA <span>EXPRESS EIRL</span></h3>
+                <p>Transporte de carga con seguridad, puntualidad y confianza.</p>
             </div>
-
-
             <div>
-
                 <h4>Empresa</h4>
-
                 <ul>
                     <li><a href="#nosotros">Nosotros</a></li>
                     <li><a href="#mision-vision">Misión y Visión</a></li>
                     <li><a href="#valores">Valores</a></li>
+                    <li><a href="#calidad">Calidad</a></li>
+                    <li><a href="#pilares">Pilares Operativos</a></li>
                     <li><a href="#seguridad">Seguridad</a></li>
                 </ul>
-
             </div>
-
-
             <div>
-
                 <h4>Servicios</h4>
-
                 <ul>
                     <li><a href="#servicios">Transporte de carga</a></li>
                     <li><a href="#servicios">Distribución</a></li>
                     <li><a href="#operacion">Nuestra operación</a></li>
+                    <li><a href="#flota">Nuestra flota</a></li>
                     <li><a href="#cobertura">Cobertura</a></li>
                 </ul>
-
             </div>
-
-
             <div>
-
                 <h4>Contacto</h4>
-
-                <p>
-                    <i class="fa-solid fa-phone"></i>
-                    +51 999 913 590
-                </p>
-
-                <p>
-                    <i class="fa-solid fa-envelope"></i>
-                    hgamarraa1984@gmail.com
-                </p>
-
-                <p>
-                    <i class="fa-solid fa-location-dot"></i>
-                    Lima, Perú
-                </p>
-
+                <p><i class="fa-solid fa-phone"></i> +51 999 913 590</p>
+                <p><i class="fa-solid fa-envelope"></i> hgamarraa1984@gmail.com</p>
+                <p><i class="fa-solid fa-location-dot"></i> Lima, Perú</p>
             </div>
-
         </div>
-
-
         <div class="footer-bottom">
-
-            <small>
-                © 2026 GAMARRITA EXPRESS E.I.R.L.
-                Todos los derechos reservados.
-            </small>
-
+            <small>© 2026 GAMARRITA EXPRESS E.I.R.L. Todos los derechos reservados.</small>
         </div>
-
     </div>
-
 </footer>
 
-
-
 <!-- =========================================================
-     13. WHATSAPP
+     16. WHATSAPP
 ========================================================= -->
-
-<a href="https://wa.me/51999913590"
-   class="whatsapp"
-   target="_blank"
-   rel="noopener noreferrer"
-   aria-label="Contactar por WhatsApp">
-
+<a href="https://wa.me/51999913590" class="whatsapp" target="_blank" rel="noopener noreferrer" aria-label="Contactar por WhatsApp">
     <i class="fa-brands fa-whatsapp"></i>
-
 </a>
 
-
-
 <!-- =========================================================
-     14. JAVASCRIPT
+     17. JAVASCRIPT
 ========================================================= -->
-
 <script src="script.js"></script>
-
 </body>
 </html>
