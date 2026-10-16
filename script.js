@@ -1,6 +1,6 @@
 
 document.addEventListener("DOMContentLoaded", () => {
-
+        
     /* =========================================================
        01. ELEMENTOS PRINCIPALES
     ========================================================= */
@@ -12,12 +12,23 @@ document.addEventListener("DOMContentLoaded", () => {
     const secciones = document.querySelectorAll("section");
     const whatsapp = document.querySelector(".whatsapp");
     const videoHero = document.getElementById("heroVideo");
+    
     const tarjetas = document.querySelectorAll(
-        ".corporate-card, .value-card, .service, .process-card, .fleet-card, .benefits-grid > div, .contact-grid > div"
+        ".about-card, " +
+        ".corporate-card, " +
+        ".value-card, " +
+        ".service, " +
+        ".process-card, " +
+        ".fleet-card, " +
+        ".safety-icon, " +
+        ".benefits-grid > div, " +
+        ".contact-grid > div"
     );
+    
     const movimientoReducido = window.matchMedia(
         "(prefers-reduced-motion: reduce)"
     );
+
 
     /* =========================================================
        02. HEADER AL HACER SCROLL
