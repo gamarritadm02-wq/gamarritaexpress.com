@@ -1,190 +1,408 @@
-/*=========================
-      HEADER SCROLL
-==========================*/
+document.addEventListener("DOMContentLoaded", () => {
 
-const header = document.getElementById("header");
+    /* =====================================================
+       01. ELEMENTOS PRINCIPALES
+    ===================================================== */
 
-window.addEventListener("scroll", () => {
+    const headerWeb = document.getElementById("header");
+    const botonMenuWeb = document.getElementById("botonMenuWeb");
+    const menuWeb = document.getElementById("menuWeb");
+    const menuWebOverlay = document.getElementById("menuWebOverlay");
+    const enlacesMenu = document.querySelectorAll(".menu-web-link");
+    const secciones = document.querySelectorAll("section");
+    const whatsapp = document.querySelector(".whatsapp");
+    const videoHero = document.getElementById("heroVideo");
 
-    if (window.scrollY > 60) {
 
-        header.classList.add("scrolled");
+    /* =====================================================
+       02. HEADER AL HACER SCROLL
+    ===================================================== */
 
-    } else {
+    function actualizarHeader() {
 
-        header.classList.remove("scrolled");
+        if (!headerWeb) return;
 
+        headerWeb.classList.toggle(
+            "scrolled",
+            window.scrollY > 60
+        );
     }
 
-});
+    actualizarHeader();
+
+    window.addEventListener(
+        "scroll",
+        actualizarHeader,
+        { passive: true }
+    );
 
 
-/*=========================
-    SCROLL REVEAL
-==========================*/
+    /* =====================================================
+       03. MENÚ HAMBURGUESA
+    ===================================================== */
 
-const sections = document.querySelectorAll("section");
+    function abrirMenu() {
 
-const reveal = () => {
+        if (!menuWeb || !botonMenuWeb) return;
 
-    const trigger = window.innerHeight * 0.85;
+        menuWeb.classList.add("menu-abierto");
+        botonMenuWeb.classList.add("active");
 
-    sections.forEach(section => {
-
-        const top = section.getBoundingClientRect().top;
-
-        if (top < trigger) {
-
-            section.classList.add("show");
-
+        if (menuWebOverlay) {
+            menuWebOverlay.classList.add("activo");
         }
 
-    });
-
-};
-
-window.addEventListener("scroll", reveal);
-
-reveal();
-
-
-/*=========================
-   BOTONES SUAVES
-==========================*/
-
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-
-    anchor.addEventListener("click", function (e) {
-
-        e.preventDefault();
-
-        const destino = document.querySelector(
-            this.getAttribute("href")
+        botonMenuWeb.setAttribute(
+            "aria-expanded",
+            "true"
         );
 
-        if (destino) {
-
-            destino.scrollIntoView({
-                behavior: "smooth"
-            });
-
-        }
-
-    });
-
-});
-
-
-/*=========================
-     EFECTO HERO
-==========================*/
-
-window.addEventListener("scroll", () => {
-
-    const hero = document.querySelector(".hero");
-
-    if (hero) {
-
-        hero.style.backgroundPositionY =
-            (window.scrollY * 0.35) + "px";
-
+        document.body.style.overflow = "hidden";
     }
 
-});
 
+    function cerrarMenu() {
 
-/*=========================
-    BOTON WHATSAPP
-==========================*/
+        if (!menuWeb || !botonMenuWeb) return;
 
-const whatsapp = document.querySelector(".whatsapp");
+        menuWeb.classList.remove("menu-abierto");
+        botonMenuWeb.classList.remove("active");
 
-window.addEventListener("scroll", () => {
-
-    if (!whatsapp) return;
-
-    if (window.scrollY > 500) {
-
-        whatsapp.style.opacity = "1";
-        whatsapp.style.transform = "scale(1)";
-
-    } else {
-
-        whatsapp.style.opacity = "0";
-        whatsapp.style.transform = "scale(.8)";
-
-    }
-
-});
-
-
-/*=========================
-     EFECTO TARJETAS
-==========================*/
-
-const cards = document.querySelectorAll(".service");
-
-cards.forEach(card => {
-
-    card.addEventListener("mousemove", (e) => {
-
-        const x = e.offsetX;
-        const y = e.offsetY;
-
-        card.style.background =
-            `radial-gradient(circle at ${x}px ${y}px, #ffffff, #f5f7fb)`;
-
-    });
-
-    card.addEventListener("mouseleave", () => {
-
-        card.style.background = "#fff";
-
-    });
-
-});
-
-
-/*=========================
-    CARGA PAGINA
-==========================*/
-
-window.addEventListener("load", () => {
-
-    document.body.classList.add("loaded");
-
-});
-
-
-/*=========================
-      VIDEO HERO
-==========================*/
-
-const video = document.getElementById("heroVideo");
-
-const videos = [
-    "camion.mp4",
-    "camion2.mp4"
-];
-
-let videoActual = 0;
-
-if (video) {
-
-    video.addEventListener("ended", function () {
-
-        videoActual++;
-
-        if (videoActual >= videos.length) {
-
-            videoActual = 0;
-
+        if (menuWebOverlay) {
+            menuWebOverlay.classList.remove("activo");
         }
 
-        video.src = videos[videoActual];
+        botonMenuWeb.setAttribute(
+            "aria-expanded",
+            "false"
+        );
 
-        video.play();
+        document.body.style.overflow = "";
+    }
 
+
+    function alternarMenu() {
+
+        if (!menuWeb) return;
+
+        const estaAbierto =
+            menuWeb.classList.contains("menu-abierto");
+
+        if (estaAbierto) {
+            cerrarMenu();
+        } else {
+            abrirMenu();
+        }
+    }
+
+
+    /* BOTÓN HAMBURGUESA */
+
+    if (botonMenuWeb) {
+
+        botonMenuWeb.addEventListener(
+            "click",
+            (e) => {
+
+                e.preventDefault();
+                e.stopPropagation();
+
+                alternarMenu();
+            }
+        );
+    }
+
+
+    /* CERRAR AL PRESIONAR EL FONDO */
+
+    if (menuWebOverlay) {
+
+        menuWebOverlay.addEventListener(
+            "click",
+            cerrarMenu
+        );
+    }
+
+
+    /* CERRAR AL PRESIONAR UNA OPCIÓN */
+
+    enlacesMenu.forEach(enlace => {
+
+        enlace.addEventListener(
+            "click",
+            cerrarMenu
+        );
     });
 
-}
+
+    /* CERRAR CON ESC */
+
+    document.addEventListener(
+        "keydown",
+        (e) => {
+
+            if (e.key === "Escape") {
+                cerrarMenu();
+            }
+        }
+    );
+
+
+    /* CERRAR AL VOLVER A PANTALLA GRANDE */
+
+    window.addEventListener(
+        "resize",
+        () => {
+
+            if (window.innerWidth > 1000) {
+                cerrarMenu();
+            }
+        }
+    );
+
+
+    /* =====================================================
+       04. SCROLL SUAVE
+    ===================================================== */
+
+    document
+        .querySelectorAll('a[href^="#"]')
+        .forEach(enlace => {
+
+            enlace.addEventListener(
+                "click",
+                function (e) {
+
+                    const href =
+                        this.getAttribute("href");
+
+                    if (!href || href === "#") {
+                        return;
+                    }
+
+                    const destino =
+                        document.querySelector(href);
+
+                    if (!destino) {
+                        return;
+                    }
+
+                    e.preventDefault();
+
+                    cerrarMenu();
+
+                    destino.scrollIntoView({
+                        behavior: "smooth",
+                        block: "start"
+                    });
+                }
+            );
+        });
+
+
+    /* =====================================================
+       05. OPCIÓN ACTIVA DEL MENÚ
+    ===================================================== */
+
+    function actualizarMenuActivo() {
+
+        const posicion =
+            window.scrollY + 150;
+
+        let actual = "inicio";
+
+        enlacesMenu.forEach(enlace => {
+
+            const href =
+                enlace.getAttribute("href");
+
+            if (!href || !href.startsWith("#")) {
+                return;
+            }
+
+            const seccion =
+                document.querySelector(href);
+
+            if (!seccion) {
+                return;
+            }
+
+            if (posicion >= seccion.offsetTop) {
+                actual = seccion.id;
+            }
+        });
+
+
+        enlacesMenu.forEach(enlace => {
+
+            enlace.classList.toggle(
+                "active",
+                enlace.getAttribute("href") ===
+                "#" + actual
+            );
+        });
+    }
+
+    actualizarMenuActivo();
+
+    window.addEventListener(
+        "scroll",
+        actualizarMenuActivo,
+        { passive: true }
+    );
+
+
+    /* =====================================================
+       06. MOSTRAR SECCIONES AL HACER SCROLL
+    ===================================================== */
+
+    function revelarSecciones() {
+
+        const limite =
+            window.innerHeight * 0.85;
+
+        secciones.forEach(seccion => {
+
+            const posicion =
+                seccion.getBoundingClientRect().top;
+
+            if (posicion < limite) {
+
+                seccion.classList.add("show");
+            }
+        });
+    }
+
+    revelarSecciones();
+
+    window.addEventListener(
+        "scroll",
+        revelarSecciones,
+        { passive: true }
+    );
+
+
+    /* =====================================================
+       07. WHATSAPP
+    ===================================================== */
+
+    function actualizarWhatsapp() {
+
+        if (!whatsapp) return;
+
+        if (window.scrollY > 500) {
+
+            whatsapp.style.opacity = "1";
+            whatsapp.style.transform = "scale(1)";
+
+        } else {
+
+            whatsapp.style.opacity = "0";
+            whatsapp.style.transform = "scale(.8)";
+        }
+    }
+
+    actualizarWhatsapp();
+
+    window.addEventListener(
+        "scroll",
+        actualizarWhatsapp,
+        { passive: true }
+    );
+
+
+    /* =====================================================
+       08. EFECTO TARJETAS DE SERVICIOS
+    ===================================================== */
+
+    const tarjetasServicio =
+        document.querySelectorAll(".service");
+
+    tarjetasServicio.forEach(tarjeta => {
+
+        tarjeta.addEventListener(
+            "mousemove",
+            (e) => {
+
+                const rect =
+                    tarjeta.getBoundingClientRect();
+
+                const x =
+                    e.clientX - rect.left;
+
+                const y =
+                    e.clientY - rect.top;
+
+                tarjeta.style.background =
+                    `radial-gradient(
+                        circle at ${x}px ${y}px,
+                        #ffffff,
+                        #f5f7fb
+                    )`;
+            }
+        );
+
+
+        tarjeta.addEventListener(
+            "mouseleave",
+            () => {
+
+                tarjeta.style.background = "#fff";
+            }
+        );
+    });
+
+
+    /* =====================================================
+       09. VIDEO HERO
+    ===================================================== */
+
+    const videos = [
+        "style/av/camion.mp4",
+        "style/av/camion2.mp4"
+    ];
+
+    let videoActual = 0;
+
+    if (videoHero) {
+
+        /*
+        IMPORTANTE:
+        Para que cambie de camion.mp4 a camion2.mp4
+        el elemento <video> NO debe tener el atributo loop.
+        */
+
+        videoHero.addEventListener(
+            "ended",
+            () => {
+
+                videoActual++;
+
+                if (videoActual >= videos.length) {
+                    videoActual = 0;
+                }
+
+                videoHero.src =
+                    videos[videoActual];
+
+                videoHero.load();
+
+                videoHero.play().catch(() => {});
+            }
+        );
+    }
+
+
+    /* =====================================================
+       10. PÁGINA CARGADA
+    ===================================================== */
+
+    window.addEventListener(
+        "load",
+        () => {
+
+            document.body.classList.add("loaded");
+        }
+    );
+
+});
