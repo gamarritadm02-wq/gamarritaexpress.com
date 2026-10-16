@@ -276,7 +276,7 @@ document.addEventListener("DOMContentLoaded", () => {
         passive: true
     });
 
-            
+        
         /* =========================================================
            10. IMÁGENES ROTATIVAS DE PORTADA
         ========================================================= */
