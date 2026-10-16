@@ -1097,6 +1097,19 @@ section.show {
     #flota .fleet-card h3 {
         font-size: 22px;
     }
+   .hero {
+    height: 100vh;
+    min-height: 600px;
+}
+
+.hero-content {
+    width: min(700px, 85%);
+    margin-left: 7%;
+}
+
+.hero h1 {
+    font-size: clamp(36px, 5vw, 52px);
+}
 }
 
 /* =========================================================
@@ -1276,6 +1289,15 @@ section.show {
         font-size: 21px;
         padding: 20px 12px;
     }
+   .hero {
+    min-height: 650px;
+    text-align: center;
+}
+
+.hero-content {
+    width: 90%;
+    margin: auto;
+}
 }
 
 /* =========================================================
@@ -1325,4 +1347,7 @@ section.show {
         opacity: 1;
         transform: none;
     }
+   .hero-slide {
+    transition: none;
+}
 }
